@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\JOS.Enumerations\JOS.Enumerations.csproj" />
+    <ProjectReference Include="..\..\src\JOS.Enumeration\JOS.Enumeration.csproj" />
+    <ProjectReference Include="..\JOS.Enumerations\JOS.Enumerations.csproj" />
   </ItemGroup>
 
 </Project>

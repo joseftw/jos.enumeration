@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\JOS.Enumerations\JOS.Enumerations.csproj" />
+    <ProjectReference Include="..\..\test\JOS.Enumerations\JOS.Enumerations.csproj" />
   </ItemGroup>
 
 </Project>
