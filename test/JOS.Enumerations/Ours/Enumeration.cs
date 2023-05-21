@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using JOS.Enumeration;
 
-namespace JOS.Enumeration.Ours;
+namespace JOS.Enumerations.Ours;
 
 public abstract class Enumeration : IComparable
 {

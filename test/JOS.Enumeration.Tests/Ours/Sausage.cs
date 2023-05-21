@@ -1,6 +1,6 @@
 ﻿namespace JOS.Enumeration.Tests.Ours;
 
-internal class Sausage : Enumeration.Ours.Enumeration
+internal class Sausage : Enumerations.Ours.Enumeration
 {
     public static Sausage HotDog = new(1, "Hot Dog");
     public static Sausage Pølse = new(2, "Pølse");

@@ -29,7 +29,7 @@ namespace JOS.Enumeration.Tests.Microsoft
         [Fact]
         public void GetAll_ShouldReturnAllInstances()
         {
-            var hamburgers = Enumeration.Microsoft.Enumeration.GetAll<Hamburger>().ToHashSet();
+            var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToHashSet();
 
             hamburgers.Count.ShouldBe(3);
             hamburgers.ShouldContain(Hamburger.BigMac);
@@ -43,7 +43,7 @@ namespace JOS.Enumeration.Tests.Microsoft
             var cheeseburger = Hamburger.Cheeseburger;
             var bigTasty = Hamburger.BigTasty;
 
-            var result = Enumeration.Microsoft.Enumeration.AbsoluteDifference(cheeseburger, bigTasty);
+            var result = Enumerations.Microsoft.Enumeration.AbsoluteDifference(cheeseburger, bigTasty);
 
             result.ShouldBe(2);
         }
@@ -51,7 +51,7 @@ namespace JOS.Enumeration.Tests.Microsoft
         [Fact]
         public void FromValue_ShouldReturnCorrectInstance()
         {
-            var result = Enumeration.Microsoft.Enumeration.FromValue<Hamburger>(Hamburger.Cheeseburger.Id);
+            var result = Enumerations.Microsoft.Enumeration.FromValue<Hamburger>(Hamburger.Cheeseburger.Id);
 
             result.ShouldBe(Hamburger.Cheeseburger);
         }
@@ -59,7 +59,7 @@ namespace JOS.Enumeration.Tests.Microsoft
         [Fact]
         public void FromDisplayName_ShouldReturnCorrectInstance()
         {
-            var result = Enumeration.Microsoft.Enumeration.FromDisplayName<Hamburger>(Hamburger.Cheeseburger.Name);
+            var result = Enumerations.Microsoft.Enumeration.FromDisplayName<Hamburger>(Hamburger.Cheeseburger.Name);
 
             result.ShouldBe(Hamburger.Cheeseburger);
         }
@@ -67,8 +67,8 @@ namespace JOS.Enumeration.Tests.Microsoft
         [Fact]
         public void DifferentImplementationsWillNotClash()
         {
-            var hamburgers = Enumeration.Microsoft.Enumeration.GetAll<Hamburger>().ToList();
-            var sausages = Enumeration.Microsoft.Enumeration.GetAll<Sausage>().ToList();
+            var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToList();
+            var sausages = Enumerations.Microsoft.Enumeration.GetAll<Sausage>().ToList();
 
             hamburgers.Count.ShouldBe(3);
             sausages.Count.ShouldBe(2);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace JOS.Enumeration.Record
+namespace JOS.Enumeration
 {
     public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
     {
@@ -73,7 +73,7 @@ namespace JOS.Enumeration.Record
             }
             throw new InvalidOperationException($"'{displayName}' is not a valid display name in {typeof(T)}");
         }
-        
+
         public int CompareTo(T? other) => Value.CompareTo(other!.Value);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 
-namespace JOS.Enumeration;
+namespace JOS.Enumerations.Ours;
 
 public enum ErrorTypes
 {

@@ -29,7 +29,7 @@ namespace JOS.Enumeration.Tests.Ours
         [Fact]
         public void GetAll_ShouldReturnAllInstances()
         {
-            var hamburgers = Enumeration.Ours.Enumeration.GetAll<Hamburger>().ToHashSet();
+            var hamburgers = Enumerations.Ours.Enumeration.GetAll<Hamburger>().ToHashSet();
 
             hamburgers.Count.ShouldBe(3);
             hamburgers.ShouldContain(Hamburger.BigMac);
@@ -40,7 +40,7 @@ namespace JOS.Enumeration.Tests.Ours
         [Fact]
         public void FromValue_ShouldReturnCorrectInstance()
         {
-            var result = Enumeration.Ours.Enumeration.FromValue<Hamburger>(Hamburger.Cheeseburger.Value);
+            var result = Enumerations.Ours.Enumeration.FromValue<Hamburger>(Hamburger.Cheeseburger.Value);
 
             result.ShouldBe(Hamburger.Cheeseburger);
         }
@@ -48,7 +48,7 @@ namespace JOS.Enumeration.Tests.Ours
         [Fact]
         public void FromDisplayName_ShouldReturnCorrectInstance()
         {
-            var result = Enumeration.Ours.Enumeration.FromDescription<Hamburger>(Hamburger.Cheeseburger.Description);
+            var result = Enumerations.Ours.Enumeration.FromDescription<Hamburger>(Hamburger.Cheeseburger.Description);
 
             result.ShouldBe(Hamburger.Cheeseburger);
         }
@@ -56,8 +56,8 @@ namespace JOS.Enumeration.Tests.Ours
         [Fact]
         public void DifferentImplementationsWillNotClash()
         {
-            var hamburgers = Enumeration.Ours.Enumeration.GetAll<Hamburger>().ToList();
-            var sausages = Enumeration.Ours.Enumeration.GetAll<Sausage>().ToList();
+            var hamburgers = Enumerations.Ours.Enumeration.GetAll<Hamburger>().ToList();
+            var sausages = Enumerations.Ours.Enumeration.GetAll<Sausage>().ToList();
 
             hamburgers.Count.ShouldBe(3);
             sausages.Count.ShouldBe(2);

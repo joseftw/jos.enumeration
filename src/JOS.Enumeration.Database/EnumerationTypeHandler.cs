@@ -1,7 +1,6 @@
 using System;
 using System.Data;
 using Dapper;
-using JOS.Enumeration.Record;
 
 namespace JOS.Enumeration.Database;
 

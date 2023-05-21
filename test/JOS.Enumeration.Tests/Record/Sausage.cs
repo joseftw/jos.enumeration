@@ -1,6 +1,4 @@
-﻿using JOS.Enumeration.Record;
-
-namespace JOS.Enumeration.Tests.Record;
+﻿namespace JOS.Enumeration.Tests.Record;
 
 internal record Sausage : Enumeration<Sausage>
 {

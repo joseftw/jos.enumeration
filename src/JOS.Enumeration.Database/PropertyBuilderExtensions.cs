@@ -1,4 +1,3 @@
-using JOS.Enumeration.Record;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JOS.Enumeration.Database;

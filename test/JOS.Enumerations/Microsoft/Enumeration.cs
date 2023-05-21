@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 #pragma warning disable CS8767
 
-namespace JOS.Enumeration.Microsoft
+namespace JOS.Enumerations.Microsoft
 {
     public abstract class Enumeration : IComparable
     {

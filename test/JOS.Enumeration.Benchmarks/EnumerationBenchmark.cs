@@ -17,35 +17,35 @@ namespace JOS.Enumeration.Benchmarks
         [Benchmark(Baseline = true)]
         public IReadOnlyCollection<Hamburger> GetAll_Microsoft()
         {
-            return Microsoft.Enumeration.GetAll<Hamburger>().ToList();
+            return Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToList();
         }
 
         [BenchmarkCategory("GetAll")]
         [Benchmark]
         public IReadOnlyCollection<Enumerations.Ours.Hamburger> GetAll_Ours()
         {
-            return Ours.Enumeration.GetAll<Enumerations.Ours.Hamburger>().ToList();
+            return Enumerations.Ours.Enumeration.GetAll<Enumerations.Ours.Hamburger>().ToList();
         }
 
         [BenchmarkCategory("GetAll")]
         [Benchmark]
         public IReadOnlyCollection<Enumerations.Record.Hamburger> GetAll_Record()
         {
-            return Record.Enumeration<Enumerations.Record.Hamburger>.GetAll().ToList();
+            return Enumeration<Enumerations.Record.Hamburger>.GetAll().ToList();
         }
 
         [BenchmarkCategory("FromName")]
         [Benchmark(Baseline = true)]
         public Hamburger FromName_Microsoft()
         {
-            return Microsoft.Enumeration.FromDisplayName<Hamburger>("Cheeseburger");
+            return Enumerations.Microsoft.Enumeration.FromDisplayName<Hamburger>("Cheeseburger");
         }
 
         [BenchmarkCategory("FromName")]
         [Benchmark]
         public Enumerations.Ours.Hamburger FromName_Ours()
         {
-            return Ours.Enumeration.FromDescription<Enumerations.Ours.Hamburger>("Cheeseburger");
+            return Enumerations.Ours.Enumeration.FromDescription<Enumerations.Ours.Hamburger>("Cheeseburger");
         }
 
         [BenchmarkCategory("FromName")]
@@ -59,14 +59,14 @@ namespace JOS.Enumeration.Benchmarks
         [Benchmark(Baseline = true)]
         public Hamburger FromValue_Microsoft()
         {
-            return Microsoft.Enumeration.FromValue<Hamburger>(2);
+            return Enumerations.Microsoft.Enumeration.FromValue<Hamburger>(2);
         }
 
         [BenchmarkCategory("FromValue")]
         [Benchmark]
         public Enumerations.Ours.Hamburger FromValue_Ours()
         {
-            return Ours.Enumeration.FromValue<Enumerations.Ours.Hamburger>(2);
+            return Enumerations.Ours.Enumeration.FromValue<Enumerations.Ours.Hamburger>(2);
         }
 
         [BenchmarkCategory("FromValue")]

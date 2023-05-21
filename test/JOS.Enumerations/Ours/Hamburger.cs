@@ -1,6 +1,6 @@
 ﻿namespace JOS.Enumerations.Ours
 {
-    public class Hamburger : Enumeration.Ours.Enumeration
+    public class Hamburger : Enumeration
     {
         public static readonly Hamburger Cheeseburger = new(1, "Cheeseburger");
         public static readonly Hamburger BigMac = new(2, "Big Mac");

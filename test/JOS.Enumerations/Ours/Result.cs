@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JOS.Enumeration;
+namespace JOS.Enumerations.Ours;
 
 public class Result
 {
