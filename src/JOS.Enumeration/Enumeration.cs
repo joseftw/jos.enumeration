@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace JOS.Enumeration
 {
-    public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
+    public abstract record Enumeration<T>(int Value, string DisplayName) : IComparable<T> where T : Enumeration<T>
     {
         private static readonly Lazy<Dictionary<int, T>> AllItems;
         private static readonly Lazy<Dictionary<string, T>> AllItemsByName;
@@ -36,14 +36,6 @@ namespace JOS.Enumeration
             });
         }
 
-        protected Enumeration(int value, string displayName)
-        {
-            Value = value;
-            DisplayName = displayName;
-        }
-
-        public int Value { get; }
-        public string DisplayName { get; }
         public override string ToString() => DisplayName;
 
         public static IEnumerable<T> GetAll()
