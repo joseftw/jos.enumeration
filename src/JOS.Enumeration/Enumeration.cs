@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
 namespace JOS.Enumeration
 {
+    [DebuggerDisplay("{Value} - {DisplayName}")]
     public abstract record Enumeration<T>(int Value, string DisplayName) : IComparable<T> where T : Enumeration<T>
     {
         private static readonly Lazy<Dictionary<int, T>> AllItems;
@@ -35,8 +37,6 @@ namespace JOS.Enumeration
                 return items;
             });
         }
-
-        public override string ToString() => DisplayName;
 
         public static IEnumerable<T> GetAll()
         {
