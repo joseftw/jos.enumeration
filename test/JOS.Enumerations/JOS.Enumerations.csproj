@@ -7,7 +7,6 @@
   </PropertyGroup>
 
     <ItemGroup>
-    <ProjectReference Include="..\..\src\JOS.Enumeration\JOS.Enumeration.csproj" />
-  </ItemGroup>
-
+      <ProjectReference Include="..\..\src\JOS.Enumeration\JOS.Enumeration.csproj" />
+    </ItemGroup>
 </Project>
