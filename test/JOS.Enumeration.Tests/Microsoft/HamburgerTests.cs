@@ -4,116 +4,115 @@ using Shouldly;
 using JOS.Enumerations.Microsoft;
 using Xunit;
 
-namespace JOS.Enumeration.Tests.Microsoft
+namespace JOS.Enumeration.Tests.Microsoft;
+
+public class HamburgerTests
 {
-    public class HamburgerTests
+    [Fact]
+    public void DifferentInstancesShouldNotBeEqual()
     {
-        [Fact]
-        public void DifferentInstancesShouldNotBeEqual()
-        {
-            var cheeseburger = Hamburger.Cheeseburger;
-            var bigMac = Hamburger.BigMac;
+        var cheeseburger = Hamburger.Cheeseburger;
+        var bigMac = Hamburger.BigMac;
 
-            bigMac.ShouldNotBeSameAs(cheeseburger);
-        }
+        bigMac.ShouldNotBeSameAs(cheeseburger);
+    }
 
-        [Fact]
-        public void SameInstancesShouldBeEqual()
-        {
-            var cheeseburger1 = Hamburger.Cheeseburger;
-            var cheeseburger2 = CreateCopy(cheeseburger1);
+    [Fact]
+    public void SameInstancesShouldBeEqual()
+    {
+        var cheeseburger1 = Hamburger.Cheeseburger;
+        var cheeseburger2 = CreateCopy(cheeseburger1);
 
-            cheeseburger1.Equals(cheeseburger2).ShouldBeTrue();
-        }
+        cheeseburger1.Equals(cheeseburger2).ShouldBeTrue();
+    }
 
-        [Fact]
-        public void GetAll_ShouldReturnAllInstances()
-        {
-            var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToHashSet();
+    [Fact]
+    public void GetAll_ShouldReturnAllInstances()
+    {
+        var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToHashSet();
 
-            hamburgers.Count.ShouldBe(3);
-            hamburgers.ShouldContain(Hamburger.BigMac);
-            hamburgers.ShouldContain(Hamburger.BigTasty);
-            hamburgers.ShouldContain(Hamburger.Cheeseburger);
-        }
+        hamburgers.Count.ShouldBe(3);
+        hamburgers.ShouldContain(Hamburger.BigMac);
+        hamburgers.ShouldContain(Hamburger.BigTasty);
+        hamburgers.ShouldContain(Hamburger.Cheeseburger);
+    }
 
-        [Fact]
-        public void AbsoluteDifference_ShouldReturnCorrectDifference()
-        {
-            var cheeseburger = Hamburger.Cheeseburger;
-            var bigTasty = Hamburger.BigTasty;
+    [Fact]
+    public void AbsoluteDifference_ShouldReturnCorrectDifference()
+    {
+        var cheeseburger = Hamburger.Cheeseburger;
+        var bigTasty = Hamburger.BigTasty;
 
-            var result = Enumerations.Microsoft.Enumeration.AbsoluteDifference(cheeseburger, bigTasty);
+        var result = Enumerations.Microsoft.Enumeration.AbsoluteDifference(cheeseburger, bigTasty);
 
-            result.ShouldBe(2);
-        }
+        result.ShouldBe(2);
+    }
 
-        [Fact]
-        public void FromValue_ShouldReturnCorrectInstance()
-        {
-            var result = Enumerations.Microsoft.Enumeration.FromValue<Hamburger>(Hamburger.Cheeseburger.Id);
+    [Fact]
+    public void FromValue_ShouldReturnCorrectInstance()
+    {
+        var result = Enumerations.Microsoft.Enumeration.FromValue<Hamburger>(Hamburger.Cheeseburger.Id);
 
-            result.ShouldBe(Hamburger.Cheeseburger);
-        }
+        result.ShouldBe(Hamburger.Cheeseburger);
+    }
 
-        [Fact]
-        public void FromDisplayName_ShouldReturnCorrectInstance()
-        {
-            var result = Enumerations.Microsoft.Enumeration.FromDisplayName<Hamburger>(Hamburger.Cheeseburger.Name);
+    [Fact]
+    public void FromDisplayName_ShouldReturnCorrectInstance()
+    {
+        var result = Enumerations.Microsoft.Enumeration.FromDisplayName<Hamburger>(Hamburger.Cheeseburger.Name);
 
-            result.ShouldBe(Hamburger.Cheeseburger);
-        }
+        result.ShouldBe(Hamburger.Cheeseburger);
+    }
 
-        [Fact]
-        public void DifferentImplementationsWillNotClash()
-        {
-            var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToList();
-            var sausages = Enumerations.Microsoft.Enumeration.GetAll<Sausage>().ToList();
+    [Fact]
+    public void DifferentImplementationsWillNotClash()
+    {
+        var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToList();
+        var sausages = Enumerations.Microsoft.Enumeration.GetAll<Sausage>().ToList();
 
-            hamburgers.Count.ShouldBe(3);
-            sausages.Count.ShouldBe(2);
-        }
+        hamburgers.Count.ShouldBe(3);
+        sausages.Count.ShouldBe(2);
+    }
 
-        [Fact]
-        public void CompareTo_ShouldReturn0ForSameInstances()
-        {
-            var hamburger1 = Hamburger.Cheeseburger;
-            var hamburger2 = CreateCopy(hamburger1);
+    [Fact]
+    public void CompareTo_ShouldReturn0ForSameInstances()
+    {
+        var hamburger1 = Hamburger.Cheeseburger;
+        var hamburger2 = CreateCopy(hamburger1);
 
-            var result = hamburger1.CompareTo(hamburger2);
+        var result = hamburger1.CompareTo(hamburger2);
 
-            result.ShouldBe(0);
-        }
+        result.ShouldBe(0);
+    }
 
-        [Fact]
-        public void CompareTo_ShouldReturnMinus1ForItemWhenValueIsLessThanTheComparedValue()
-        {
-            var hamburger1 = Hamburger.Cheeseburger;
-            var hamburger2 = Hamburger.BigTasty;
+    [Fact]
+    public void CompareTo_ShouldReturnMinus1ForItemWhenValueIsLessThanTheComparedValue()
+    {
+        var hamburger1 = Hamburger.Cheeseburger;
+        var hamburger2 = Hamburger.BigTasty;
 
-            var result = hamburger1.CompareTo(hamburger2);
+        var result = hamburger1.CompareTo(hamburger2);
 
-            result.ShouldBe(-1);
-        }
+        result.ShouldBe(-1);
+    }
 
-        [Fact]
-        public void CompareTo_ShouldReturn1ForItemWhenValueIsGreaterThanTheComparedValue()
-        {
-            var hamburger1 = Hamburger.BigTasty;
-            var hamburger2 = Hamburger.Cheeseburger;
+    [Fact]
+    public void CompareTo_ShouldReturn1ForItemWhenValueIsGreaterThanTheComparedValue()
+    {
+        var hamburger1 = Hamburger.BigTasty;
+        var hamburger2 = Hamburger.Cheeseburger;
 
-            var result = hamburger1.CompareTo(hamburger2);
+        var result = hamburger1.CompareTo(hamburger2);
 
-            result.ShouldBe(1);
-        }
+        result.ShouldBe(1);
+    }
 
-        private static Hamburger CreateCopy(Hamburger hamburger)
-        {
-            return (Hamburger)typeof(Hamburger).GetConstructor(
-                    BindingFlags.NonPublic | BindingFlags.Instance,
-                    null,
-                    new[] { typeof(int), typeof(string) }, null)
-                !.Invoke(new object[] { hamburger.Id, hamburger.Name });
-        }
+    private static Hamburger CreateCopy(Hamburger hamburger)
+    {
+        return (Hamburger)typeof(Hamburger).GetConstructor(
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                null,
+                new[] { typeof(int), typeof(string) }, null)
+            !.Invoke(new object[] { hamburger.Id, hamburger.Name });
     }
 }

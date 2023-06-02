@@ -1,12 +1,11 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace JOS.Enumeration.Benchmarks
+namespace JOS.Enumeration.Benchmarks;
+
+internal class Program
 {
-    internal class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var summary1 = BenchmarkRunner.Run<EnumerationBenchmark>();
-        }
+        var summary1 = BenchmarkRunner.Run<EnumerationBenchmark>();
     }
 }
