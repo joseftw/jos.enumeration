@@ -52,7 +52,7 @@ public class HamburgerTests
     {
         var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromValue(1000));
 
-        exception.Message.ShouldBe("'1000' is not a valid value in 'JOS.Enumerations.Record.Hamburger'");
+        exception.Message.ShouldBe("'1000' is not a valid value in 'JOS.Enumerations.Hamburger'");
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class HamburgerTests
         var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDisplayName("Egg"));
 
         exception.Message.ShouldBe(
-            "'Egg' is not a valid display name in 'JOS.Enumerations.Record.Hamburger'");
+            "'Egg' is not a valid display name in 'JOS.Enumerations.Hamburger'");
     }
 
     [Fact]
