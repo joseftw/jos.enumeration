@@ -18,6 +18,6 @@ public class EnumerationTypeHandler<T> : SqlMapper.TypeHandler<T> where T : IEnu
             throw new ArgumentException($"Could not convert {value} to int", nameof(value));
         }
 
-        throw new NotImplementedException();
+        return T.FromValue(intValue);
     }
 }
