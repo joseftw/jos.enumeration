@@ -31,7 +31,7 @@ public class EnumerationBenchmark
     [Benchmark]
     public IReadOnlyCollection<Enumerations.Record.Hamburger> GetAll_Record()
     {
-        return Enumeration<Enumerations.Record.Hamburger>.GetAll().ToList();
+        return Enumerations.Record.Hamburger.GetAll().ToList();
     }
 
     [BenchmarkCategory("FromName")]

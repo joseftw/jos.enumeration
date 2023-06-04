@@ -4,7 +4,7 @@ using Dapper;
 
 namespace JOS.Enumeration.Database;
 
-public class EnumerationTypeHandler<T> : SqlMapper.TypeHandler<T> where T : Enumeration<T>
+public class EnumerationTypeHandler<T> : SqlMapper.TypeHandler<T> where T : IEnumeration<T>
 {
     public override void SetValue(IDbDataParameter parameter, T value)
     {
@@ -18,6 +18,6 @@ public class EnumerationTypeHandler<T> : SqlMapper.TypeHandler<T> where T : Enum
             throw new ArgumentException($"Could not convert {value} to int", nameof(value));
         }
 
-        return Enumeration<T>.FromValue(intValue);
+        throw new NotImplementedException();
     }
 }

@@ -8,5 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\JOS.Enumeration\JOS.Enumeration.csproj" />
+      <ProjectReference Include="..\..\src\JOS.Enumeration.SourceGenerator\JOS.Enumeration.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>

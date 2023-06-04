@@ -39,17 +39,6 @@ public class HamburgerTests
     }
 
     [Fact]
-    public void AbsoluteDifference_ShouldReturnCorrectDifference()
-    {
-        var cheeseburger = Hamburger.Cheeseburger;
-        var bigTasty = Hamburger.BigTasty;
-
-        var result = Hamburger.AbsoluteDifference(cheeseburger, bigTasty);
-
-        result.ShouldBe(2);
-    }
-
-    [Fact]
     public void FromValue_ShouldReturnCorrectInstance()
     {
         var result = Hamburger.FromValue(Hamburger.Cheeseburger.Value);
@@ -62,11 +51,11 @@ public class HamburgerTests
     {
         var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromValue(1000));
 
-        exception.Message.ShouldBe("'1000' is not a valid value in JOS.Enumerations.Record.Hamburger");
+        exception.Message.ShouldBe("'1000' is not a valid value in 'JOS.Enumerations.Record.Hamburger'");
     }
 
     [Fact]
-    public void FromName_ShouldReturnCorrectInstance()
+    public void FromDisplayName_ShouldReturnCorrectInstance()
     {
         var result = Hamburger.FromDisplayName(Hamburger.Cheeseburger.DisplayName);
 
@@ -74,12 +63,12 @@ public class HamburgerTests
     }
 
     [Fact]
-    public void FromName_ShouldThrowIfNoMatchingItemFound()
+    public void FromDisplayName_ShouldThrowIfNoMatchingItemFound()
     {
         var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDisplayName("Egg"));
 
         exception.Message.ShouldBe(
-            "'Egg' is not a valid display name in JOS.Enumerations.Record.Hamburger");
+            "'Egg' is not a valid display name in 'JOS.Enumerations.Record.Hamburger'");
     }
 
     [Fact]
