@@ -1,3 +1,4 @@
+using JOS.Enumerations.Record;
 using Shouldly;
 using Xunit;
 

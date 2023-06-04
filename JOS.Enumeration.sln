@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{5A16067C-E
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		JOS.Enumeration.sln.DotSettings.user = JOS.Enumeration.sln.DotSettings.user
 		README.md = README.md
 		.editorconfig = .editorconfig
 	EndProjectSection

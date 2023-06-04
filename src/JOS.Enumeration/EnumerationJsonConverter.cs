@@ -4,20 +4,20 @@ using System.Text.Json.Serialization;
 
 namespace JOS.Enumeration;
 
-public class EnumerationJsonConverter<T> : JsonConverter<Enumeration<T>> where T : Enumeration<T>
+public class EnumerationJsonConverter<T> : JsonConverter<T> where T : IEnumeration<T>
 {
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert.BaseType == typeof(Enumeration<>).MakeGenericType(typeof(T));
+        return typeToConvert.IsAssignableTo(typeof(IEnumeration<T>));
     }
 
-    public override Enumeration<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var value = reader.GetInt32();
-        return Enumeration<T>.FromValue(value);
+        return T.FromValue(value);
     }
 
-    public override void Write(Utf8JsonWriter writer, Enumeration<T> value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
         writer.WriteNumberValue(value.Value);
     }

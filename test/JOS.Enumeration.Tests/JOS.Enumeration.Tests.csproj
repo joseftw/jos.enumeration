@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\test\JOS.Enumerations\JOS.Enumerations.csproj" />
-    <ProjectReference Include="..\..\src\JOS.Enumeration.SourceGenerator\JOS.Enumeration.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

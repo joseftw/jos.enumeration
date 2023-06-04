@@ -8,7 +8,7 @@ namespace JOS.Enumeration.SourceGenerator;
 
 internal static class EnumerationHelpers
 {
-    internal static IncrementalValueProvider<ImmutableArray<RecordDeclarationSyntax>> GetRecordDeclarations(
+    internal static IncrementalValueProvider<ImmutableArray<RecordDeclarationSyntax>> GetEnumerationRecordDeclarations(
         IncrementalGeneratorInitializationContext context)
     {
         var declarations = context.SyntaxProvider
@@ -35,7 +35,7 @@ internal static class EnumerationHelpers
             return null;
         }
 
-        var constructedFrom = classSymbol.BaseType.ConstructedFrom.ToString();
-        return constructedFrom == "JOS.Enumeration.Enumeration<T>" ? recordDeclarationSyntax : null;
+        var implementsIEnumeration = classSymbol.Interfaces.Any(x => x.Name == "IEnumeration");
+        return implementsIEnumeration ? recordDeclarationSyntax : null;
     }
 }
