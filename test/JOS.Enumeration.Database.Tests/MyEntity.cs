@@ -1,5 +1,5 @@
+using JOS.Enumerations;
 using System;
-using JOS.Enumerations.Record;
 
 namespace JOS.Enumeration.Database.Tests;
 

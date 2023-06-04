@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
 using JOS.Enumeration.Database.Tests.JOS.Test;
-using JOS.Enumerations.Record;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
+using Hamburger = JOS.Enumerations.Hamburger;
 
 namespace JOS.Enumeration.Database.Tests.EntityFramework;
 
@@ -17,7 +17,7 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
     {
         _fixture = fixture ?? throw new ArgumentNullException(nameof(fixture));
     }
-    
+
     [Fact]
     public async Task CanSaveAndReadEntityWithEnumeration()
     {

@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using Shouldly;
+using System;
+using System.Linq;
 using System.Reflection;
-using Shouldly;
-using JOS.Enumerations.Microsoft;
 using Xunit;
+using Hamburger = JOS.Enumerations.Hamburger;
+using Sausage = JOS.Enumerations.Sausage;
 
-namespace JOS.Enumeration.Tests.Microsoft;
+namespace JOS.Enumeration.Tests;
 
 public class HamburgerTests
 {
@@ -29,7 +31,7 @@ public class HamburgerTests
     [Fact]
     public void GetAll_ShouldReturnAllInstances()
     {
-        var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToHashSet();
+        var hamburgers = Hamburger.GetAll().ToHashSet();
 
         hamburgers.Count.ShouldBe(3);
         hamburgers.ShouldContain(Hamburger.BigMac);
@@ -38,37 +40,43 @@ public class HamburgerTests
     }
 
     [Fact]
-    public void AbsoluteDifference_ShouldReturnCorrectDifference()
+    public void FromValue_ShouldReturnCorrectInstance()
     {
-        var cheeseburger = Hamburger.Cheeseburger;
-        var bigTasty = Hamburger.BigTasty;
+        var result = Hamburger.FromValue(Hamburger.Cheeseburger.Value);
 
-        var result = Enumerations.Microsoft.Enumeration.AbsoluteDifference(cheeseburger, bigTasty);
-
-        result.ShouldBe(2);
+        result.ShouldBe(Hamburger.Cheeseburger);
     }
 
     [Fact]
-    public void FromValue_ShouldReturnCorrectInstance()
+    public void FromValue_ShouldThrowIfNoMatchingItemFound()
     {
-        var result = Enumerations.Microsoft.Enumeration.FromValue<Hamburger>(Hamburger.Cheeseburger.Id);
+        var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromValue(1000));
 
-        result.ShouldBe(Hamburger.Cheeseburger);
+        exception.Message.ShouldBe("'1000' is not a valid value in 'JOS.Enumerations.Record.Hamburger'");
     }
 
     [Fact]
     public void FromDisplayName_ShouldReturnCorrectInstance()
     {
-        var result = Enumerations.Microsoft.Enumeration.FromDisplayName<Hamburger>(Hamburger.Cheeseburger.Name);
+        var result = Hamburger.FromDisplayName(Hamburger.Cheeseburger.DisplayName);
 
         result.ShouldBe(Hamburger.Cheeseburger);
     }
 
     [Fact]
+    public void FromDisplayName_ShouldThrowIfNoMatchingItemFound()
+    {
+        var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDisplayName("Egg"));
+
+        exception.Message.ShouldBe(
+            "'Egg' is not a valid display name in 'JOS.Enumerations.Record.Hamburger'");
+    }
+
+    [Fact]
     public void DifferentImplementationsWillNotClash()
     {
-        var hamburgers = Enumerations.Microsoft.Enumeration.GetAll<Hamburger>().ToList();
-        var sausages = Enumerations.Microsoft.Enumeration.GetAll<Sausage>().ToList();
+        var hamburgers = Hamburger.GetAll().ToList();
+        var sausages = Sausage.GetAll().ToList();
 
         hamburgers.Count.ShouldBe(3);
         sausages.Count.ShouldBe(2);
@@ -113,6 +121,7 @@ public class HamburgerTests
                 BindingFlags.NonPublic | BindingFlags.Instance,
                 null,
                 new[] { typeof(int), typeof(string) }, null)
-            !.Invoke(new object[] { hamburger.Id, hamburger.Name });
+            !.Invoke(new object[] { hamburger.Value, hamburger.DisplayName });
     }
+    // TODO Add test that ensures that code throws if duplicate names.
 }

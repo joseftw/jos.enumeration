@@ -1,8 +1,8 @@
-using JOS.Enumerations.Record;
 using Shouldly;
 using Xunit;
+using Sausage = JOS.Enumerations.Sausage;
 
-namespace JOS.Enumeration.Tests.Record;
+namespace JOS.Enumeration.Tests;
 
 public class SourceGenerationTests
 {

@@ -1,6 +1,6 @@
 ﻿using JOS.Enumeration;
 
-namespace JOS.Enumerations.Record;
+namespace JOS.Enumerations;
 
 public partial record Hamburger : IEnumeration<Hamburger>
 {

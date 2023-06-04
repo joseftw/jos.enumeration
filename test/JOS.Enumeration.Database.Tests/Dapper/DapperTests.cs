@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using JOS.Enumeration.Database.Tests.JOS.Test;
-using JOS.Enumerations.Record;
+using JOS.Enumerations;
 using Npgsql;
 using Shouldly;
 using Xunit;

@@ -1,10 +1,10 @@
+using JOS.Enumerations;
+using Shouldly;
 using System.Collections.Generic;
 using System.Text.Json;
-using JOS.Enumerations.Record;
-using Shouldly;
 using Xunit;
 
-namespace JOS.Enumeration.Tests.Record;
+namespace JOS.Enumeration.Tests;
 
 public class EnumerationJsonConverterTests
 {

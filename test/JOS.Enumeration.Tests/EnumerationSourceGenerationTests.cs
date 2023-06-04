@@ -1,8 +1,8 @@
-using JOS.Enumerations.Record;
+using JOS.Enumerations;
 using Shouldly;
 using Xunit;
 
-namespace JOS.Enumeration.Tests.Record;
+namespace JOS.Enumeration.Tests;
 
 public class EnumerationSourceGenerationTests
 {
