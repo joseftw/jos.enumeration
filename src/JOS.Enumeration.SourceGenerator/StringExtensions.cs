@@ -7,9 +7,6 @@ internal static class StringExtensions
 {
     internal static string FormatSource(this string source)
     {
-#if DEBUG
-        source = CSharpSyntaxTree.ParseText(source).GetRoot().NormalizeWhitespace().SyntaxTree.GetText().ToString();
-#endif
-        return source;
+        return CSharpSyntaxTree.ParseText(source).GetRoot().NormalizeWhitespace().SyntaxTree.GetText().ToString();
     }
 }

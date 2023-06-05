@@ -40,6 +40,19 @@ public class HamburgerTests
     }
 
     [Fact]
+    public void GetEnumerable_ShouldReturnAllInstances()
+    {
+        var enumerable = Hamburger.GetEnumerable();
+
+        var items = enumerable.ToList();
+
+        items.Count.ShouldBe(3);
+        items.ShouldContain(Hamburger.BigMac);
+        items.ShouldContain(Hamburger.BigTasty);
+        items.ShouldContain(Hamburger.Cheeseburger);
+    }
+
+    [Fact]
     public void FromValue_ShouldReturnCorrectInstance()
     {
         var result = Hamburger.FromValue(Hamburger.Cheeseburger.Value);

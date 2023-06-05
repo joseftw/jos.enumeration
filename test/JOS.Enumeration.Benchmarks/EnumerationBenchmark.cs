@@ -1,9 +1,10 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
-using JOS.Enumerations;
 using System.Collections.Generic;
 using System.Linq;
+using HamburgerGenerated = JOS.Enumerations.Hamburger;
+using HamburgerGeneric = JOS.Enumeration.Benchmarks.Hamburger;
 
 namespace JOS.Enumeration.Benchmarks;
 
@@ -13,21 +14,70 @@ namespace JOS.Enumeration.Benchmarks;
 [CategoriesColumn]
 public class EnumerationBenchmark
 {
-    [Benchmark]
-    public IReadOnlyCollection<Hamburger> GetAll()
+    [Benchmark(Baseline = true)]
+    [BenchmarkCategory("GetAll")]
+    public IReadOnlyCollection<HamburgerGeneric> Generic_GetAll()
     {
-        return Hamburger.GetAll().ToList();
+        return HamburgerGeneric.GetAll().ToList();
+    }
+
+    [Benchmark(Baseline = true)]
+    [BenchmarkCategory("GetEnumerable")]
+    public IReadOnlyCollection<HamburgerGeneric> Generic_GetEnumerable()
+    {
+        return HamburgerGeneric.GetEnumerable().ToList();
+    }
+
+    [Benchmark(Baseline = true)]
+    [BenchmarkCategory("FromDisplayName")]
+    public HamburgerGeneric Generic_FromDisplayName()
+    {
+        return HamburgerGeneric.FromDisplayName("Cheeseburger");
+    }
+
+    [Benchmark(Baseline = true)]
+    [BenchmarkCategory("FromValue")]
+    public HamburgerGeneric Generic_FromValue()
+    {
+        return HamburgerGeneric.FromValue(2);
     }
 
     [Benchmark]
-    public Hamburger FromDisplayName_Record()
+    [BenchmarkCategory("GetAll")]
+    public IReadOnlyCollection<HamburgerGenerated> Generated_GetAll()
     {
-        return Hamburger.FromDisplayName("Cheeseburger");
+        return HamburgerGenerated.GetAll();
     }
 
     [Benchmark]
-    public Hamburger FromValue_Record()
+    [BenchmarkCategory("GetEnumerable")]
+    public IReadOnlyCollection<HamburgerGenerated> Generated_GetEnumerable()
     {
-        return Hamburger.FromValue(2);
+        return HamburgerGenerated.GetEnumerable().ToList();
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("FromDisplayName")]
+    public HamburgerGenerated Generated_FromDisplayName()
+    {
+        return HamburgerGenerated.FromDisplayName("Cheeseburger");
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("FromValue")]
+    public HamburgerGenerated Generated_FromValue()
+    {
+        return HamburgerGenerated.FromValue(2);
+    }
+}
+
+public record Hamburger : Enumeration<Hamburger>
+{
+    public static readonly Hamburger Cheeseburger = new (1, "Cheeseburger");
+    public static readonly Hamburger BigMac = new(2, "Big Mac");
+    public static readonly Hamburger BigTasty = new(3, "Big Tasty");
+
+    private Hamburger(int value, string displayName) : base(value, displayName)
+    {
     }
 }
