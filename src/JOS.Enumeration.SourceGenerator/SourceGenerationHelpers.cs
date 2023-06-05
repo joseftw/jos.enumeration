@@ -1,3 +1,6 @@
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
+
 namespace JOS.Enumeration.SourceGenerator;
 
 internal static class SourceGenerationHelpers
@@ -9,4 +12,22 @@ internal static class SourceGenerationHelpers
     """;
 
     internal const string Nullable = "#nullable enable";
+
+    internal static IReadOnlyCollection<EnumerationItem> ExtractEnumerationItems(
+        IReadOnlyCollection<FieldDeclarationSyntax> fields)
+    {
+        var items = new List<EnumerationItem>(fields.Count);
+        foreach(var field in fields)
+        {
+            var variable = field.Declaration.Variables.First();
+            var objectCreationExpression = (ImplicitObjectCreationExpressionSyntax)variable.Initializer!.Value;
+            var arguments = objectCreationExpression.ArgumentList.Arguments;
+            var value = (int)((LiteralExpressionSyntax)arguments[0].Expression).Token.Value!;
+            var displayName = (string)((LiteralExpressionSyntax)arguments[1].Expression).Token.Value!;
+            var fieldName = variable.Identifier.Value!.ToString();
+            items.Add(new EnumerationItem(value, displayName, fieldName));
+        }
+
+        return items;
+    }
 }

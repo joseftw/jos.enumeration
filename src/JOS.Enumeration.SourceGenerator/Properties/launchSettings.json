@@ -3,7 +3,7 @@
   "profiles": {
     "JOS.Enumeration.SourceGenerator": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "../../test/JOS.Enumeration.Tests/JOS.Enumeration.Tests.csproj"
+      "targetProject": "../../test/JOS.Enumerations/JOS.Enumerations.csproj"
     }
   }
 }

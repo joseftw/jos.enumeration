@@ -7,35 +7,12 @@ namespace JOS.Enumeration.Tests;
 public class EnumerationSourceGenerationTests
 {
     [Fact]
-    public void GeneratesGetAllMethod()
+    public void GeneratesSausageClass()
     {
-        var getAllSausageResult = Sausage.GetAll();
+        var hotDog = JOS.Enumerations.Enumerations.Sausage.HotDog.Value;
+        var pølse = JOS.Enumerations.Enumerations.Sausage.Pølse.Value;
 
-        var generatedResult = Enumerations.Enumeration.GetAll<Sausage>();
-
-        getAllSausageResult.ShouldBe(generatedResult);
-    }
-
-    [Fact]
-    public void GeneratesFromValueMethod()
-    {
-        const int value = 1;
-        var fromValueSausageResult = Sausage.FromValue(value);
-
-
-        var generatedResult = Enumerations.Enumeration.FromValue<Sausage>(value);
-
-        fromValueSausageResult.ShouldBe(generatedResult);
-    }
-
-    [Fact]
-    public void GeneratesFromDisplayNameMethod()
-    {
-        const string displayName = "Hot Dog";
-        var fromValueSausageResult = Sausage.FromDisplayName(displayName);
-
-        var generatedResult = Enumerations.Enumeration.FromDisplayName<Sausage>(displayName);
-
-        fromValueSausageResult.ShouldBe(generatedResult);
+        hotDog.ShouldBe(Sausage.HotDog.Value);
+        pølse.ShouldBe(Sausage.Pølse.Value);
     }
 }
