@@ -50,12 +50,18 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
 
             namespace {{@namespace}};
 
+            [System.Diagnostics.DebuggerDisplay(nameof(IEnumeration<{{symbol}}>.DisplayName))]
             {{enumeration.Modifiers}} record {{symbol.MetadataName}} : IComparable<{{symbol}}>
             {
-                private static readonly IReadOnlyCollection<{{symbol}}> AllItems = new List<{{symbol}}>
+                private static readonly IReadOnlyCollection<{{symbol}}> AllItems;
+
+                static {{symbol.MetadataName}}()
                 {
-                    {{AllItemsList(items)}}
-                };
+                    AllItems = new HashSet<{{symbol}}>({{items.Count}})
+                    {
+                        {{AllItemsList(items)}}
+                    };
+                }
 
                 private {{symbol.MetadataName}}(int value, string displayName)
                 {
@@ -169,7 +175,7 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
         var stringBuilder = new StringBuilder();
         foreach(var item in items)
         {
-            stringBuilder.AppendLine($"{item.FieldName}!,");
+            stringBuilder.AppendLine($"{item.FieldName},");
         }
         return stringBuilder.ToString();
     }

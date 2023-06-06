@@ -9,7 +9,7 @@ using HamburgerGeneric = JOS.Enumeration.Benchmarks.Hamburger;
 namespace JOS.Enumeration.Benchmarks;
 
 [MemoryDiagnoser]
-[SimpleJob(RuntimeMoniker.Net70)]
+[SimpleJob(RuntimeMoniker.Net80)]
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
 public class EnumerationBenchmark
@@ -18,14 +18,15 @@ public class EnumerationBenchmark
     [BenchmarkCategory("GetAll")]
     public IReadOnlyCollection<HamburgerGeneric> Generic_GetAll()
     {
-        return HamburgerGeneric.GetAll().ToList();
+        return HamburgerGeneric.GetAll();
     }
 
     [Benchmark(Baseline = true)]
     [BenchmarkCategory("GetEnumerable")]
-    public IReadOnlyCollection<HamburgerGeneric> Generic_GetEnumerable()
+    public int Generic_GetEnumerable()
     {
-        return HamburgerGeneric.GetEnumerable().ToList();
+        var iterator = HamburgerGeneric.GetEnumerable();
+        return iterator.Sum(item => item.Value);
     }
 
     [Benchmark(Baseline = true)]
@@ -51,9 +52,10 @@ public class EnumerationBenchmark
 
     [Benchmark]
     [BenchmarkCategory("GetEnumerable")]
-    public IReadOnlyCollection<HamburgerGenerated> Generated_GetEnumerable()
+    public int Generated_GetEnumerable()
     {
-        return HamburgerGenerated.GetEnumerable().ToList();
+        var iterator = HamburgerGenerated.GetEnumerable();
+        return iterator.Sum(item => item.Value);
     }
 
     [Benchmark]

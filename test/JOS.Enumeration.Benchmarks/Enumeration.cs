@@ -54,10 +54,7 @@ public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
 
     public static IEnumerable<T> GetEnumerable()
     {
-        foreach(var item in AllItems.Value.Values)
-        {
-            yield return item;
-        }
+        return AllItems.Value.Values;
     }
 
     public static T FromValue(int value)
