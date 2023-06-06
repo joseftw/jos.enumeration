@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{5A16067C-E
 		.gitignore = .gitignore
 		README.md = README.md
 		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOS.Enumeration.Database", "src\JOS.Enumeration.Database\JOS.Enumeration.Database.csproj", "{84C27535-F28E-4215-B4E1-C1A16C1190C2}"
