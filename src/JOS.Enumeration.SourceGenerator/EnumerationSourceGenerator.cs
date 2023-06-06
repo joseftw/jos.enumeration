@@ -46,21 +46,31 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
             using System;
             using System.Collections;
             using System.Collections.Generic;
+            #if NET8_0_OR_GREATER
+            using System.Collections.Frozen;
+            #endif
             using JOS.Enumeration;
 
             namespace {{@namespace}};
 
-            [System.Diagnostics.DebuggerDisplay(nameof(IEnumeration<{{symbol}}>.DisplayName))]
+            [System.Diagnostics.DebuggerDisplay("{DisplayName}")]
             {{enumeration.Modifiers}} record {{symbol.MetadataName}} : IComparable<{{symbol}}>
             {
-                private static readonly IReadOnlyCollection<{{symbol}}> AllItems;
+                private static readonly IReadOnlySet<{{symbol}}> AllItems;
 
                 static {{symbol.MetadataName}}()
                 {
+                    #if NET8_0_OR_GREATER
+                    AllItems = new HashSet<{{symbol}}>({{items.Count}})
+                    {
+                        {{AllItemsList(items)}}
+                    }.ToFrozenSet(optimizeForReading: true);
+                    #else
                     AllItems = new HashSet<{{symbol}}>({{items.Count}})
                     {
                         {{AllItemsList(items)}}
                     };
+                    #endif
                 }
 
                 private {{symbol.MetadataName}}(int value, string displayName)
@@ -72,7 +82,7 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
                 public int Value {get; }
                 public string DisplayName {get; }
 
-                public static IReadOnlyCollection<{{symbol}}> GetAll()
+                public static IReadOnlySet<{{symbol}}> GetAll()
                 {
                     return AllItems;
                 }

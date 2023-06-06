@@ -1,4 +1,6 @@
+using JOS.Enumerations;
 using Shouldly;
+using System.Collections.Frozen;
 using Xunit;
 using Sausage = JOS.Enumerations.Sausage;
 
@@ -25,4 +27,14 @@ public class SourceGenerationTests
 
         result.ShouldBe(2);
     }
+
+    #if NET8_0_OR_GREATER
+    [Fact]
+    public void ShouldBeFrozenSetIfNet80()
+    {
+        var result = Hamburger.GetAll();
+
+        result.ShouldBeOfType<FrozenSet<Hamburger>>();
+    }
+    #endif
 }
