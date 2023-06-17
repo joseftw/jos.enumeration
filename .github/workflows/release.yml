@@ -45,5 +45,5 @@ jobs:
     - name: Add nuget api key
       run: dotnet nuget update source nuget.org --username sir-joseftw --password ${{secrets.NUGET_API_KEY}} --store-password-in-clear-text
     - name: Push version ${{ steps.nbgv.outputs.nugetpackageversion }} packages
-      run: dotnet nuget push ./nuget-packages/**
+      run: dotnet nuget push ./nuget-packages/** --source nuget.org
 
