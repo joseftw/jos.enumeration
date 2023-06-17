@@ -7,6 +7,7 @@ namespace JOS.Enumeration.Benchmarks;
 
 public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
 {
+    private static readonly IReadOnlySet<T> AllItemsSet;
     private static readonly Lazy<Dictionary<int, T>> AllItems;
     private static readonly Lazy<Dictionary<string, T>> AllItemsByName;
 
@@ -34,6 +35,7 @@ public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
             }
             return items;
         });
+        AllItemsSet = AllItems.Value.Values.ToHashSet();
     }
 
     protected Enumeration(int value, string displayName)
@@ -47,17 +49,14 @@ public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
 
     public override sealed string ToString() => DisplayName;
 
-    public static IReadOnlyCollection<T> GetAll()
+    public static IReadOnlySet<T> GetAll()
     {
-        return AllItems.Value.Values;
+        return AllItemsSet;
     }
 
     public static IEnumerable<T> GetEnumerable()
     {
-        foreach(var item in AllItems.Value.Values)
-        {
-            yield return item;
-        }
+        return AllItems.Value.Values;
     }
 
     public static T FromValue(int value)

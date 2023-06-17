@@ -1,7 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
-using System.Collections.Generic;
 using System.Linq;
 using HamburgerGenerated = JOS.Enumerations.Hamburger;
 using HamburgerGeneric = JOS.Enumeration.Benchmarks.Hamburger;
@@ -9,23 +8,41 @@ using HamburgerGeneric = JOS.Enumeration.Benchmarks.Hamburger;
 namespace JOS.Enumeration.Benchmarks;
 
 [MemoryDiagnoser]
-[SimpleJob(RuntimeMoniker.Net70)]
+[SimpleJob(RuntimeMoniker.Net80)]
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
 public class EnumerationBenchmark
 {
     [Benchmark(Baseline = true)]
     [BenchmarkCategory("GetAll")]
-    public IReadOnlyCollection<HamburgerGeneric> Generic_GetAll()
+    public int Generic_GetAll()
     {
-        return HamburgerGeneric.GetAll().ToList();
+        var items = HamburgerGeneric.GetAll();
+        return items.Sum(item => item.Value);
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("GetAll")]
+    public int Generated_GetAll()
+    {
+        var items = HamburgerGenerated.GetAll();
+        return items.Sum(item => item.Value);
     }
 
     [Benchmark(Baseline = true)]
     [BenchmarkCategory("GetEnumerable")]
-    public IReadOnlyCollection<HamburgerGeneric> Generic_GetEnumerable()
+    public int Generic_GetEnumerable()
     {
-        return HamburgerGeneric.GetEnumerable().ToList();
+        var iterator = HamburgerGeneric.GetEnumerable();
+        return iterator.Sum(item => item.Value);
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("GetEnumerable")]
+    public int Generated_GetEnumerable()
+    {
+        var iterator = HamburgerGenerated.GetEnumerable();
+        return iterator.Sum(item => item.Value);
     }
 
     [Benchmark(Baseline = true)]
@@ -35,32 +52,18 @@ public class EnumerationBenchmark
         return HamburgerGeneric.FromDisplayName("Cheeseburger");
     }
 
-    [Benchmark(Baseline = true)]
-    [BenchmarkCategory("FromValue")]
-    public HamburgerGeneric Generic_FromValue()
-    {
-        return HamburgerGeneric.FromValue(2);
-    }
-
-    [Benchmark]
-    [BenchmarkCategory("GetAll")]
-    public IReadOnlyCollection<HamburgerGenerated> Generated_GetAll()
-    {
-        return HamburgerGenerated.GetAll();
-    }
-
-    [Benchmark]
-    [BenchmarkCategory("GetEnumerable")]
-    public IReadOnlyCollection<HamburgerGenerated> Generated_GetEnumerable()
-    {
-        return HamburgerGenerated.GetEnumerable().ToList();
-    }
-
     [Benchmark]
     [BenchmarkCategory("FromDisplayName")]
     public HamburgerGenerated Generated_FromDisplayName()
     {
         return HamburgerGenerated.FromDisplayName("Cheeseburger");
+    }
+
+    [Benchmark(Baseline = true)]
+    [BenchmarkCategory("FromValue")]
+    public HamburgerGeneric Generic_FromValue()
+    {
+        return HamburgerGeneric.FromValue(2);
     }
 
     [Benchmark]
