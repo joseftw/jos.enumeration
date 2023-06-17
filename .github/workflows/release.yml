@@ -7,8 +7,6 @@ jobs:
   build:
     name: Release
     runs-on: ubuntu-latest
-    outputs:
-      nugetpackageversion: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
     services:
       postgres:
         image: postgres:15
