@@ -34,7 +34,7 @@ public class SourceGenerationTests
     {
         var result = Hamburger.GetAll();
 
-        result.ShouldBeOfType<FrozenSet<Hamburger>>();
+        result.GetType().Name.ShouldBe("SmallFrozenSet`1");
     }
     #endif
 }
