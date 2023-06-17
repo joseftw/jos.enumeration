@@ -1,19 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <TargetFrameworks />
+        <Authors>Josef Ottosson</Authors>
+        <DebugType>embedded</DebugType>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
         <IsRoslynComponent>true</IsRoslynComponent>
         <PackageId>JOS.Enumeration.SourceGenerator</PackageId>
-        <Version>$(NBGV_NuGetPackageVersion)</Version>
-        <Authors>Josef Ottosson</Authors>
         <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks />
+        <Version>$(NBGV_NuGetPackageVersion)</Version>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub"/>
     </ItemGroup>
     <ItemGroup>
         <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
     </ItemGroup>
+    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
 </Project>

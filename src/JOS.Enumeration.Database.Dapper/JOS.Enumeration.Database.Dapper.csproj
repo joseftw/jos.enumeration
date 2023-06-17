@@ -1,15 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <PackageId>JOS.Enumeration.Database.Dapper</PackageId>
-        <Version>$(NBGV_NuGetPackageVersion)</Version>
         <Authors>Josef Ottosson</Authors>
-        <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
+        <DebugType>embedded</DebugType>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
+        <PackageId>JOS.Enumeration.Database.Dapper</PackageId>
+        <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
+        <Version>$(NBGV_NuGetPackageVersion)</Version>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\JOS.Enumeration\JOS.Enumeration.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Dapper"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub"/>
     </ItemGroup>
+    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
 </Project>
