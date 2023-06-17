@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace JOS.Enumeration.Database;
+namespace JOS.Enumeration.Database.EntityFrameworkCore;
 
 public static class PropertyBuilderExtensions
 {

@@ -35,7 +35,8 @@ internal static class EnumerationHelpers
             return null;
         }
 
-        var implementsIEnumeration = classSymbol.Interfaces.Any(x => x.Name == "IEnumeration");
+        var implementsIEnumeration = classSymbol.Interfaces.Any(
+            x => x.ContainingNamespace.ToString() == "JOS.Enumeration" && x.Name == "IEnumeration");
         return implementsIEnumeration ? recordDeclarationSyntax : null;
     }
 }

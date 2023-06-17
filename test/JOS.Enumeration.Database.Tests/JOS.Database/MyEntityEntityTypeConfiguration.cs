@@ -1,3 +1,4 @@
+using JOS.Enumeration.Database.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

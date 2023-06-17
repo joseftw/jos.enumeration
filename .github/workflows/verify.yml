@@ -1,8 +1,6 @@
 name: Verify
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 jobs:
@@ -25,10 +23,14 @@ jobs:
           - 5432:5432
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: dotnet/nbgv@master
+      id: nbgv
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
         dotnet-quality: 'preview'
-    - name: Build and Test
+    - name: Build and Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
       run: dotnet test -c Release
