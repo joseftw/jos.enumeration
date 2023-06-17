@@ -6,9 +6,11 @@
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
         <IsRoslynComponent>true</IsRoslynComponent>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageId>JOS.Enumeration.SourceGenerator</PackageId>
         <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
         <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
         <TargetFrameworks />
@@ -25,4 +27,7 @@
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
+    <ItemGroup>
+        <None Include="../../LICENSE" Pack="true" PackagePath=""/>
+    </ItemGroup>
 </Project>

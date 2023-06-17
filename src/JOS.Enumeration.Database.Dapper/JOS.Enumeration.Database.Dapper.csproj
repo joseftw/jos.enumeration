@@ -4,8 +4,10 @@
         <DebugType>embedded</DebugType>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageId>JOS.Enumeration.Database.Dapper</PackageId>
         <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
+        <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
         <Version>$(NBGV_NuGetPackageVersion)</Version>
@@ -20,4 +22,7 @@
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
+    <ItemGroup>
+        <None Include="../../LICENSE" Pack="true" PackagePath=""/>
+    </ItemGroup>
 </Project>

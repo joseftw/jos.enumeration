@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{5A16067C-E
 		Directory.Packages.props = Directory.Packages.props
 		nuget.config = nuget.config
 		.github\workflows\release.yml = .github\workflows\release.yml
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOS.Enumeration.Migrator", "test\JOS.Enumeration.Migrator\JOS.Enumeration.Migrator.csproj", "{8ACB5ED9-6D93-4C22-87C1-014AE4E210B4}"
