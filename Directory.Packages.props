@@ -7,7 +7,7 @@
         <PackageVersion Include="Dapper" Version="2.0.138"/>
         <PackageVersion Include="EFCore.NamingConventions" Version="7.0.2" />
         <PackageVersion Include="JOS.Enumeration" Version="$(NBGV_NuGetPackageVersion)" />
-        <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+        <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />

@@ -15,7 +15,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Dapper"/>
-        <PackageReference Include="Microsoft.SourceLink.GitHub"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
     </ItemGroup>
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>

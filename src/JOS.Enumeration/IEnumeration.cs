@@ -11,3 +11,5 @@ public interface IEnumeration<T>
     static abstract T FromValue(int value);
     static abstract T FromDisplayName(string displayName);
 }
+
+// ADD LICENSE TO NUGET PACKAGES
