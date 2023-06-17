@@ -7,6 +7,8 @@ jobs:
   build:
     name: Release
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
     services:
       postgres:
         image: postgres:15
@@ -23,6 +25,10 @@ jobs:
           - 5432:5432
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: dotnet/nbgv@master
+      id: nbgv
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -30,13 +36,13 @@ jobs:
         dotnet-quality: 'preview'
     - name: Build and Test
       run: dotnet test -c Release
-    - name: Pack JOS.Enumeration ${{ env.NBGV_NuGetPackageVersion }}
+    - name: Pack JOS.Enumeration ${{ steps.nbgv.outputs.version }}
       run: dotnet pack src/JOS.Enumeration -c Release -o ./nuget-packages --no-build
-    - name: Pack JOS.Enumeration.SourceGenerator ${{ env.NBGV_NuGetPackageVersion }}
+    - name: Pack JOS.Enumeration.SourceGenerator ${{ steps.nbgv.outputs.version }}
       run: dotnet pack src/JOS.Enumeration.SourceGenerator -c Release -o ./nuget-packages --no-build
-    - name: Pack JOS.Enumeration.Database.Dapper ${{ env.NBGV_NuGetPackageVersion }}
+    - name: Pack JOS.Enumeration.Database.Dapper ${{ steps.nbgv.outputs.version }}
       run: dotnet pack src/JOS.Enumeration.Database.Dapper -c Release -o ./nuget-packages --no-build
-    - name: Pack JOS.Enumeration.Database.EntityFrameworkCore ${{ env.NBGV_NuGetPackageVersion }}
+    - name: Pack JOS.Enumeration.Database.EntityFrameworkCore ${{ steps.nbgv.outputs.version }}
       run: dotnet pack src/JOS.Enumeration.Database.EntityFrameworkCore -c Release -o ./nuget-packages --no-build
     - name: Push packages
       run: ls nuget-packages
