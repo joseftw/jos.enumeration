@@ -21,6 +21,7 @@ Contains a custom `TypeHandler` for use with Dapper.
 
 ### JOS.Enumeration.Database.EntityFrameworkCore
 Contains ConfigureEnumeration extension method to allow usage with EntityFramework Core.
+
 `dotnet add package JOS.Enumeration.Database.EntityFrameworkCore`
 
 ## Usage
