@@ -30,7 +30,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: |
+          7.x.x
+          8.0.x
         dotnet-quality: 'preview'
     - name: Build and Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
       run: dotnet test -c Release

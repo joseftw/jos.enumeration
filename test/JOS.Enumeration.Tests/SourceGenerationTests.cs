@@ -1,6 +1,8 @@
 using JOS.Enumerations;
 using Shouldly;
+#if NET8_0_OR_GREATER
 using System.Collections.Frozen;
+#endif
 using Xunit;
 using Sausage = JOS.Enumerations.Sausage;
 
