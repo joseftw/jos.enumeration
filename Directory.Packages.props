@@ -1,0 +1,30 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="EFCore.NamingConventions" Version="7.0.2" />
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.5.23280.8"/>
+        <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0-preview.5.23280.8" />
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.5.23280.1" />
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
+        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.4" />
+        <PackageVersion Include="Respawn" Version="6.0.0" />
+        <PackageVersion Include="Respawn.Postgres" Version="1.0.15" />
+        <PackageVersion Include="Shouldly" Version="4.2.1" />
+        <PackageVersion Include="xunit" Version="2.4.2" />
+        <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
+        <PackageVersion Include="Dapper" Version="2.0.138"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.5.23280.1"/>
+        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
+        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4"/>
+        <PackageVersion Include="BenchmarkDotNet" Version="0.13.5" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0-preview.4.23259.5"/>
+        <PackageVersion Include="JOS.Enumeration" Version="$(NBGV_NuGetPackageVersion)" />
+    </ItemGroup>
+    <ItemGroup>
+        <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
+            <PrivateAssets>all</PrivateAssets>
+        </GlobalPackageReference>
+    </ItemGroup>
+</Project>

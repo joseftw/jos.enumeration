@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using JOS.Enumeration.Database.Dapper;
 using JOS.Enumeration.Database.Tests.JOS.Test;
 using JOS.Enumerations;
 using Npgsql;

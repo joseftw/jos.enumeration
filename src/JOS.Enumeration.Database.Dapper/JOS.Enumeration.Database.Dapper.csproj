@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <PackageId>JOS.Enumeration.Database.Dapper</PackageId>
+        <Version>$(NBGV_NuGetPackageVersion)</Version>
+        <Authors>Josef Ottosson</Authors>
+        <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
+        <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\JOS.Enumeration\JOS.Enumeration.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Dapper"/>
+    </ItemGroup>
+</Project>

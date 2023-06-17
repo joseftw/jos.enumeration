@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <PackageId>JOS.Enumeration</PackageId>
+    <Version>$(NBGV_NuGetPackageVersion)</Version>
+    <Authors>Josef Ottosson</Authors>
+    <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
   </PropertyGroup>
 </Project>

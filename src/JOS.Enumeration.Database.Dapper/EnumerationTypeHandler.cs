@@ -1,8 +1,8 @@
+using Dapper;
 using System;
 using System.Data;
-using Dapper;
 
-namespace JOS.Enumeration.Database;
+namespace JOS.Enumeration.Database.Dapper;
 
 public class EnumerationTypeHandler<T> : SqlMapper.TypeHandler<T> where T : IEnumeration<T>
 {
