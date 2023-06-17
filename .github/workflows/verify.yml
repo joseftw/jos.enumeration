@@ -8,7 +8,7 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
+      nugetpackageversion: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
     services:
       postgres:
         image: postgres:15
@@ -34,5 +34,5 @@ jobs:
       with:
         dotnet-version: 8.0.x
         dotnet-quality: 'preview'
-    - name: Build and Test Version ${{ steps.nbgv.outputs.version }}
+    - name: Build and Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
       run: dotnet test -c Release
