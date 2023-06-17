@@ -1,6 +1,28 @@
 # JOS.Enumeration
 Enumeration implementation based on Record and source generation
 
+## Installation
+### JOS.Enumeration
+Contains the `IEnumeration interface` and a `System.Text.Json` JsonConverter.
+
+`dotnet add package JOS.Enumeration`
+
+### JOS.Enumeration.SourceGenerator
+Contains the source generator that generates the enumeration records for you.
+
+Has **NO** dependency on **JOS.Enumeration**, you'll need to add that explicitly.
+
+`dotnet add package JOS.Enumeration.SourceGenerator`
+
+### JOS.Enumeration.Database.Dapper
+Contains a custom `TypeHandler` for use with Dapper.
+
+`dotnet add package JOS.Enumeration.Database.Dapper`
+
+### JOS.Enumeration.Database.EntityFrameworkCore
+Contains ConfigureEnumeration extension method to allow usage with EntityFramework Core.
+`dotnet add package JOS.Enumeration.Database.EntityFrameworkCore`
+
 ## Usage
 * Create a new record
 * Make it partial
