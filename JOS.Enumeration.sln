@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{5A16067C-E
 		Directory.Packages.props = Directory.Packages.props
 		nuget.config = nuget.config
 		.github\workflows\release.yml = .github\workflows\release.yml
-		LICENSE = LICENSE
+		LICENSE.txt = LICENSE.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOS.Enumeration.Migrator", "test\JOS.Enumeration.Migrator\JOS.Enumeration.Migrator.csproj", "{8ACB5ED9-6D93-4C22-87C1-014AE4E210B4}"
@@ -39,6 +39,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOS.Enumeration.Database.Dapper", "src\JOS.Enumeration.Database.Dapper\JOS.Enumeration.Database.Dapper.csproj", "{E46FC724-EFE2-493C-91F2-9E4B6AAD1503}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOS.Enumeration.Database.EntityFrameworkCore", "src\JOS.Enumeration.Database.EntityFrameworkCore\JOS.Enumeration.Database.EntityFrameworkCore.csproj", "{A1782434-8A23-4C6A-A9D8-F061A7E0A2A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleNugetConsumer", "test\ExampleNugetConsumer\ExampleNugetConsumer.csproj", "{C6FEB32F-7951-465B-A042-B200FB6312C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +84,10 @@ Global
 		{A1782434-8A23-4C6A-A9D8-F061A7E0A2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1782434-8A23-4C6A-A9D8-F061A7E0A2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1782434-8A23-4C6A-A9D8-F061A7E0A2A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6FEB32F-7951-465B-A042-B200FB6312C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6FEB32F-7951-465B-A042-B200FB6312C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6FEB32F-7951-465B-A042-B200FB6312C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6FEB32F-7951-465B-A042-B200FB6312C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{A127E5A1-380C-4EEC-A0AC-8EEC5B0D84FA} = {39FD5F7A-11B8-4ED4-A2EA-336CA23CE36F}
 		{E46FC724-EFE2-493C-91F2-9E4B6AAD1503} = {39FD5F7A-11B8-4ED4-A2EA-336CA23CE36F}
 		{A1782434-8A23-4C6A-A9D8-F061A7E0A2A1} = {39FD5F7A-11B8-4ED4-A2EA-336CA23CE36F}
+		{C6FEB32F-7951-465B-A042-B200FB6312C1} = {013E9048-5C68-45E1-86D0-500B5A0E1596}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F5230AE6-BDB7-43B0-BF5E-7513117ED388}

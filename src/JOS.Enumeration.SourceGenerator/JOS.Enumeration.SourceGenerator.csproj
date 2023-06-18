@@ -6,7 +6,7 @@
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
         <IsRoslynComponent>true</IsRoslynComponent>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageId>JOS.Enumeration.SourceGenerator</PackageId>
         <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -28,6 +28,6 @@
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="../../LICENSE" Pack="true" PackagePath=""/>
+        <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
         <DebugType>embedded</DebugType>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageId>JOS.Enumeration.Database.EntityFrameworkCore</PackageId>
         <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -23,6 +23,6 @@
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="../../LICENSE" Pack="true" PackagePath=""/>
+        <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>
