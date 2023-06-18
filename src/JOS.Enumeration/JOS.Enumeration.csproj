@@ -7,7 +7,7 @@
     <PackageId>JOS.Enumeration</PackageId>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
     <Version>$(NBGV_NuGetPackageVersion)</Version>
