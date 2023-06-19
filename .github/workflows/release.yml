@@ -1,4 +1,4 @@
-name: Verify
+name: Release
 
 on:
   push:
