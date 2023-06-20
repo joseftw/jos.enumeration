@@ -102,6 +102,11 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
                     {{FromDisplayNameBody(items, symbol)}}
                 }
 
+                public static {{symbol}} FromDisplayName(ReadOnlySpan<char> displayName)
+                {
+                    {{FromDisplayNameBody(items, symbol)}}
+                }
+
                 public int CompareTo({{symbol}}? other) => Value.CompareTo(other!.Value);
                 public static implicit operator int({{symbol}} item) => item.Value;
                 public static implicit operator {{symbol}}(int value) => FromValue(value);

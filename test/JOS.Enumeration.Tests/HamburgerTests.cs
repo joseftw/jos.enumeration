@@ -87,6 +87,25 @@ public class HamburgerTests
     }
 
     [Fact]
+    public void Span_FromDisplayName_ShouldReturnCorrectInstance()
+    {
+        var displayName = Hamburger.Cheeseburger.DisplayName.AsSpan();
+
+        var result = Hamburger.FromDisplayName(displayName);
+
+        result.ShouldBe(Hamburger.Cheeseburger);
+    }
+
+    [Fact]
+    public void Span_FromDisplayName_ShouldThrowIfNoMatchingItemFound()
+    {
+        var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDisplayName("Egg".AsSpan()));
+
+        exception.Message.ShouldBe(
+            "'Egg' is not a valid display name in 'JOS.Enumerations.Hamburger'");
+    }
+
+    [Fact]
     public void DifferentImplementationsWillNotClash()
     {
         var hamburgers = Hamburger.GetAll().ToList();
