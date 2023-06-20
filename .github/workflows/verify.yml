@@ -44,3 +44,8 @@ jobs:
       run: dotnet pack src/JOS.Enumeration.Database.Dapper -c Release -o ./nuget-packages --no-build
     - name: Pack JOS.Enumeration.Database.EntityFrameworkCore ${{ steps.nbgv.outputs.nugetpackageversion }}
       run: dotnet pack src/JOS.Enumeration.Database.EntityFrameworkCore -c Release -o ./nuget-packages --no-build
+    - name: Step 3 - Use the Upload Artifact GitHub Action
+      uses: actions/upload-artifact@v3
+      with:
+        name: nuget-packages
+        path: "nuget-packages/"
