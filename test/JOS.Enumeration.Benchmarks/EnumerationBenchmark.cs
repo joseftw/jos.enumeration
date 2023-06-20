@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
+using System;
 using System.Linq;
 using HamburgerGenerated = JOS.Enumerations.Hamburger;
 using HamburgerGeneric = JOS.Enumeration.Benchmarks.Hamburger;
@@ -8,6 +9,7 @@ using HamburgerGeneric = JOS.Enumeration.Benchmarks.Hamburger;
 namespace JOS.Enumeration.Benchmarks;
 
 [MemoryDiagnoser]
+[SimpleJob(RuntimeMoniker.Net70)]
 [SimpleJob(RuntimeMoniker.Net80)]
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
@@ -57,6 +59,13 @@ public class EnumerationBenchmark
     public HamburgerGenerated Generated_FromDisplayName()
     {
         return HamburgerGenerated.FromDisplayName("Cheeseburger");
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("FromDisplayName")]
+    public HamburgerGenerated Generated_FromDisplayNameSpan()
+    {
+        return HamburgerGenerated.FromDisplayName("Cheeseburger".AsSpan());
     }
 
     [Benchmark(Baseline = true)]

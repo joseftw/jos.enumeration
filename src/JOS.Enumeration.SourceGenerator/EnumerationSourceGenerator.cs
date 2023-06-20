@@ -63,12 +63,12 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
                     #if NET8_0_OR_GREATER
                     AllItems = new HashSet<{{symbol}}>({{items.Count}})
                     {
-                        {{AllItemsList(items)}}
+                        {{AllItemsSet(items)}}
                     }.ToFrozenSet(optimizeForReading: true);
                     #else
                     AllItems = new HashSet<{{symbol}}>({{items.Count}})
                     {
-                        {{AllItemsList(items)}}
+                        {{AllItemsSet(items)}}
                     };
                     #endif
                 }
@@ -185,7 +185,7 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
         return stringBuilder.ToString();
     }
 
-    private static string AllItemsList(IEnumerable<EnumerationItem> items)
+    private static string AllItemsSet(IEnumerable<EnumerationItem> items)
     {
         var stringBuilder = new StringBuilder();
         foreach(var item in items)
