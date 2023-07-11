@@ -88,6 +88,18 @@ public partial record Hamburger : IComparable<Hamburger>
 * Database support (Dapper and EF Core).
 
 ### JSON
+You'll need to register a custom converter for each Enumeration.
+Example:
+```csharp
+var jsonSerializerOptions = new JsonSerializerOptions
+{
+    Converters = { new EnumerationJsonConverter<Hamburger>() },
+    PropertyNameCaseInsensitive = true,
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+};
+
+
+```
 
 ### Database
 ```csharp

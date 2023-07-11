@@ -4,20 +4,23 @@ using System.Data;
 
 namespace JOS.Enumeration.Database.Dapper;
 
-public class EnumerationTypeHandler<T> : SqlMapper.TypeHandler<T> where T : IEnumeration<T>
+public class EnumerationTypeHandler<TEnumeration>
+    : EnumerationTypeHandler<int, TEnumeration> where TEnumeration : IEnumeration<int, TEnumeration>
 {
-    public override void SetValue(IDbDataParameter parameter, T value)
+}
+
+public class EnumerationTypeHandler<TKey, TEnumeration> :
+    SqlMapper.TypeHandler<TEnumeration>
+    where TEnumeration : IEnumeration<TKey, TEnumeration>
+    where TKey : IConvertible
+{
+    public override void SetValue(IDbDataParameter parameter, TEnumeration value)
     {
         parameter.Value = value.Value;
     }
 
-    public override T Parse(object value)
+    public override TEnumeration Parse(object value)
     {
-        if(!int.TryParse(value.ToString(), out var intValue))
-        {
-            throw new ArgumentException($"Could not convert {value} to int", nameof(value));
-        }
-
-        return T.FromValue(intValue);
+        return TEnumeration.FromValue((TKey)value);
     }
 }

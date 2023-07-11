@@ -4,7 +4,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="BenchmarkDotNet" Version="0.13.5" />
-        <PackageVersion Include="Dapper" Version="2.0.138"/>
+        <PackageVersion Include="Dapper" Version="2.0.143"/>
         <PackageVersion Include="EFCore.NamingConventions" Version="7.0.2" />
         <PackageVersion Include="JOS.Enumeration" Version="$(NBGV_NuGetPackageVersion)" />
         <PackageVersion Include="JOS.Enumeration.SourceGenerator" Version="$(NBGV_NuGetPackageVersion)" />

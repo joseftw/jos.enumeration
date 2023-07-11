@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="JOS.Enumeration" Version="1.1.3-beta-gfef378b783" />
-      <PackageReference Include="JOS.Enumeration.SourceGenerator" Version="1.1.3-beta-gfef378b783" />
+      <PackageReference Include="JOS.Enumeration" Version="1.1.7-beta-g4edda95a99" />
+      <PackageReference Include="JOS.Enumeration.SourceGenerator" Version="1.1.7-beta-g4edda95a99" />
     </ItemGroup>
 
 </Project>

@@ -4,21 +4,22 @@ using System.Text.Json.Serialization;
 
 namespace JOS.Enumeration;
 
-public class EnumerationJsonConverter<T> : JsonConverter<T> where T : IEnumeration<T>
+public class EnumerationJsonConverter<TValue, TEnumeration> :
+    JsonConverter<TEnumeration> where TEnumeration : IEnumeration<TValue, TEnumeration> where TValue : IConvertible
 {
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert.IsAssignableTo(typeof(IEnumeration<T>));
+        return typeToConvert.IsAssignableTo(typeof(IEnumeration<TValue, TEnumeration>));
     }
 
-    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TEnumeration Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        var value = reader.GetInt32();
-        return T.FromValue(value);
+        var value = JsonSerializer.Deserialize<TValue>(ref reader, options)!;
+        return TEnumeration.FromValue(value);
     }
 
-    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, TEnumeration value, JsonSerializerOptions options)
     {
-        writer.WriteNumberValue(value.Value);
+        writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes(value.Value, options));
     }
 }

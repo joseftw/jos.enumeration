@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 var builder = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration((_, configurationBuilder) =>
     {
+        configurationBuilder.AddJsonFile("appsettings.json");
+        configurationBuilder.AddJsonFile("appsettings.Development.json", optional: true);
+        configurationBuilder.AddEnvironmentVariables();
         configurationBuilder.AddEnvironmentVariables("JOS_Enumeration_");
         configurationBuilder.AddCommandLine(args);
     });
@@ -24,7 +27,9 @@ builder.ConfigureServices(services =>
 
 var app = builder.Build();
 
+var hostEnv = app.Services.GetRequiredService<IHostEnvironment>();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("Running in {HostEnv} mode", hostEnv.EnvironmentName);
 var scope = app.Services.CreateAsyncScope();
 
 await using(scope)

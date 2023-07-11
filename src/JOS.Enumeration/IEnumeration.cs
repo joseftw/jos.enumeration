@@ -1,15 +1,18 @@
+using System;
 using System.Collections.Generic;
 
 namespace JOS.Enumeration;
 
-public interface IEnumeration<T>
+public interface IEnumeration<T> : IEnumeration<int, T>
 {
-    int Value { get; }
-    string DisplayName { get; }
-    static abstract IReadOnlySet<T> GetAll();
-    static abstract IEnumerable<T> GetEnumerable();
-    static abstract T FromValue(int value);
-    static abstract T FromDisplayName(string displayName);
 }
 
-// ADD LICENSE TO NUGET PACKAGES
+public interface IEnumeration<TValue, TType> where TValue : IConvertible
+{
+    TValue Value { get; }
+    string DisplayName { get; }
+    static abstract IReadOnlySet<TType> GetAll();
+    static abstract IEnumerable<TType> GetEnumerable();
+    static abstract TType FromValue(TValue value);
+    static abstract TType FromDisplayName(string displayName);
+}

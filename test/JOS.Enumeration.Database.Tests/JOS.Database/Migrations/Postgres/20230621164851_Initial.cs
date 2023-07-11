@@ -16,7 +16,8 @@ public partial class Initial : Migration
             columns: table => new
             {
                 id = table.Column<Guid>(type: "uuid", nullable: false),
-                hamburger = table.Column<int>(type: "integer", nullable: false)
+                hamburger = table.Column<int>(type: "integer", nullable: false),
+                car = table.Column<string>(type: "text", nullable: false)
             },
             constraints: table =>
             {

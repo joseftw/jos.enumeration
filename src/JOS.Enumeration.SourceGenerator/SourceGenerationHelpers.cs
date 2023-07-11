@@ -20,9 +20,9 @@ internal static class SourceGenerationHelpers
         foreach(var field in fields)
         {
             var variable = field.Declaration.Variables.First();
-            var objectCreationExpression = (ImplicitObjectCreationExpressionSyntax)variable.Initializer!.Value;
-            var arguments = objectCreationExpression.ArgumentList.Arguments;
-            var value = (int)((LiteralExpressionSyntax)arguments[0].Expression).Token.Value!;
+            var objectCreationExpression = (BaseObjectCreationExpressionSyntax)variable.Initializer!.Value;
+            var arguments = objectCreationExpression.ArgumentList!.Arguments;
+            var value = ((LiteralExpressionSyntax)arguments[0].Expression).Token.Value!;
             var displayName = (string)((LiteralExpressionSyntax)arguments[1].Expression).Token.Value!;
             var fieldName = variable.Identifier.Value!.ToString();
             items.Add(new EnumerationItem(value, displayName, fieldName));
