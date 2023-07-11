@@ -23,3 +23,8 @@ public class EnumerationJsonConverter<TValue, TEnumeration> :
         writer.WriteRawValue(JsonSerializer.SerializeToUtf8Bytes(value.Value, options));
     }
 }
+
+public class EnumerationJsonConverter<TEnumeration> : EnumerationJsonConverter<int, TEnumeration>
+    where TEnumeration : IEnumeration<int, TEnumeration>
+{
+}

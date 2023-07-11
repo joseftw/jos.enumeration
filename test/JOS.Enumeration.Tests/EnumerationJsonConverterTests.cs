@@ -84,6 +84,44 @@ public class EnumerationJsonConverterTests
     }
 
     [Fact]
+    public void SerializesIntegerKeyCorrectly_Default()
+    {
+        var jsonSerializerOptions  = new JsonSerializerOptions
+        {
+            Converters = { new EnumerationJsonConverter<IntEnumeration>() },
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        var dto = new
+        {
+            IntItem = IntEnumeration.Item2,
+            IntItems = IntEnumeration.GetAll()
+        };
+
+        var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
+
+        result.ShouldBe("{\"intItem\":2,\"intItems\":[1,2]}");
+    }
+
+    [Fact]
+    public void DeserializesIntKeyCorrectly_Default()
+    {
+        var jsonSerializerOptions  = new JsonSerializerOptions
+        {
+            Converters = { new EnumerationJsonConverter<IntEnumeration>() },
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        const string json = """
+        { "int": 2 }
+        """;
+
+        var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
+
+        result.Int.ShouldBe(IntEnumeration.Item2);
+    }
+
+    [Fact]
     public void SerializesIntegerKeyCorrectly()
     {
         var jsonSerializerOptions  = new JsonSerializerOptions
