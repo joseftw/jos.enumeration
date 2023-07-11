@@ -19,10 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageVersion Update="Microsoft.Extensions.Hosting" Version="8.0.0-preview.5.23280.8"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <None Update="appsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
