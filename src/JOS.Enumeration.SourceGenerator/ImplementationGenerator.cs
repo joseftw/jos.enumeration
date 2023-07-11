@@ -98,6 +98,8 @@ internal static class ImplementationGenerator
                     {{FromDisplayNameBody(items, symbol)}}
                 }
 
+                public static Type ValueType => typeof({{valueType}});
+
                 public int CompareTo({{symbol}}? other) => Value.CompareTo(other!.Value);
                 public static implicit operator {{valueType.OriginalDefinition}}({{symbol}} item) => item.Value;
                 public static implicit operator {{symbol}}({{valueType.OriginalDefinition}} value) => FromValue(value);

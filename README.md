@@ -38,8 +38,21 @@ public partial record Hamburger : IEnumeration<Hamburger>
 ```
 The following code will be generated:
 ```csharp
-public partial record Hamburger : IComparable<Hamburger>
+[System.Diagnostics.DebuggerDisplay("{DisplayName}")]
+public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
 {
+    private static readonly IReadOnlySet<JOS.Enumerations.Hamburger> AllItems;
+    
+    static Hamburger()
+    {
+        AllItems = new HashSet<JOS.Enumerations.Hamburger>(3)
+        {
+            Cheeseburger,
+            BigMac,
+            BigTasty
+        }.ToFrozenSet(optimizeForReading: true);
+    }
+
     private Hamburger(int value, string displayName)
     {
         Value = value;
@@ -47,59 +60,111 @@ public partial record Hamburger : IComparable<Hamburger>
     }
 
     public int Value { get; }
+
     public string DisplayName { get; }
-    public static IEnumerable<Hamburger> GetAll()
+
+    public static IReadOnlySet<JOS.Enumerations.Hamburger> GetAll()
+    {
+        return AllItems;
+    }
+
+    public static IEnumerable<JOS.Enumerations.Hamburger> GetEnumerable()
     {
         yield return Cheeseburger;
         yield return BigMac;
         yield return BigTasty;
     }
 
-    public static Hamburger FromValue(int value)
+    public static JOS.Enumerations.Hamburger FromValue(int value)
     {
         return value switch
         {
             1 => Cheeseburger,
             2 => BigMac,
             3 => BigTasty,
-            _ => throw new InvalidOperationException($"'{value}' is not a valid value in 'JOS.Enumerations.Hamburger'")};
+            _ => throw new InvalidOperationException($"'{value}' is not a valid value in 'JOS.Enumerations.Hamburger'")
+        };
     }
 
-    public static Hamburger FromDisplayName(string displayName)
+    public static JOS.Enumerations.Hamburger FromDisplayName(string displayName)
     {
         return displayName switch
         {
             "Cheeseburger" => Cheeseburger,
             "Big Mac" => BigMac,
             "Big Tasty" => BigTasty,
-            _ => throw new InvalidOperationException($"'{displayName}' is not a valid display name in 'JOS.Enumerations.Hamburger'")};
+            _ => throw new InvalidOperationException($"'{displayName}' is not a valid display name in 'JOS.Enumerations.Hamburger'")
+        };
     }
 
-    public int CompareTo(Hamburger? other) => Value.CompareTo(other!.Value);
-    public static implicit operator int (Hamburger item) => item.Value;
-    public static implicit operator Hamburger(int value) => FromValue(value);
+    public static JOS.Enumerations.Hamburger FromDisplayName(ReadOnlySpan<char> displayName)
+    {
+        return displayName switch
+        {
+            "Cheeseburger" => Cheeseburger,
+            "Big Mac" => BigMac,
+            "Big Tasty" => BigTasty,
+            _ => throw new InvalidOperationException($"'{displayName}' is not a valid display name in 'JOS.Enumerations.Hamburger'")
+        };
+    }
+
+    public static Type ValueType => typeof(int);
+    public int CompareTo(JOS.Enumerations.Hamburger? other) => Value.CompareTo(other!.Value);
+    public static implicit operator int (JOS.Enumerations.Hamburger item) => item.Value;
+    public static implicit operator JOS.Enumerations.Hamburger(int value) => FromValue(value);
 }
 ```
 ## Features
+* Generic value
 * Generated `IComparable<T>` method.
 * Generated implicit operators (convert to/from int).
 * Generated optimized `GetAll`, `FromValue` and `FromDisplayName` methods.
-* System.Text.Json support *(AOT support coming soon)*
+* System.Text.Json support
 * Database support (Dapper and EF Core).
 
+### Generic value
+
+It's possible to use a generic value instead of the default `int` value by implementing the `IEnumeration<TValue, TEnumeration>` interface.
+
+```csharp
+public partial record Car : IEnumeration<string, Car>
+{
+    public static readonly Car FerrariSpider = new("ferrari-spider", "Ferrari Spider");
+    public static readonly Car TeslaModelY = new("tesla-model-y", "Tesla Model Y");
+}
+```
+`TValue` has a [*IConvertible*](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible?WT.mc_id=DT-MVP-5004074) constraint.
+
+The following types has been tested and are guaranteed to work:
+* int (default)
+* bool
+* decimal
+* long
+* string
+* uint
+* ulong
+
 ### JSON
-You'll need to register a custom converter for each Enumeration.
+The package comes with a generic `JsonConverter`. You'll need to register a custom converter for each enumeration.
 Example:
 ```csharp
 var jsonSerializerOptions = new JsonSerializerOptions
 {
-    Converters = { new EnumerationJsonConverter<Hamburger>() },
-    PropertyNameCaseInsensitive = true,
-    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    Converters = { new EnumerationJsonConverter<Hamburger>() }
 };
-
-
 ```
+If you're using a custom value, you need to register the converter like this:
+```csharp
+var jsonSerializerOptions = new JsonSerializerOptions
+{
+    Converters = { new EnumerationJsonConverter<string, Car>() }
+};
+```
+It supports the following scenarios:
+* Serializing to `TValue`
+* Deserializing from `TValue`
+
+If you want any other behaviour, just create your own converter and register it.
 
 ### Database
 ```csharp

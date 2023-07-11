@@ -1,5 +1,4 @@
 using JOS.Enumeration;
-using System.Text.Json.Serialization;
 
 namespace JOS.Enumerations;
 
