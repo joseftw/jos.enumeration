@@ -14,7 +14,7 @@ dotnet add package JOS.Enumeration.SourceGenerator
 ```
 
 ### JOS.Enumeration.Database.Dapper
-Contains a custom `TypeHandler` for use with Dapper.
+Contains a custom `TypeHandler` to use with Dapper.
 
 `dotnet add package JOS.Enumeration.Database.Dapper`
 
