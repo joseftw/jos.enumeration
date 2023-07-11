@@ -1,4 +1,5 @@
 using JOS.Enumeration.Database.EntityFrameworkCore;
+using JOS.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,5 +11,6 @@ public class MyEntityEntityTypeConfiguration : IEntityTypeConfiguration<MyEntity
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Hamburger).ConfigureEnumeration().IsRequired();
+        builder.Property(x => x.Car).ConfigureEnumeration<string, Car>().IsRequired();
     }
 }

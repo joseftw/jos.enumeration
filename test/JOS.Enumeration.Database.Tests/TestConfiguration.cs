@@ -7,8 +7,9 @@ public class TestConfiguration : Dictionary<string, string>
     public TestConfiguration()
     {
         this["ASPNETCORE_ENVIRONMENT"] = "TestRunner";
+        this["DOTNET_ENVIRONMENT"] = "TestRunner";
         this["Postgres:ConnectionString"] =
-            "Host=127.0.0.1;Port=5432;Username=jos-enumeration;Password=anything;Database=jos_enumeration_test";
+            "Host=127.0.0.1;Port=5432;Username=jos;Password=any;Database=jos_enumeration_test";
     }
 
     public string PostgresConnectionString => this["Postgres:ConnectionString"];

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using JOS.Enumeration.Database.Tests.JOS.Test;
+using JOS.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
@@ -21,8 +22,7 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
     [Fact]
     public async Task CanSaveAndReadEntityWithEnumeration()
     {
-        await _fixture.ResetDatabase();
-        var myEntity = new MyEntity(Guid.NewGuid(), Hamburger.BigMac);
+        var myEntity = new MyEntity(Guid.NewGuid(), Hamburger.BigMac, Car.TeslaModelY);
         await using var arrangeDbContext = new JosEnumerationDbContext(_fixture.PostgresDatabaseOptions);
         arrangeDbContext.MyEntities.Add(myEntity);
         await arrangeDbContext.SaveChangesAsync();
@@ -33,5 +33,6 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
         result.ShouldNotBeNull();
         result.Id.ShouldBe(myEntity.Id);
         result.Hamburger.ShouldBe(myEntity.Hamburger);
+        result.Car.ShouldBe(myEntity.Car);
     }
 }

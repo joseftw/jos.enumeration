@@ -13,16 +13,17 @@
         <Version>$(NBGV_NuGetPackageVersion)</Version>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\JOS.Enumeration\JOS.Enumeration.csproj"/>
+        <ProjectReference Include="..\JOS.Enumeration\JOS.Enumeration.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Dapper"/>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
+        <PackageReference Include="Dapper" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
     </ItemGroup>
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
+        <None Include="../../LICENSE.txt" Pack="true" PackagePath="" />
     </ItemGroup>
 </Project>
