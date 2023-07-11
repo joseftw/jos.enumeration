@@ -13,7 +13,7 @@ jobs:
         image: postgres:15
         env:
           POSTGRES_USER: jos-enumeration
-          POSTGRES_PASSWORD: anything
+          POSTGRES_PASSWORD: any
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
