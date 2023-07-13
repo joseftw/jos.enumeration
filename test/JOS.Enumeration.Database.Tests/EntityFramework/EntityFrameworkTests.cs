@@ -1,15 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using JOS.Enumeration.Database.Tests.JOS.Test;
 using JOS.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
-using Hamburger = JOS.Enumerations.Hamburger;
 
 namespace JOS.Enumeration.Database.Tests.EntityFramework;
 
-[Collection(DatabaseTestCollection.Name)]
 public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
 {
     private readonly JosEnumerationDatabaseFixture _fixture;
