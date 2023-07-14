@@ -1,3 +1,4 @@
+using JOS.Enumeration.Database.Tests.JOS.Test;
 using System;
 using System.Threading.Tasks;
 using JOS.Enumerations;
@@ -7,6 +8,7 @@ using Xunit;
 
 namespace JOS.Enumeration.Database.Tests.EntityFramework;
 
+[Collection(DatabaseTestCollection.Name)]
 public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
 {
     private readonly JosEnumerationDatabaseFixture _fixture;
