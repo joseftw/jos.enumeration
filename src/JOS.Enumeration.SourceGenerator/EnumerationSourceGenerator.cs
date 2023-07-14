@@ -7,8 +7,8 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var recordDeclarations = EnumerationHelpers.GetEnumerationRecordDeclarations(context);
-        var incrementalValueProvider = context.CompilationProvider.Combine(recordDeclarations);
+        var implementations = EnumerationHelpers.GetImplementations(context);
+        var incrementalValueProvider = context.CompilationProvider.Combine(implementations);
         context.RegisterSourceOutput(
             incrementalValueProvider,
             static (context, source) => ImplementationGenerator.Generate(source.Left, source.Right, context));
