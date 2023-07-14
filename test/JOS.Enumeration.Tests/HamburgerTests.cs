@@ -69,39 +69,39 @@ public class HamburgerTests
     }
 
     [Fact]
-    public void FromDisplayName_ShouldReturnCorrectInstance()
+    public void FromDescription_ShouldReturnCorrectInstance()
     {
-        var result = Hamburger.FromDisplayName(Hamburger.Cheeseburger.DisplayName);
+        var result = Hamburger.FromDescription(Hamburger.Cheeseburger.Description);
 
         result.ShouldBe(Hamburger.Cheeseburger);
     }
 
     [Fact]
-    public void FromDisplayName_ShouldThrowIfNoMatchingItemFound()
+    public void FromDescription_ShouldThrowIfNoMatchingItemFound()
     {
-        var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDisplayName("Egg"));
+        var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDescription("Egg"));
 
         exception.Message.ShouldBe(
-            "'Egg' is not a valid display name in 'JOS.Enumerations.Hamburger'");
+            "'Egg' is not a valid description in 'JOS.Enumerations.Hamburger'");
     }
 
     [Fact]
-    public void Span_FromDisplayName_ShouldReturnCorrectInstance()
+    public void Span_FromDescription_ShouldReturnCorrectInstance()
     {
-        var displayName = Hamburger.Cheeseburger.DisplayName.AsSpan();
+        var description = Hamburger.Cheeseburger.Description.AsSpan();
 
-        var result = Hamburger.FromDisplayName(displayName);
+        var result = Hamburger.FromDescription(description);
 
         result.ShouldBe(Hamburger.Cheeseburger);
     }
 
     [Fact]
-    public void Span_FromDisplayName_ShouldThrowIfNoMatchingItemFound()
+    public void Span_FromDescription_ShouldThrowIfNoMatchingItemFound()
     {
-        var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDisplayName("Egg".AsSpan()));
+        var exception = Should.Throw<InvalidOperationException>(() => Hamburger.FromDescription("Egg".AsSpan()));
 
         exception.Message.ShouldBe(
-            "'Egg' is not a valid display name in 'JOS.Enumerations.Hamburger'");
+            "'Egg' is not a valid description in 'JOS.Enumerations.Hamburger'");
     }
 
     [Fact]
@@ -153,7 +153,7 @@ public class HamburgerTests
                 BindingFlags.NonPublic | BindingFlags.Instance,
                 null,
                 new[] { typeof(int), typeof(string) }, null)
-            !.Invoke(new object[] { hamburger.Value, hamburger.DisplayName });
+            !.Invoke(new object[] { hamburger.Value, hamburger.Description });
     }
     // TODO Add test that ensures that code throws if duplicate names.
 }

@@ -67,39 +67,39 @@ public class CarTests
     }
 
     [Fact]
-    public void FromDisplayName_ShouldReturnCorrectInstance()
+    public void FromDescription_ShouldReturnCorrectInstance()
     {
-        var result = Car.FromDisplayName(Car.TeslaModelY.DisplayName);
+        var result = Car.FromDescription(Car.TeslaModelY.Description);
 
         result.ShouldBe(Car.TeslaModelY);
     }
 
     [Fact]
-    public void FromDisplayName_ShouldThrowIfNoMatchingItemFound()
+    public void FromDescription_ShouldThrowIfNoMatchingItemFound()
     {
-        var exception = Should.Throw<InvalidOperationException>(() => Car.FromDisplayName("Egg"));
+        var exception = Should.Throw<InvalidOperationException>(() => Car.FromDescription("Egg"));
 
         exception.Message.ShouldBe(
-            "'Egg' is not a valid display name in 'JOS.Enumerations.Car'");
+            "'Egg' is not a valid description in 'JOS.Enumerations.Car'");
     }
 
     [Fact]
-    public void Span_FromDisplayName_ShouldReturnCorrectInstance()
+    public void Span_FromDescription_ShouldReturnCorrectInstance()
     {
-        var displayName = Car.TeslaModelY.DisplayName.AsSpan();
+        var description = Car.TeslaModelY.Description.AsSpan();
 
-        var result = Car.FromDisplayName(displayName);
+        var result = Car.FromDescription(description);
 
         result.ShouldBe(Car.TeslaModelY);
     }
 
     [Fact]
-    public void Span_FromDisplayName_ShouldThrowIfNoMatchingItemFound()
+    public void Span_FromDescription_ShouldThrowIfNoMatchingItemFound()
     {
-        var exception = Should.Throw<InvalidOperationException>(() => Car.FromDisplayName("Egg".AsSpan()));
+        var exception = Should.Throw<InvalidOperationException>(() => Car.FromDescription("Egg".AsSpan()));
 
         exception.Message.ShouldBe(
-            "'Egg' is not a valid display name in 'JOS.Enumerations.Car'");
+            "'Egg' is not a valid description in 'JOS.Enumerations.Car'");
     }
 
     [Fact]
@@ -151,6 +151,6 @@ public class CarTests
                 BindingFlags.NonPublic | BindingFlags.Instance,
                 null,
                 new[] { typeof(string), typeof(string), typeof(string) }, null)
-            !.Invoke(new object[] { car.Value, car.DisplayName, car.Model });
+            !.Invoke(new object[] { car.Value, car.Description, car.Model });
     }
 }

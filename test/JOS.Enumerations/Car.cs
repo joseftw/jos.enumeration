@@ -9,7 +9,7 @@ public partial record Car : IEnumeration<string, Car>
 
     public string Model { get; } = null!;
 
-    private Car(string value, string displayName, string model) : this(value, displayName)
+    private Car(string value, string description, string model) : this(value, description)
     {
         Model = model;
     }

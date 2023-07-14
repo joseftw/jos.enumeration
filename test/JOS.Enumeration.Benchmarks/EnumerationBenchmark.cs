@@ -58,14 +58,14 @@ public class EnumerationBenchmark
     [BenchmarkCategory("FromDisplayName")]
     public HamburgerGenerated Generated_FromDisplayName()
     {
-        return HamburgerGenerated.FromDisplayName("Cheeseburger");
+        return HamburgerGenerated.FromDescription("Cheeseburger");
     }
 
     [Benchmark]
     [BenchmarkCategory("FromDisplayName")]
     public HamburgerGenerated Generated_FromDisplayNameSpan()
     {
-        return HamburgerGenerated.FromDisplayName("Cheeseburger".AsSpan());
+        return HamburgerGenerated.FromDescription("Cheeseburger".AsSpan());
     }
 
     [Benchmark(Baseline = true)]
