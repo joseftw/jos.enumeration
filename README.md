@@ -50,6 +50,7 @@ public interface IEnumeration<TValue, TType> where TValue : IConvertible
     static abstract IEnumerable<TType> GetEnumerable();
     static abstract TType FromValue(TValue value);
     static abstract TType FromDescription(string description);
+    static abstract TType FromDescription(ReadOnlySpan<char> description);
     static abstract Type ValueType { get; }
 }
 ```
