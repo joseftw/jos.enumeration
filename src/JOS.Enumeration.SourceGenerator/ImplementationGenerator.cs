@@ -45,7 +45,7 @@ internal static class ImplementationGenerator
 
             namespace {{@namespace}};
 
-            [System.Diagnostics.DebuggerDisplay("{DisplayName}")]
+            [System.Diagnostics.DebuggerDisplay("{Description}")]
             {{enumeration.Modifiers}} {{enumeration.Keyword.Value}} {{symbol.MetadataName}}
                 : {{GenerateInterfaces(symbol, enumeration)}}
             {
@@ -66,14 +66,14 @@ internal static class ImplementationGenerator
                     #endif
                 }
 
-                private {{symbol.MetadataName}}({{valueType}} value, string displayName)
+                private {{symbol.MetadataName}}({{valueType}} value, string description)
                 {
                     Value = value;
-                    DisplayName = displayName ?? throw new ArgumentNullException(nameof(displayName));
+                    Description = description ?? throw new ArgumentNullException(nameof(description));
                 }
 
                 public {{valueType}} Value { get; }
-                public string DisplayName { get; }
+                public string Description { get; }
 
                 public static IReadOnlySet<{{symbol}}> GetAll()
                 {
@@ -90,14 +90,14 @@ internal static class ImplementationGenerator
                     {{FromValueMethodBody(valueType.OriginalDefinition, items, symbol)}}
                 }
 
-                public static {{symbol}} FromDisplayName(string displayName)
+                public static {{symbol}} FromDescription(string description)
                 {
-                    {{FromDisplayNameBody(items, symbol)}}
+                    {{FromDescriptionBody(items, symbol)}}
                 }
 
-                public static {{symbol}} FromDisplayName(ReadOnlySpan<char> displayName)
+                public static {{symbol}} FromDescription(ReadOnlySpan<char> description)
                 {
-                    {{FromDisplayNameBody(items, symbol)}}
+                    {{FromDescriptionBody(items, symbol)}}
                 }
 
                 public static Type ValueType => typeof({{valueType}});
@@ -259,18 +259,18 @@ internal static class ImplementationGenerator
         }
     }
 
-    private static string FromDisplayNameBody(IEnumerable<EnumerationItem> items, ISymbol enumerationSymbol)
+    private static string FromDescriptionBody(IEnumerable<EnumerationItem> items, ISymbol enumerationSymbol)
     {
         var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("return displayName switch");
+        stringBuilder.AppendLine("return description switch");
         stringBuilder.AppendLine("{");
         foreach(var field in items)
         {
-            stringBuilder.AppendLine($"\"{field.DisplayName}\" => {field.FieldName},");
+            stringBuilder.AppendLine($"\"{field.Description}\" => {field.FieldName},");
         }
 
         stringBuilder.AppendLine(
-            $"_ => throw new InvalidOperationException($\"'{{displayName}}' is not a valid display name in '{enumerationSymbol}'\")");
+            $"_ => throw new InvalidOperationException($\"'{{description}}' is not a valid description in '{enumerationSymbol}'\")");
         stringBuilder.Append("};");
         return stringBuilder.ToString();
     }

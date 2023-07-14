@@ -10,10 +10,10 @@ public interface IEnumeration<T> : IEnumeration<int, T> where T : IEnumeration<T
 public interface IEnumeration<TValue, TType> where TValue : IConvertible
 {
     TValue Value { get; }
-    string DisplayName { get; }
+    string Description { get; }
     static abstract IReadOnlySet<TType> GetAll();
     static abstract IEnumerable<TType> GetEnumerable();
     static abstract TType FromValue(TValue value);
-    static abstract TType FromDisplayName(string displayName);
+    static abstract TType FromDescription(string description);
     static abstract Type ValueType { get; }
 }

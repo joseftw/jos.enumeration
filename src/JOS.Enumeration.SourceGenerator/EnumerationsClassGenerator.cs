@@ -61,7 +61,7 @@ internal static class EnumerationsClassGenerator
                 stringBuilder.AppendLine($"public static class {item.FieldName}");
                 stringBuilder.AppendLine("{");
                 stringBuilder.AppendLine($"public const {valueType.OriginalDefinition} Value = {value};");
-                stringBuilder.AppendLine($"public const string DisplayName = \"{item.DisplayName}\";");
+                stringBuilder.AppendLine($"public const string Description = \"{item.Description}\";");
                 stringBuilder.AppendLine("}");
             }
             stringBuilder.AppendLine("}");

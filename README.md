@@ -37,7 +37,7 @@ public partial record Hamburger : IEnumeration<Hamburger>
 ```
 The following code will be generated:
 ```csharp
-[System.Diagnostics.DebuggerDisplay("{DisplayName}")]
+[System.Diagnostics.DebuggerDisplay("{Description}")]
 public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
 {
     private static readonly IReadOnlySet<JOS.Enumerations.Hamburger> AllItems;
@@ -52,15 +52,15 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
         }.ToFrozenSet(optimizeForReading: true);
     }
 
-    private Hamburger(int value, string displayName)
+    private Hamburger(int value, string description)
     {
         Value = value;
-        DisplayName = displayName ?? throw new ArgumentNullException(nameof(displayName));
+        Description = description ?? throw new ArgumentNullException(nameof(description));
     }
 
     public int Value { get; }
 
-    public string DisplayName { get; }
+    public string Description { get; }
 
     public static IReadOnlySet<JOS.Enumerations.Hamburger> GetAll()
     {
@@ -85,25 +85,25 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
         };
     }
 
-    public static JOS.Enumerations.Hamburger FromDisplayName(string displayName)
+    public static JOS.Enumerations.Hamburger FromDescription(string description)
     {
-        return displayName switch
+        return description switch
         {
             "Cheeseburger" => Cheeseburger,
             "Big Mac" => BigMac,
             "Big Tasty" => BigTasty,
-            _ => throw new InvalidOperationException($"'{displayName}' is not a valid display name in 'JOS.Enumerations.Hamburger'")
+            _ => throw new InvalidOperationException($"'{description}' is not a valid description in 'JOS.Enumerations.Hamburger'")
         };
     }
 
-    public static JOS.Enumerations.Hamburger FromDisplayName(ReadOnlySpan<char> displayName)
+    public static JOS.Enumerations.Hamburger FromDescription(ReadOnlySpan<char> description)
     {
-        return displayName switch
+        return description switch
         {
             "Cheeseburger" => Cheeseburger,
             "Big Mac" => BigMac,
             "Big Tasty" => BigTasty,
-            _ => throw new InvalidOperationException($"'{displayName}' is not a valid display name in 'JOS.Enumerations.Hamburger'")
+            _ => throw new InvalidOperationException($"'{description}' is not a valid description in 'JOS.Enumerations.Hamburger'")
         };
     }
 
@@ -117,7 +117,7 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
 * Generic value
 * Generated `IComparable<T>` method.
 * Generated implicit operators (convert to/from int).
-* Generated optimized `GetAll`, `FromValue` and `FromDisplayName` methods.
+* Generated optimized `GetAll`, `FromValue` and `FromDescription` methods.
 * System.Text.Json support
 * Database support (Dapper and EF Core).
 
