@@ -8,35 +8,35 @@ namespace JOS.Enumeration.SourceGenerator;
 
 internal static class EnumerationHelpers
 {
-    internal static IncrementalValueProvider<ImmutableArray<RecordDeclarationSyntax>> GetEnumerationRecordDeclarations(
+    internal static IncrementalValueProvider<ImmutableArray<TypeDeclarationSyntax>> GetImplementations(
         IncrementalGeneratorInitializationContext context)
     {
         var declarations = context.SyntaxProvider
-            .CreateSyntaxProvider(
-                predicate: static (node, _) => Predicate(node),
-                transform: static (context, _) => Transform(context))
-            .Where(static m => m is not null);
+                                  .CreateSyntaxProvider(
+                                      predicate: static (node, _) => Predicate(node),
+                                      transform: static (context, _) => Transform(context))
+                                  .Where(static m => m is not null);
         return declarations.Collect()!;
     }
 
     private static bool Predicate(SyntaxNode node)
     {
-        return node is RecordDeclarationSyntax recordDeclarationSyntax &&
-               recordDeclarationSyntax.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PartialKeyword));
+        return node is TypeDeclarationSyntax typeDeclarationSyntax &&
+               typeDeclarationSyntax.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PartialKeyword));
     }
 
-    private static RecordDeclarationSyntax? Transform(GeneratorSyntaxContext context)
+    private static TypeDeclarationSyntax? Transform(GeneratorSyntaxContext context)
     {
-        var recordDeclarationSyntax = (RecordDeclarationSyntax) context.Node;
-        var classSymbol = context.SemanticModel.GetDeclaredSymbol(recordDeclarationSyntax);
+        var typeDeclarationSyntax = (TypeDeclarationSyntax) context.Node;
+        var symbol = context.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
 
-        if (classSymbol?.BaseType == null)
+        if (symbol?.BaseType == null)
         {
             return null;
         }
 
-        var implementsIEnumeration = classSymbol.Interfaces.Any(
+        var implementsIEnumeration = symbol.Interfaces.Any(
             x => x.ContainingNamespace.ToString() == "JOS.Enumeration" && x.Name == "IEnumeration");
-        return implementsIEnumeration ? recordDeclarationSyntax : null;
+        return implementsIEnumeration ? typeDeclarationSyntax : null;
     }
 }

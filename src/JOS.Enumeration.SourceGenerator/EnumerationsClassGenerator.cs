@@ -10,7 +10,7 @@ internal static class EnumerationsClassGenerator
 {
     internal static void Generate(
         Compilation compilation,
-        ImmutableArray<RecordDeclarationSyntax> enumerations,
+        ImmutableArray<TypeDeclarationSyntax> enumerations,
         SourceProductionContext context)
     {
         if(enumerations.IsDefaultOrEmpty)
@@ -38,7 +38,7 @@ internal static class EnumerationsClassGenerator
     }
 
     private static string GenerateNestedClasses(
-        Compilation compilation, ImmutableArray<RecordDeclarationSyntax> enumerations)
+        Compilation compilation, ImmutableArray<TypeDeclarationSyntax> enumerations)
     {
         var stringBuilder = new StringBuilder();
         foreach(var enumeration in enumerations)

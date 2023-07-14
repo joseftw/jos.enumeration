@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -11,7 +12,7 @@ internal static class ImplementationGenerator
 {
     internal static void Generate(
         Compilation compilation,
-        ImmutableArray<RecordDeclarationSyntax> enumerations,
+        ImmutableArray<TypeDeclarationSyntax> enumerations,
         SourceProductionContext context)
     {
         if(enumerations.IsDefaultOrEmpty)
@@ -45,7 +46,8 @@ internal static class ImplementationGenerator
             namespace {{@namespace}};
 
             [System.Diagnostics.DebuggerDisplay("{DisplayName}")]
-            {{enumeration.Modifiers}} record {{symbol.MetadataName}} : IComparable<{{symbol}}>
+            {{enumeration.Modifiers}} {{enumeration.Keyword.Value}} {{symbol.MetadataName}}
+                : {{GenerateInterfaces(symbol, enumeration)}}
             {
                 private static readonly IReadOnlySet<{{symbol}}> AllItems;
 
@@ -103,11 +105,94 @@ internal static class ImplementationGenerator
                 public int CompareTo({{symbol}}? other) => Value.CompareTo(other!.Value);
                 public static implicit operator {{valueType.OriginalDefinition}}({{symbol}} item) => item.Value;
                 public static implicit operator {{symbol}}({{valueType.OriginalDefinition}} value) => FromValue(value);
+
+                {{ClassSpecificMethods(symbol, enumeration)}}
             }
             """;
 
             context.AddSource($"{symbol.MetadataName}.Generated.Implementation.cs", source.FormatSource());
         }
+    }
+
+    private static string GenerateInterfaces(ISymbol symbol, TypeDeclarationSyntax typeDeclaration)
+    {
+        return typeDeclaration switch
+        {
+            RecordDeclarationSyntax => $"IComparable<{symbol}>",
+            ClassDeclarationSyntax => $"IComparable<{symbol}>, IEquatable<{symbol}>",
+            _ => throw new NotSupportedException($"{typeDeclaration} is not supported")
+        };
+    }
+
+    private static string ClassSpecificMethods(ISymbol symbol, TypeDeclarationSyntax typeDeclaration)
+    {
+        if(typeDeclaration is RecordDeclarationSyntax)
+        {
+            return String.Empty;
+        }
+
+        var typeSymbol = (ITypeSymbol)symbol;
+        var userDefinedMethods =
+            typeSymbol.GetMembers()
+                      .Where(x => x is IMethodSymbol
+                      {
+                          MethodKind: not (MethodKind.Constructor or MethodKind.StaticConstructor)
+                      })
+                      .Cast<IMethodSymbol>()
+                      .Select(x =>
+                      {
+                          var parameters = x.Parameters;
+                          if(!parameters.Any())
+                          {
+                              return $"{x.Name}()";
+                          }
+
+                          var parametersString = string.Join(",", x.Parameters.Select(p => p.ToString()));
+                          return string.Concat($"{x.Name}(", parametersString, ")");
+                      })
+                      .ToImmutableHashSet();
+
+        var stringBuilder = new StringBuilder(3);
+
+        if(!userDefinedMethods.Any(x => x.StartsWith("Equals(object?")))
+        {
+            var equalsMethod = $$"""
+            public override bool Equals(object? obj)
+            {
+                if (!(obj is {{symbol}} other))
+                {
+                    return false;
+                }
+
+                return Value.Equals(other.Value);
+            }
+            """;
+            stringBuilder.AppendLine(equalsMethod);
+        }
+
+        if(!userDefinedMethods.Any(x => x.StartsWith($"Equals({symbol}?")))
+        {
+            var genericEqualsMethod = $$"""
+            public bool Equals({{symbol}}? other)
+            {
+                return Value.Equals(other?.Value);
+            }
+            """;
+            stringBuilder.AppendLine(genericEqualsMethod);
+        }
+
+        if(!userDefinedMethods.Any(x => x.StartsWith("GetHashCode(")))
+        {
+            var getHashCodeMethod = """
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(Value);
+            }
+            """;
+            stringBuilder.AppendLine(getHashCodeMethod);
+        }
+
+        return stringBuilder.ToString();
     }
 
     private static string GetEnumeratorBody(IEnumerable<EnumerationItem> items)
@@ -128,6 +213,7 @@ internal static class ImplementationGenerator
         {
             stringBuilder.AppendLine($"{item.FieldName},");
         }
+
         return stringBuilder.ToString();
     }
 
