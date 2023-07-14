@@ -1,5 +1,5 @@
 # JOS.Enumeration
-Enumeration implementation based on Record and source generation
+Enumeration implementation with source generation support.
 
 ## Installation
 ### JOS.Enumeration
@@ -24,8 +24,7 @@ Contains ConfigureEnumeration extension method to allow usage with EntityFramewo
 `dotnet add package JOS.Enumeration.Database.EntityFrameworkCore`
 
 ## Usage
-* Create a new record
-* Make it partial
+* Create a new *partial* `record` or `class`
 * Implement the `IEnumeration<T>` interface
 * Add your Enumeration items
 ```csharp
