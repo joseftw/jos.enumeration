@@ -1,5 +1,7 @@
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JOS.Enumeration.SourceGenerator;
 
@@ -19,15 +21,40 @@ internal static class SourceGenerationHelpers
         var items = new List<EnumerationItem>(fields.Count);
         foreach(var field in fields)
         {
-            var variable = field.Declaration.Variables.First();
-            var objectCreationExpression = (BaseObjectCreationExpressionSyntax)variable.Initializer!.Value;
-            var arguments = objectCreationExpression.ArgumentList!.Arguments;
-            var value = ((LiteralExpressionSyntax)arguments[0].Expression).Token.Value!;
-            var description = (string)((LiteralExpressionSyntax)arguments[1].Expression).Token.Value!;
-            var fieldName = variable.Identifier.Value!.ToString();
-            items.Add(new EnumerationItem(value, description, fieldName));
+            var syntax = field.Declaration.Variables.First();
+            var item = CreateEnumerationItem(syntax);
+            items.Add(item);
         }
 
         return items;
+    }
+
+    internal static IReadOnlyCollection<EnumerationItem> ExtractEnumerationItems(
+        IReadOnlyCollection<IFieldSymbol> fields)
+    {
+        var items = new List<EnumerationItem>(fields.Count);
+        foreach(var field in fields)
+        {
+            var syntax = field.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+            if(syntax is not VariableDeclaratorSyntax variableDeclarationSyntax)
+            {
+                continue;
+            }
+            var item = CreateEnumerationItem(variableDeclarationSyntax);
+            items.Add(item);
+        }
+
+        return items;
+    }
+
+    // TODO make this...much less error prone :D
+    private static EnumerationItem CreateEnumerationItem(VariableDeclaratorSyntax variable)
+    {
+        var objectCreationExpression = (BaseObjectCreationExpressionSyntax)variable.Initializer!.Value;
+        var arguments = objectCreationExpression.ArgumentList!.Arguments;
+        var value = ((LiteralExpressionSyntax)arguments[0].Expression).Token.Value!;
+        var description = (string)((LiteralExpressionSyntax)arguments[1].Expression).Token.Value!;
+        var fieldName = variable.Identifier.Value!.ToString();
+        return new EnumerationItem(value, description, fieldName, variable);
     }
 }
