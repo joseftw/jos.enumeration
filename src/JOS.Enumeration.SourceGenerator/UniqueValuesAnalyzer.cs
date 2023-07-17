@@ -20,41 +20,35 @@ public class UniqueValuesAnalyzer : DiagnosticAnalyzer
         context.RegisterSymbolAction(c =>
         {
             var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
-            if(namedTypeSymbol.ImplementsIEnumeration())
+            if(!namedTypeSymbol.ImplementsIEnumeration())
             {
-                var typeSymbol = (ITypeSymbol)c.Symbol;
-                var items = namedTypeSymbol
-                            .GetMembers()
-                            .Where(x => x.IsStatic &&
-                                        x is IFieldSymbol field &&
-                                        SymbolEqualityComparer.Default.Equals(field.Type, typeSymbol))
-                            .Cast<IFieldSymbol>()
-                            .ToArray();
-                var enumerationItems = SourceGenerationHelpers.ExtractEnumerationItems(items);
-                var values = new HashSet<object>();
-                var descriptions = new HashSet<string>();
-                foreach(var enumerationItem in enumerationItems)
-                {
-                    if(values.Contains(enumerationItem.Value))
-                    {
-                        var diagnostic = CreateUniqueValueDiagnostic(enumerationItem, enumerationItem.Value);
-                        c.ReportDiagnostic(diagnostic);
-                    }
-                    else
-                    {
-                        values.Add(enumerationItem.Value);
-                    }
+                return;
+            }
 
-                    if(descriptions.Contains(enumerationItem.Description))
-                    {
-                        var diagnostic =
-                            CreateUniqueDescriptionDiagnostic(enumerationItem, enumerationItem.Description);
-                        c.ReportDiagnostic(diagnostic);
-                    }
-                    else
-                    {
-                        descriptions.Add(enumerationItem.Description);
-                    }
+            var typeSymbol = (ITypeSymbol)c.Symbol;
+            var items = typeSymbol
+                        .GetMembers()
+                        .Where(x => x.IsStatic &&
+                                    x is IFieldSymbol field &&
+                                    SymbolEqualityComparer.Default.Equals(field.Type, typeSymbol))
+                        .Cast<IFieldSymbol>()
+                        .ToArray();
+            var enumerationItems = SourceGenerationHelpers.ExtractEnumerationItems(items);
+            var values = new HashSet<object>();
+            var descriptions = new HashSet<string>();
+            foreach(var enumerationItem in enumerationItems)
+            {
+                if(!values.Add(enumerationItem.Value))
+                {
+                    var diagnostic = CreateUniqueValueDiagnostic(enumerationItem, enumerationItem.Value);
+                    c.ReportDiagnostic(diagnostic);
+                }
+
+                if(!descriptions.Add(enumerationItem.Description))
+                {
+                    var diagnostic =
+                        CreateUniqueDescriptionDiagnostic(enumerationItem, enumerationItem.Description);
+                    c.ReportDiagnostic(diagnostic);
                 }
             }
         }, SymbolKind.NamedType);
@@ -75,7 +69,7 @@ public class UniqueValuesAnalyzer : DiagnosticAnalyzer
         id: UniqueDescriptionDiagnosticId,
         title: "Description needs to be unique",
         messageFormat: "Description needs to be unique. Description '{0}' has already been added.",
-        category: "Usage",
+        category: "Design",
         defaultSeverity: DiagnosticSeverity.Error,
         isEnabledByDefault: true);
 
