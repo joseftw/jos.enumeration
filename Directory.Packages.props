@@ -3,7 +3,7 @@
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     </PropertyGroup>
     <ItemGroup>
-        <PackageVersion Include="BenchmarkDotNet" Version="0.13.6" />
+        <PackageVersion Include="BenchmarkDotNet" Version="0.13.7" />
         <PackageVersion Include="Dapper" Version="2.0.143"/>
         <PackageVersion Include="EFCore.NamingConventions" Version="7.0.2" />
         <PackageVersion Include="JOS.Enumeration" Version="$(NBGV_NuGetPackageVersion)" />
@@ -11,7 +11,7 @@
         <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.0" />
         <PackageVersion Include="Respawn" Version="6.1.0" />
         <PackageVersion Include="Respawn.Postgres" Version="1.0.15" />
         <PackageVersion Include="Shouldly" Version="4.2.1" />
@@ -19,7 +19,7 @@
         <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.0" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="7.0.7 "/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="7.0.10"/>
         <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.7 " />
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0 "/>
         <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.1 "/>
@@ -27,12 +27,12 @@
         <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4 " />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.5.23280.1"/>
-        <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.5.23280.1" />
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.6.23329.7"/>
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0-preview.6.23329.7"/>
-        <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0-preview.6.23329.7" />
-        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.4" />
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.7.23375.4"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.7.23375.4" />
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.7.23375.6"/>
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0-preview.7.23375.6"/>
+        <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0-preview.7.23375.6" />
+        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.5-ci.20230810T163507" />
     </ItemGroup>
     <ItemGroup>
         <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
