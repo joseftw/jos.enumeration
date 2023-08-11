@@ -58,7 +58,7 @@ internal static class ImplementationGenerator
                     AllItems = new HashSet<{{symbol}}>({{items.Count}})
                     {
                         {{AllItemsSet(items)}}
-                    }.ToFrozenSet(optimizeForReading: true);
+                    }.ToFrozenSet();
                     #else
                     AllItems = new HashSet<{{symbol}}>({{items.Count}})
                     {
