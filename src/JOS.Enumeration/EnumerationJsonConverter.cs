@@ -25,6 +25,4 @@ public class EnumerationJsonConverter<TValue, TEnumeration> :
 }
 
 public class EnumerationJsonConverter<TEnumeration> : EnumerationJsonConverter<int, TEnumeration>
-    where TEnumeration : IEnumeration<int, TEnumeration>
-{
-}
+    where TEnumeration : IEnumeration<int, TEnumeration>;

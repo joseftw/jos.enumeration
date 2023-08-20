@@ -5,9 +5,7 @@ using System.Data;
 namespace JOS.Enumeration.Database.Dapper;
 
 public class EnumerationTypeHandler<TEnumeration>
-    : EnumerationTypeHandler<int, TEnumeration> where TEnumeration : IEnumeration<int, TEnumeration>
-{
-}
+    : EnumerationTypeHandler<int, TEnumeration> where TEnumeration : IEnumeration<int, TEnumeration>;
 
 public class EnumerationTypeHandler<TKey, TEnumeration> :
     SqlMapper.TypeHandler<TEnumeration>
