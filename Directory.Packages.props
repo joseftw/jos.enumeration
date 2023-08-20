@@ -4,14 +4,14 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="BenchmarkDotNet" Version="0.13.7"/>
-        <PackageVersion Include="Dapper" Version="2.0.143"/>
+        <PackageVersion Include="Dapper" Version="2.0.151"/>
         <PackageVersion Include="EFCore.NamingConventions" Version="7.0.2"/>
         <PackageVersion Include="JOS.Enumeration" Version="$(NBGV_NuGetPackageVersion)"/>
         <PackageVersion Include="JOS.Enumeration.SourceGenerator" Version="$(NBGV_NuGetPackageVersion)"/>
         <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0"/>
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.0"/>
+        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0"/>
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.1"/>
         <PackageVersion Include="Respawn" Version="6.1.0"/>
         <PackageVersion Include="Respawn.Postgres" Version="1.0.15"/>
         <PackageVersion Include="Shouldly" Version="4.2.1"/>
@@ -32,7 +32,7 @@
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.7.23375.6"/>
         <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0-preview.7.23375.6"/>
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0-preview.7.23375.6"/>
-        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.5-ci.20230810T163507"/>
+        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.5-ci.20230818T093445"/>
     </ItemGroup>
     <ItemGroup>
         <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
