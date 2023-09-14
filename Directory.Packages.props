@@ -5,7 +5,6 @@
     <ItemGroup>
         <PackageVersion Include="BenchmarkDotNet" Version="0.13.8"/>
         <PackageVersion Include="Dapper" Version="2.0.151"/>
-        <PackageVersion Include="EFCore.NamingConventions" Version="7.0.2"/>
         <PackageVersion Include="JOS.Enumeration" Version="$(NBGV_NuGetPackageVersion)"/>
         <PackageVersion Include="JOS.Enumeration.SourceGenerator" Version="$(NBGV_NuGetPackageVersion)"/>
         <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1"/>

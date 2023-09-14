@@ -10,6 +10,6 @@ public static class DbContextOptionsBuilderExtensions
         return builder.UseNpgsql(postgresDatabaseOptions.ConnectionString, optionsBuilder =>
         {
             optionsBuilder.MigrationsAssembly(postgresDatabaseOptions.MigrationsAssembly);
-        }).UseSnakeCaseNamingConvention();
+        });
     }
 }
