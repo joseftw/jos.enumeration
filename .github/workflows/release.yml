@@ -32,9 +32,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: |
-          7.0.400
+          7.0.x
           8.0.x
-        dotnet-quality: 'preview'
+        dotnet-quality: 'ga'
     - name: Build and Test
       run: dotnet test -c Release
     - name: Pack JOS.Enumeration ${{ steps.nbgv.outputs.nugetpackageversion }}
