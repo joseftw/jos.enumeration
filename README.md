@@ -2,10 +2,6 @@
 Enumeration implementation with source generation support.
 
 ## Installation
-`dotnet add package JOS.Enumeration`
-
-`dotnet add package JOS.Enumeration.SourceGenerator`
-
 ### JOS.Enumeration
 Contains the `IEnumeration interface` and a `System.Text.Json` JsonConverter.
 The `JOS.Enumeration.SourceGenerator` package contains the actual source generator.
