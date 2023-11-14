@@ -37,14 +37,8 @@ jobs:
         dotnet-quality: 'ga'
     - name: Build and Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
       run: dotnet test -c Release
-    - name: Pack JOS.Enumeration ${{ steps.nbgv.outputs.nugetpackageversion }}
-      run: dotnet pack src/JOS.Enumeration -c Release -o ./nuget-packages --no-build
-    - name: Pack JOS.Enumeration.SourceGenerator ${{ steps.nbgv.outputs.nugetpackageversion }}
-      run: dotnet pack src/JOS.Enumeration.SourceGenerator -c Release -o ./nuget-packages --no-build
-    - name: Pack JOS.Enumeration.Database.Dapper ${{ steps.nbgv.outputs.nugetpackageversion }}
-      run: dotnet pack src/JOS.Enumeration.Database.Dapper -c Release -o ./nuget-packages --no-build
-    - name: Pack JOS.Enumeration.Database.EntityFrameworkCore ${{ steps.nbgv.outputs.nugetpackageversion }}
-      run: dotnet pack src/JOS.Enumeration.Database.EntityFrameworkCore -c Release -o ./nuget-packages --no-build
+    - name: Pack JOS.Enumeration.sln ${{ steps.nbgv.outputs.nugetpackageversion }}
+      run: dotnet pack JOS.Enumeration.sln -c Release -o ./nuget-packages --no-build
     - name: Store nuget packages as artifacts
       uses: actions/upload-artifact@v3
       with:

@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\JOS.Enumeration\JOS.Enumeration.csproj" />
-    <ProjectReference Include="..\..\src\JOS.Enumeration.SourceGenerator\JOS.Enumeration.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="All" />
+    <ProjectReference Include="..\..\src\JOS.Enumeration\JOS.Enumeration.csproj"/>
+    <ProjectReference Include="..\..\src\JOS.Enumeration.SourceGenerator\JOS.Enumeration.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="All"/>
   </ItemGroup>
 </Project>

@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
-        <TargetFrameworks>net8.0;</TargetFrameworks>
-    </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <TargetFrameworks>net8.0;</TargetFrameworks>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="JOS.Enumeration" Version="1.1.19-beta-g0616c54bd7" />
-      <PackageReference Include="JOS.Enumeration.SourceGenerator" Version="1.1.19-beta-g0616c54bd7" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JOS.Enumeration" Version="1.1.19-beta-g0616c54bd7"/>
+    <PackageReference Include="JOS.Enumeration.SourceGenerator" Version="1.1.19-beta-g0616c54bd7"/>
+  </ItemGroup>
 
 </Project>

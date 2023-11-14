@@ -4,6 +4,7 @@
     <DebugType>embedded</DebugType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
     <PackageId>JOS.Enumeration</PackageId>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>

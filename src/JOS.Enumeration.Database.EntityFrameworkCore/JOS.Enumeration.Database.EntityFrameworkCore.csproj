@@ -1,28 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <Authors>Josef Ottosson</Authors>
-        <DebugType>embedded</DebugType>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
-        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <PackageId>JOS.Enumeration.Database.EntityFrameworkCore</PackageId>
-        <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
-        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
-        <Version>$(NBGV_NuGetPackageVersion)</Version>
-    </PropertyGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\JOS.Enumeration\JOS.Enumeration.csproj"/>
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
-    </ItemGroup>
-    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
-    </ItemGroup>
+  <PropertyGroup>
+    <Authors>Josef Ottosson</Authors>
+    <DebugType>embedded</DebugType>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageId>JOS.Enumeration.Database.EntityFrameworkCore</PackageId>
+    <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
+    <Version>$(NBGV_NuGetPackageVersion)</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JOS.Enumeration\JOS.Enumeration.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
+  </ItemGroup>
 </Project>
