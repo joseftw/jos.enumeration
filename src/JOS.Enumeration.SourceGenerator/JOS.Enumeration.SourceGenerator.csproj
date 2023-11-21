@@ -11,7 +11,8 @@
     <PackageId>JOS.Enumeration.SourceGenerator</PackageId>
     <PackageProjectUrl>https://github.com/joseftw/jos.enumeration</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <TargetFrameworks/>
@@ -30,5 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
+    <None Include="../../README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
