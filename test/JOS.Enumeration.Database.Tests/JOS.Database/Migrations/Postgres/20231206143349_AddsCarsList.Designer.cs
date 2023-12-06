@@ -3,6 +3,7 @@ using System;
 using JOS.Enumeration.Database.Tests.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JOS.Enumeration.Database.Tests.JOS.Database.Migrations.Postgres
 {
     [DbContext(typeof(JosEnumerationDbContext))]
-    partial class JosEnumerationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231206143349_AddsCarsList")]
+    partial class AddsCarsList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -14,6 +14,6 @@ public class JosEnumerationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(JosEnumerationDbContext).Assembly);
+        new MyEntityEntityTypeConfiguration().Configure(modelBuilder.Entity<MyEntity>());
     }
 }

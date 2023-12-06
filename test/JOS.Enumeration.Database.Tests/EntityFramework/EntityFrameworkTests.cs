@@ -21,7 +21,8 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
     [Fact]
     public async Task CanSaveAndReadEntityWithEnumeration()
     {
-        var myEntity = new MyEntity(Guid.NewGuid(), Hamburger.BigMac, Car.TeslaModelY);
+        var cars = new[] { Car.FerrariSpider, Car.TeslaModelY };
+        var myEntity = new MyEntity(Guid.NewGuid(), Hamburger.BigMac, Car.TeslaModelY, cars);
         await using var arrangeDbContext = new JosEnumerationDbContext(_fixture.PostgresDatabaseOptions);
         arrangeDbContext.MyEntities.Add(myEntity);
         await arrangeDbContext.SaveChangesAsync();
@@ -33,5 +34,6 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
         result.Id.ShouldBe(myEntity.Id);
         result.Hamburger.ShouldBe(myEntity.Hamburger);
         result.Car.ShouldBe(myEntity.Car);
+        result.Cars.ShouldBe(cars);
     }
 }

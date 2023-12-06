@@ -230,3 +230,19 @@ public class MyEntityEntityTypeConfiguration : IEntityTypeConfiguration<MyEntity
 ```csharp
 var result = await myDbContext.MyEntities.FirstAsync(x => x.Id == myEntity.Id); 
 ```
+### Primitive Collections
+Support for primitive collections in net8.0 can be configured like this:
+
+#### EF Core
+```csharp
+public void Configure(EntityTypeBuilder<MyEntity> builder)
+{
+    builder.ConfigureEnumeration<MyEntity, string, Car>(x => x.Cars);
+}
+#endif
+```
+
+#### Dapper
+```csharp
+SqlMapper.AddTypeHandler(new EnumerationArrayTypeHandler<string, Car>());
+```

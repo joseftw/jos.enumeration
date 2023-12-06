@@ -11,18 +11,10 @@ public static class PropertyBuilderExtensions
         return ConfigureEnumeration<int, TProperty>(propertyBuilder);
     }
 
-    public static PropertyBuilder<TProperty> ConfigureEnumeration<TKey, TProperty>(
+    public static PropertyBuilder<TProperty> ConfigureEnumeration<TValue, TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder)
-        where TProperty : IEnumeration<TKey, TProperty> where TKey : IConvertible
+        where TProperty : IEnumeration<TValue, TProperty> where TValue : IConvertible
     {
-        return propertyBuilder.HasConversion(
-            enumeration => enumeration.Value,
-            value => FromValue<TKey, TProperty>(value));
-    }
-
-    private static TProperty FromValue<TKey, TProperty>(TKey value)
-        where TProperty : IEnumeration<TKey, TProperty> where TKey : IConvertible
-    {
-        return TProperty.FromValue(value);
+        return propertyBuilder.HasConversion(new EnumerationConverter<TValue, TProperty>());
     }
 }
