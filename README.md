@@ -239,7 +239,6 @@ public void Configure(EntityTypeBuilder<MyEntity> builder)
 {
     builder.ConfigureEnumeration<MyEntity, string, Car>(x => x.Cars);
 }
-#endif
 ```
 
 #### Dapper
