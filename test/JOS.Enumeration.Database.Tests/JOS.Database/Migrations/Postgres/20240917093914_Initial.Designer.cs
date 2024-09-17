@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JOS.Enumeration.Database.Tests.JOS.Database.Migrations.Postgres
 {
     [DbContext(typeof(JosEnumerationDbContext))]
-    [Migration("20231206143349_AddsCarsList")]
-    partial class AddsCarsList
+    [Migration("20240917093914_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -29,27 +29,22 @@ namespace JOS.Enumeration.Database.Tests.JOS.Database.Migrations.Postgres
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Car")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("car");
+                        .HasColumnType("text");
 
                     b.Property<string[]>("Cars")
                         .IsRequired()
-                        .HasColumnType("text[]")
-                        .HasColumnName("cars");
+                        .HasColumnType("text[]");
 
                     b.Property<int>("Hamburger")
-                        .HasColumnType("integer")
-                        .HasColumnName("hamburger");
+                        .HasColumnType("integer");
 
-                    b.HasKey("Id")
-                        .HasName("pk_my_entities");
+                    b.HasKey("Id");
 
-                    b.ToTable("my_entities", (string)null);
+                    b.ToTable("MyEntities");
                 });
 #pragma warning restore 612, 618
         }

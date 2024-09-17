@@ -4,7 +4,6 @@
     <DebugType>embedded</DebugType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Debug'">true</GeneratePackageOnBuild>
     <IsPackable>true</IsPackable>
     <IsRoslynComponent>true</IsRoslynComponent>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -14,9 +13,8 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/joseftw/jos.enumeration</RepositoryUrl>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TargetFrameworks/>
     <Version>$(NBGV_NuGetPackageVersion)</Version>
+    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>

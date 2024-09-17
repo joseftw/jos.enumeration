@@ -1,5 +1,3 @@
-using JOS.Enumeration;
-
 namespace ExampleNugetConsumer;
 
 // public partial class F1Team : IEnumeration<F1Team>

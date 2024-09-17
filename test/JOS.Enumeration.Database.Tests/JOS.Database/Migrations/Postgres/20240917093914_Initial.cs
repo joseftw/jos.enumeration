@@ -12,16 +12,17 @@ public partial class Initial : Migration
     protected override void Up(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.CreateTable(
-            name: "my_entities",
+            name: "MyEntities",
             columns: table => new
             {
-                id = table.Column<Guid>(type: "uuid", nullable: false),
-                hamburger = table.Column<int>(type: "integer", nullable: false),
-                car = table.Column<string>(type: "text", nullable: false)
+                Id = table.Column<Guid>(type: "uuid", nullable: false),
+                Hamburger = table.Column<int>(type: "integer", nullable: false),
+                Car = table.Column<string>(type: "text", nullable: false),
+                Cars = table.Column<string[]>(type: "text[]", nullable: false)
             },
             constraints: table =>
             {
-                table.PrimaryKey("pk_my_entities", x => x.id);
+                table.PrimaryKey("PK_MyEntities", x => x.Id);
             });
     }
 
@@ -29,6 +30,6 @@ public partial class Initial : Migration
     protected override void Down(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.DropTable(
-            name: "my_entities");
+            name: "MyEntities");
     }
 }

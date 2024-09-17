@@ -54,7 +54,7 @@ internal static class SourceGenerationHelpers
         var arguments = objectCreationExpression.ArgumentList!.Arguments;
         var value = ((LiteralExpressionSyntax)arguments[0].Expression).Token.Value!;
         var description = (string)((LiteralExpressionSyntax)arguments[1].Expression).Token.Value!;
-        var fieldName = variable.Identifier.Value!.ToString();
+        var fieldName = variable.Identifier.Value!.ToString()!;
         return new EnumerationItem(value, description, fieldName, variable);
     }
 }

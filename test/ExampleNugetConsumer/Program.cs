@@ -1,5 +1,4 @@
-﻿using ExampleNugetConsumer;
-using System;
+﻿using System;
 
 // var pizzas = Pizza.GetAll();
 //

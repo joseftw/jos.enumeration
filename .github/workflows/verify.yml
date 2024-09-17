@@ -34,8 +34,8 @@ jobs:
         dotnet-version: |
           7.0.x
           8.0.x
-        dotnet-quality: 'ga'
-    - name: Build and Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
+          9.0.x
+    - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
       run: dotnet test -c Release
     - name: Pack JOS.Enumeration.sln ${{ steps.nbgv.outputs.nugetpackageversion }}
       run: dotnet pack JOS.Enumeration.sln -c Release -o ./nuget-packages --no-build

@@ -3,10 +3,10 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EFCore.NamingConventions"/>
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk"/>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
