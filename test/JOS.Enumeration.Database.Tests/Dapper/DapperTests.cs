@@ -7,7 +7,6 @@ using JOS.Enumeration.Database.Tests.JOS.Test;
 using JOS.Enumerations;
 using Npgsql;
 using Shouldly;
-using System.Collections.Generic;
 using Xunit;
 
 namespace JOS.Enumeration.Database.Tests.Dapper;
@@ -32,7 +31,7 @@ public class DapperTests : IClassFixture<JosEnumerationDatabaseFixture>
         SqlMapper.AddTypeHandler(new EnumerationTypeHandler<string, Car>());
         SqlMapper.AddTypeHandler(new EnumerationArrayTypeHandler<string, Car>());
         const string insertSql = """
-            INSERT INTO my_entities
+            INSERT INTO "MyEntities"
             VALUES (@id, @hamburger, @car, @cars)
         """;
         await arrangeConnection.ExecuteAsync(insertSql, new
@@ -43,9 +42,10 @@ public class DapperTests : IClassFixture<JosEnumerationDatabaseFixture>
             cars = myEntity.Cars
         });
         await using var actConnection = new NpgsqlConnection(_fixture.PostgresDatabaseOptions.ConnectionString);
-
-        var results = (await actConnection.QueryAsync<MyEntity>(
-            "SELECT id, hamburger, car, cars from my_entities WHERE id = @id", new { id = myEntity.Id })).ToList();
+        var selectSql = """
+            SELECT "Id", "Hamburger", "Car", "Cars" from "MyEntities" WHERE "Id" = @id
+            """;
+        var results = (await actConnection.QueryAsync<MyEntity>(selectSql, new { Id = myEntity.Id })).ToList();
 
         results.ShouldNotBeNull();
         results.Count.ShouldBe(1);

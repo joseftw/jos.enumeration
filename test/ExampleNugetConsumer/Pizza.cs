@@ -1,5 +1,3 @@
-using JOS.Enumeration;
-
 namespace ExampleNugetConsumer;
 
 // public partial record Pizza : IEnumeration<Pizza>

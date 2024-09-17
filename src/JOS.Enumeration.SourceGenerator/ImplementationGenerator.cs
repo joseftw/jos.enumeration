@@ -235,7 +235,7 @@ internal static class ImplementationGenerator
 
             if(value is bool)
             {
-                value = value.ToString().ToLower();
+                value = value.ToString()!.ToLower();
             }
 
             stringBuilder.AppendLine($"{value} => {field.FieldName},");

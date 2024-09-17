@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
@@ -75,9 +76,9 @@ internal static class EnumerationsClassGenerator
         var type = typeSymbol.OriginalDefinition.ToString();
         return type switch
         {
-            "bool" => value.ToString().ToLower(),
+            "bool" => value.ToString()!.ToLower(),
             "string" => $"\"{value}\"",
-            _ => value.ToString()
+            _ => value!.ToString()!
         };
     }
 }

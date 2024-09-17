@@ -1,6 +1,5 @@
 using JOS.Enumerations;
 using System;
-using System.Collections.Generic;
 
 namespace JOS.Enumeration.Database.Tests;
 
