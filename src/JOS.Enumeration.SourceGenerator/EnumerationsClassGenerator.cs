@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Immutable;
@@ -44,8 +45,9 @@ internal static class EnumerationsClassGenerator
         var stringBuilder = new StringBuilder();
         foreach(var enumeration in enumerations)
         {
+            var semanticModel = compilation.GetSemanticModel(enumeration.SyntaxTree);
             var symbol =
-                compilation.GetSemanticModel(enumeration.SyntaxTree).GetDeclaredSymbol(enumeration)!;
+                ModelExtensions.GetDeclaredSymbol(semanticModel, enumeration)!;
             var typeSymbol = (ITypeSymbol)symbol;
             var enumerationInterface =
                 typeSymbol.AllInterfaces.Single(x => x.Name == "IEnumeration" && x.TypeArguments.Length == 2);
@@ -54,7 +56,7 @@ internal static class EnumerationsClassGenerator
             stringBuilder.AppendLine($"public static class {name}");
             stringBuilder.AppendLine("{");
             var fieldDeclarationSyntaxes =
-                enumeration.Members.Where(x => x is FieldDeclarationSyntax).Cast<FieldDeclarationSyntax>().ToList();
+                enumeration.GetFields(semanticModel, typeSymbol).ToList();
             var items = SourceGenerationHelpers.ExtractEnumerationItems(fieldDeclarationSyntaxes);
             foreach(var item in items)
             {

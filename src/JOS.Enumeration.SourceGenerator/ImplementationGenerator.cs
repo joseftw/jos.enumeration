@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,15 @@ internal static class ImplementationGenerator
         foreach(var enumeration in enumerations)
         {
             context.CancellationToken.ThrowIfCancellationRequested();
-            var symbol = compilation.GetSemanticModel(enumeration.SyntaxTree).GetDeclaredSymbol(enumeration)!;
+            var semanticModel = compilation.GetSemanticModel(enumeration.SyntaxTree);
+            var symbol = ModelExtensions.GetDeclaredSymbol(semanticModel, enumeration)!;
             var @namespace = symbol.ContainingNamespace;
             var typeSymbol = (ITypeSymbol)symbol;
             var enumerationInterface =
                 typeSymbol.AllInterfaces.Single(x => x.Name == "IEnumeration" && x.TypeArguments.Length == 2);
             var valueType = enumerationInterface.TypeArguments.First();
             var fieldDeclarationSyntaxes =
-                enumeration.Members.Where(x => x is FieldDeclarationSyntax).Cast<FieldDeclarationSyntax>().ToList();
+                enumeration.GetFields(semanticModel, typeSymbol).ToList();
             var items =
                 SourceGenerationHelpers.ExtractEnumerationItems(fieldDeclarationSyntaxes).WithoutDuplicates();
             var source = $$"""
