@@ -69,11 +69,7 @@ internal static class ImplementationGenerator
                     #endif
                 }
 
-                private {{symbol.MetadataName}}({{valueType}} value, string description)
-                {
-                    Value = value;
-                    Description = description ?? throw new ArgumentNullException(nameof(description));
-                }
+                {{GenerateDefaultConstructor(symbol, valueType)}}
 
                 public {{valueType}} Value { get; }
                 public string Description { get; }
@@ -115,6 +111,29 @@ internal static class ImplementationGenerator
 
             context.AddSource($"{symbol.MetadataName}.Generated.Implementation.cs", source.FormatSource());
         }
+    }
+
+    private static string GenerateDefaultConstructor(ISymbol symbol, ITypeSymbol valueType)
+    {
+        var typeSymbol = (ITypeSymbol)symbol;
+        var hasDeclaredConstructor =
+            typeSymbol.GetMembers()
+                      .OfType<IMethodSymbol>()
+                      .Any(methodSymbol =>
+                          methodSymbol.MethodKind == MethodKind.Constructor &&
+                          methodSymbol.Parameters.Length == 2 &&
+                          methodSymbol.Parameters[0].Type.SpecialType == valueType.SpecialType &&
+                          methodSymbol.Parameters[1].Type.SpecialType == SpecialType.System_String);
+
+        return hasDeclaredConstructor
+            ? string.Empty
+            : $$"""
+               private {{symbol.MetadataName}}({{valueType}} value, string description)
+               {
+                   Value = value;
+                   Description = description ?? throw new ArgumentNullException(nameof(description));
+               }
+               """;
     }
 
     private static string GenerateInterfaces(ISymbol symbol, TypeDeclarationSyntax typeDeclaration)
