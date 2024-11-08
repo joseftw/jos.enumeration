@@ -1,5 +1,7 @@
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -52,9 +54,25 @@ internal static class SourceGenerationHelpers
     {
         var objectCreationExpression = (BaseObjectCreationExpressionSyntax)variable.Initializer!.Value;
         var arguments = objectCreationExpression.ArgumentList!.Arguments;
-        var value = ((LiteralExpressionSyntax)arguments[0].Expression).Token.Value!;
-        var description = (string)((LiteralExpressionSyntax)arguments[1].Expression).Token.Value!;
+        var valueExpression = arguments[0].Expression;
+        var value = GetExpressionValue(valueExpression);
+        var descriptionExpression = arguments[1].Expression;
+        var description = GetExpressionValue(descriptionExpression);
         var fieldName = variable.Identifier.Value!.ToString()!;
-        return new EnumerationItem(value, description, fieldName, variable);
+        return new EnumerationItem(value!, (string)description, fieldName, variable);
+    }
+
+    private static object GetExpressionValue(ExpressionSyntax expression)
+    {
+        return expression switch
+        {
+            LiteralExpressionSyntax literal => literal.Token.Value ?? string.Empty,
+            BinaryExpressionSyntax binary when binary.IsKind(SyntaxKind.AddExpression) =>
+                GetExpressionValue(binary.Left).ToString() + GetExpressionValue(binary.Right).ToString(),
+            InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } } invocation =>
+                ((IdentifierNameSyntax)invocation.ArgumentList.Arguments[0].Expression).Identifier.Text,
+            InterpolatedStringExpressionSyntax _ => throw new InvalidOperationException("String interpolation is not supported"),
+            _ => throw new InvalidOperationException($"Unsupported expression type: {expression.GetType()}")
+        };
     }
 }
