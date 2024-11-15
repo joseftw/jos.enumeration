@@ -34,7 +34,7 @@ internal static class EnumerationsClassGenerator
             }
             """;
 
-        context.AddSource("Enumerations.Generated.cs", source.FormatSource());
+        context.AddSource("Enumerations.generated.cs", source.FormatSource());
     }
 
     private static string GenerateNestedClasses(

@@ -110,7 +110,7 @@ internal static class ImplementationGenerator
             }
             """;
 
-            context.AddSource($"{symbol.MetadataName}.Generated.Implementation.cs", source.FormatSource());
+            context.AddSource($"{symbol.MetadataName}.Implementation.generated.cs", source.FormatSource());
         }
     }
 
