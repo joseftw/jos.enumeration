@@ -17,6 +17,10 @@ internal static class SourceGenerationHelpers
 
     internal const string Nullable = "#nullable enable";
 
+    // TODO Set correct version
+    internal const string CodeGenerated =
+        "[System.CodeDom.Compiler.GeneratedCode(\"JOS.Enumeration.SourceGenerator\", null)]";
+
     internal static IReadOnlyCollection<EnumerationItem> ExtractEnumerationItems(
         IReadOnlyCollection<FieldDeclarationSyntax> fields)
     {

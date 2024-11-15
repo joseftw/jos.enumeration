@@ -1,7 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
@@ -19,7 +17,6 @@ internal static class EnumerationsClassGenerator
         {
             return;
         }
-
         context.CancellationToken.ThrowIfCancellationRequested();
         var @namespace = compilation.Assembly.Identity.Name;
         var source = $$"""
@@ -30,6 +27,7 @@ internal static class EnumerationsClassGenerator
 
             namespace {{@namespace}};
 
+            {{SourceGenerationHelpers.CodeGenerated}}
             public static class Enumerations
             {
                 {{GenerateNestedClasses(compilation, enumerations)}}

@@ -49,6 +49,7 @@ internal static class ImplementationGenerator
             namespace {{@namespace}};
 
             [System.Diagnostics.DebuggerDisplay("{Description}")]
+            {{SourceGenerationHelpers.CodeGenerated}}
             {{enumeration.Modifiers}} {{enumeration.Keyword.Value}} {{symbol.MetadataName}}
                 : {{GenerateInterfaces(symbol, enumeration)}}
             {
