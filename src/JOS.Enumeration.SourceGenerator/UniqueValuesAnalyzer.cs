@@ -87,9 +87,7 @@ public class UniqueValuesAnalyzer : DiagnosticAnalyzer
     private static Diagnostic CreateDiagnostic(
         DiagnosticDescriptor descriptor, EnumerationItem enumerationItem, object propertyValue)
     {
-        var tree = enumerationItem.Syntax.SyntaxTree;
-        var syntax = enumerationItem.Syntax;
-        var location = Location.Create(tree, syntax.FullSpan);
+        var location = Location.Create(enumerationItem.SyntaxTree, enumerationItem.TextSpan);
         return Diagnostic.Create(descriptor, location, propertyValue);
     }
 }

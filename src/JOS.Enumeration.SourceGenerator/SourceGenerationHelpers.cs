@@ -63,7 +63,7 @@ internal static class SourceGenerationHelpers
         var descriptionExpression = arguments[1].Expression;
         var description = GetExpressionValue(descriptionExpression);
         var fieldName = variable.Identifier.Value!.ToString()!;
-        return new EnumerationItem(value!, (string)description, fieldName, variable);
+        return new EnumerationItem(value!, (string)description, fieldName, variable.SyntaxTree, variable.FullSpan);
     }
 
     private static object GetExpressionValue(ExpressionSyntax expression)
