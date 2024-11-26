@@ -11,9 +11,13 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
         var incrementalValueProvider = context.CompilationProvider.Combine(implementations);
         context.RegisterSourceOutput(
             incrementalValueProvider,
-            static (context, source) => ImplementationGenerator.Generate(source.Left, source.Right, context));
+            static (context, source) => ImplementationGenerator.Generate(source.Right, context));
         context.RegisterSourceOutput(
             incrementalValueProvider,
-            static (context, source) => EnumerationsClassGenerator.Generate(source.Left, source.Right, context));
+            static (context, source) =>
+            {
+                var @namespace = source.Left.Assembly.Identity.Name;
+                EnumerationsClassGenerator.Generate(@namespace, source.Right, context);
+            });
     }
 }
