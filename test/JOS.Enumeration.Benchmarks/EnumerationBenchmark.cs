@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using Ardalis.SmartEnum;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using System;
@@ -9,8 +10,8 @@ using HamburgerGeneric = JOS.Enumeration.Benchmarks.Hamburger;
 namespace JOS.Enumeration.Benchmarks;
 
 [MemoryDiagnoser]
-[SimpleJob(RuntimeMoniker.Net70)]
 [SimpleJob(RuntimeMoniker.Net80)]
+[SimpleJob(RuntimeMoniker.Net90)]
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
 public class EnumerationBenchmark
@@ -28,6 +29,14 @@ public class EnumerationBenchmark
     public int Generated_GetAll()
     {
         var items = HamburgerGenerated.GetAll();
+        return items.Sum(item => item.Value);
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("GetAll")]
+    public int SmartEnum_GetAll()
+    {
+        var items = HamburgerSmartEnum.List;
         return items.Sum(item => item.Value);
     }
 
@@ -68,6 +77,13 @@ public class EnumerationBenchmark
         return HamburgerGenerated.FromDescription("Cheeseburger".AsSpan());
     }
 
+    [Benchmark]
+    [BenchmarkCategory("FromDisplayName")]
+    public HamburgerSmartEnum SmartEnum_FromDisplayName()
+    {
+        return HamburgerSmartEnum.FromName("Cheeseburger");
+    }
+
     [Benchmark(Baseline = true)]
     [BenchmarkCategory("FromValue")]
     public HamburgerGeneric Generic_FromValue()
@@ -81,6 +97,13 @@ public class EnumerationBenchmark
     {
         return HamburgerGenerated.FromValue(2);
     }
+
+    [Benchmark]
+    [BenchmarkCategory("FromValue")]
+    public HamburgerSmartEnum SmartEnum_FromValue()
+    {
+        return HamburgerSmartEnum.FromValue(2);
+    }
 }
 
 public record Hamburger : Enumeration<Hamburger>
@@ -90,6 +113,17 @@ public record Hamburger : Enumeration<Hamburger>
     public static readonly Hamburger BigTasty = new(3, "Big Tasty");
 
     private Hamburger(int value, string displayName) : base(value, displayName)
+    {
+    }
+}
+
+public class HamburgerSmartEnum : SmartEnum<HamburgerSmartEnum>
+{
+    public static readonly HamburgerSmartEnum Cheeseburger = new (1, "Cheeseburger");
+    public static readonly HamburgerSmartEnum BigMac = new(2, "Big Mac");
+    public static readonly HamburgerSmartEnum BigTasty = new(3, "Big Tasty");
+
+    private HamburgerSmartEnum(int value, string name) : base(name, value)
     {
     }
 }
