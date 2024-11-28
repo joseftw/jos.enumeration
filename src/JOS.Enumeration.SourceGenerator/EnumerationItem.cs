@@ -1,11 +1,10 @@
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System;
 
 namespace JOS.Enumeration.SourceGenerator;
 
-internal class EnumerationItem
+internal record EnumerationItem
 {
     internal EnumerationItem(
         object value, string description, string fieldName, SyntaxTree syntaxTree, TextSpan textSpan)

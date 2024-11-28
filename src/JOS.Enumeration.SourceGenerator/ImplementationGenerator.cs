@@ -1,5 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -23,9 +22,7 @@ internal static class ImplementationGenerator
             using System;
             using System.Collections;
             using System.Collections.Generic;
-            #if NET8_0_OR_GREATER
             using System.Collections.Frozen;
-            #endif
             using JOS.Enumeration;
 
             namespace {{enumeration.Namespace}};
