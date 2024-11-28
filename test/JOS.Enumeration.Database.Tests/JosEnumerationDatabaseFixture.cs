@@ -17,14 +17,14 @@ public class JosEnumerationDatabaseFixture : PostgresDatabaseFixture
     }
 
     public override JosEnumerationDatabaseOptions PostgresDatabaseOptions { get; }
-    public override async Task InitializeAsync()
+    public override async ValueTask InitializeAsync()
     {
         var enumerationDbContext = new JosEnumerationDbContext(PostgresDatabaseOptions);
         await enumerationDbContext.Database.MigrateAsync();
     }
 
-    public override Task DisposeAsync()
+    public override ValueTask DisposeAsync()
     {
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 }

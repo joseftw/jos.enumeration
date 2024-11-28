@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using JOS.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
+using System.Threading;
 using Xunit;
 
 namespace JOS.Enumeration.Database.Tests.EntityFramework;
@@ -12,10 +13,12 @@ namespace JOS.Enumeration.Database.Tests.EntityFramework;
 public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
 {
     private readonly JosEnumerationDatabaseFixture _fixture;
+    private readonly CancellationToken _cancellationToken;
 
-    public EntityFrameworkTests(JosEnumerationDatabaseFixture fixture)
+    public EntityFrameworkTests(JosEnumerationDatabaseFixture fixture, ITestContextAccessor testContextAccessor)
     {
         _fixture = fixture ?? throw new ArgumentNullException(nameof(fixture));
+        _cancellationToken = testContextAccessor.Current.CancellationToken;
     }
 
     [Fact]
@@ -25,10 +28,10 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
         var myEntity = new MyEntity(Guid.NewGuid(), Hamburger.BigMac, Car.TeslaModelY, cars);
         await using var arrangeDbContext = new JosEnumerationDbContext(_fixture.PostgresDatabaseOptions);
         arrangeDbContext.MyEntities.Add(myEntity);
-        await arrangeDbContext.SaveChangesAsync();
+        await arrangeDbContext.SaveChangesAsync(_cancellationToken);
         await using var actDbContext = new JosEnumerationDbContext(_fixture.PostgresDatabaseOptions);
 
-        var result = await actDbContext.MyEntities.FirstAsync(x => x.Id == myEntity.Id);
+        var result = await actDbContext.MyEntities.FirstAsync(x => x.Id == myEntity.Id, _cancellationToken);
 
         result.ShouldNotBeNull();
         result.Id.ShouldBe(myEntity.Id);
