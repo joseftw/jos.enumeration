@@ -44,11 +44,3 @@ await using(scope)
         logger.LogInformation("Migration of {DbContextName} done", dbContextName);
     }
 }
-
-namespace JOS.Enumeration.Migrator
-{
-    public class Program
-    {
-        public const string ServiceName = "JOS.Enumeration.Migrator";
-    }
-}
