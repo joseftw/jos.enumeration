@@ -1,6 +1,7 @@
 using JOS.Enumerations;
 using Shouldly;
 using System.CodeDom.Compiler;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -68,5 +69,23 @@ public class SourceGenerationTests
         generatedCodeAttribute.ShouldNotBeNull();
         generatedCodeAttribute.Tool.ShouldBe("JOS.Enumeration.SourceGenerator");
         generatedCodeAttribute.Version.ShouldBe(informationalVersionAttribute!.InformationalVersion);
+    }
+
+    [Fact]
+    public void ShouldAddExcludeFromCodeAnalysisAttribute()
+    {
+        var excludeFromCodeAnalysisAttribute =
+            typeof(Hamburger).GetCustomAttribute<ExcludeFromCodeCoverageAttribute>();
+
+        excludeFromCodeAnalysisAttribute.ShouldNotBeNull();
+    }
+
+    [Fact]
+    public void ShouldAddExcludeFromCodeAnalysisAttributeToEnumerationsClass()
+    {
+        var excludeFromCodeAnalysisAttribute =
+            typeof(Enumerations).GetCustomAttribute<ExcludeFromCodeCoverageAttribute>();
+
+        excludeFromCodeAnalysisAttribute.ShouldNotBeNull();
     }
 }

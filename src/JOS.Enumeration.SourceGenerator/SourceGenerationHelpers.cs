@@ -22,6 +22,8 @@ internal static class SourceGenerationHelpers
         return $"[System.CodeDom.Compiler.GeneratedCode(\"JOS.Enumeration.SourceGenerator\", \"{version}\")]";
     }
 
+    internal const string ExcludeFromCodeCoverage = "[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]";
+
     internal static IReadOnlyCollection<EnumerationItem> ExtractEnumerationItems(
         IReadOnlyCollection<FieldDeclarationSyntax> fields)
     {

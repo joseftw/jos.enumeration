@@ -29,6 +29,7 @@ internal static class ImplementationGenerator
 
             [System.Diagnostics.DebuggerDisplay("{Description}")]
             {{SourceGenerationHelpers.CodeGenerated(ThisAssembly.AssemblyInformationalVersion)}}
+            {{SourceGenerationHelpers.ExcludeFromCodeCoverage}}
             {{enumeration.Modifiers}} {{enumeration.Keyword}} {{enumeration.Symbol.MetadataName}}
                 : {{GenerateInterfaces(enumeration.Symbol.Name, enumeration.KeywordType)}}
             {
