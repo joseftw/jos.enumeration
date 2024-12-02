@@ -3,7 +3,6 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Azure.Identity" Version="1.11.4 " />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="Dapper" Version="2.0.151" />
     <PackageVersion Include="JOS.Enumeration" Version="$(NBGV_NuGetPackageVersion)" />
