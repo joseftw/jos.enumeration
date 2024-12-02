@@ -1,4 +1,3 @@
-#if NET8_0_OR_GREATER
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -27,4 +26,3 @@ public static class EntityTypeBuilderExtensions
                       .HasConversion(new EnumerationConverter<TValue, TProperty>());
     }
 }
-#endif

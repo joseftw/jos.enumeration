@@ -1,8 +1,5 @@
 using JOS.Enumerations;
 using Shouldly;
-#if NET8_0_OR_GREATER
-using System.Collections.Frozen;
-#endif
 using Xunit;
 using Sausage = JOS.Enumerations.Sausage;
 
@@ -30,13 +27,11 @@ public class SourceGenerationTests
         result.ShouldBe(2);
     }
 
-    #if NET8_0_OR_GREATER
     [Fact]
-    public void ShouldBeFrozenSetIfNet80()
+    public void ShouldBeFrozenSet()
     {
         var result = Hamburger.GetAll();
 
         result.GetType().Name.ShouldBe("SmallFrozenSet`1");
     }
-    #endif
 }
