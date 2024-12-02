@@ -1,5 +1,8 @@
 using JOS.Enumerations;
 using Shouldly;
+using System.CodeDom.Compiler;
+using System.Linq;
+using System.Reflection;
 using Xunit;
 using Sausage = JOS.Enumerations.Sausage;
 
@@ -33,5 +36,37 @@ public class SourceGenerationTests
         var result = Hamburger.GetAll();
 
         result.GetType().Name.ShouldBe("SmallFrozenSet`1");
+    }
+
+    [Fact]
+    public void ShouldAddGeneratedCodeAttributeToClass()
+    {
+        var josEnumerationAssemblyName = typeof(Hamburger).Assembly.GetReferencedAssemblies()
+                                                      .First(x => x.Name!.Equals("JOS.Enumeration"));
+        var josEnumerationAssembly = Assembly.Load(josEnumerationAssemblyName);
+        var informationalVersionAttribute = josEnumerationAssembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+
+        var generatedCodeAttribute = typeof(Hamburger).GetCustomAttribute<GeneratedCodeAttribute>();
+
+        generatedCodeAttribute.ShouldNotBeNull();
+        generatedCodeAttribute.Tool.ShouldBe("JOS.Enumeration.SourceGenerator");
+        generatedCodeAttribute.Version.ShouldBe(informationalVersionAttribute!.InformationalVersion);
+    }
+
+    [Fact]
+    public void ShouldAddGeneratedCodeAttributeToEnumerationsClass()
+    {
+        var josEnumerationAssemblyName = typeof(Enumerations).Assembly.GetReferencedAssemblies()
+                                                          .First(x => x.Name!.Equals("JOS.Enumeration"));
+        var josEnumerationAssembly = Assembly.Load(josEnumerationAssemblyName);
+        var informationalVersionAttribute = josEnumerationAssembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+
+        var generatedCodeAttribute = typeof(Enumerations).GetCustomAttribute<GeneratedCodeAttribute>();
+
+        generatedCodeAttribute.ShouldNotBeNull();
+        generatedCodeAttribute.Tool.ShouldBe("JOS.Enumeration.SourceGenerator");
+        generatedCodeAttribute.Version.ShouldBe(informationalVersionAttribute!.InformationalVersion);
     }
 }
