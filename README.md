@@ -128,7 +128,7 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
     public int CompareTo(JOS.Enumerations.Hamburger? other) => Value.CompareTo(other!.Value);
     public static implicit operator int (JOS.Enumerations.Hamburger item) => item.Value;
     public static implicit operator JOS.Enumerations.Hamburger(int value) => FromValue(value);
-}~~~~
+}
 ```
 ## Features
 * Generic value
