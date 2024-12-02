@@ -57,18 +57,19 @@ public interface IEnumeration<TValue, TType> where TValue : IConvertible
 The following code will be generated:
 ```csharp
 [System.Diagnostics.DebuggerDisplay("{Description}")]
+[System.CodeDom.Compiler.GeneratedCode("JOS.Enumeration.SourceGenerator", "4.1.11-beta+afeaa87a52")]
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
 {
     private static readonly IReadOnlySet<JOS.Enumerations.Hamburger> AllItems;
-    
     static Hamburger()
     {
         AllItems = new HashSet<JOS.Enumerations.Hamburger>(3)
         {
             Cheeseburger,
             BigMac,
-            BigTasty
-        }.ToFrozenSet(optimizeForReading: true);
+            BigTasty,
+        }.ToFrozenSet();
     }
 
     private Hamburger(int value, string description)
@@ -78,7 +79,6 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
     }
 
     public int Value { get; }
-
     public string Description { get; }
 
     public static IReadOnlySet<JOS.Enumerations.Hamburger> GetAll()
@@ -100,8 +100,7 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
             1 => Cheeseburger,
             2 => BigMac,
             3 => BigTasty,
-            _ => throw new InvalidOperationException($"'{value}' is not a valid value in 'JOS.Enumerations.Hamburger'")
-        };
+            _ => throw new InvalidOperationException($"'{value}' is not a valid value in 'JOS.Enumerations.Hamburger'")};
     }
 
     public static JOS.Enumerations.Hamburger FromDescription(string description)
@@ -111,8 +110,7 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
             "Cheeseburger" => Cheeseburger,
             "Big Mac" => BigMac,
             "Big Tasty" => BigTasty,
-            _ => throw new InvalidOperationException($"'{description}' is not a valid description in 'JOS.Enumerations.Hamburger'")
-        };
+            _ => throw new InvalidOperationException($"'{description}' is not a valid description in 'JOS.Enumerations.Hamburger'")};
     }
 
     public static JOS.Enumerations.Hamburger FromDescription(ReadOnlySpan<char> description)
@@ -122,15 +120,15 @@ public partial record Hamburger : IComparable<JOS.Enumerations.Hamburger>
             "Cheeseburger" => Cheeseburger,
             "Big Mac" => BigMac,
             "Big Tasty" => BigTasty,
-            _ => throw new InvalidOperationException($"'{description}' is not a valid description in 'JOS.Enumerations.Hamburger'")
-        };
+            _ => throw new InvalidOperationException($"'{description}' is not a valid description in 'JOS.Enumerations.Hamburger'")};
     }
 
     public static Type ValueType => typeof(int);
+
     public int CompareTo(JOS.Enumerations.Hamburger? other) => Value.CompareTo(other!.Value);
     public static implicit operator int (JOS.Enumerations.Hamburger item) => item.Value;
     public static implicit operator JOS.Enumerations.Hamburger(int value) => FromValue(value);
-}
+}~~~~
 ```
 ## Features
 * Generic value
