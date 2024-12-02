@@ -20,7 +20,7 @@ internal static class EnumerationsClassGenerator
 
             namespace {{@namespace}};
 
-            {{SourceGenerationHelpers.CodeGenerated}}
+            {{SourceGenerationHelpers.CodeGenerated(ThisAssembly.AssemblyInformationalVersion)}}
             public static class Enumerations
             {
                 {{GenerateNestedClasses(enumerations)}}
