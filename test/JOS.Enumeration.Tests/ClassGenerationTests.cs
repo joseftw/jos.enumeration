@@ -1,7 +1,5 @@
-using Shouldly;
-using System;
-using System.Collections.Generic;
 using Xunit;
+using Shouldly;
 
 namespace JOS.Enumeration.Tests;
 
@@ -10,7 +8,7 @@ public class ClassGenerationTests
     [Fact]
     public void SupportsCustomGetHashCodeMethod()
     {
-        var result = CustomGetHashCode.MyItem1.GetHashCode();
+        var result =  CustomGetHashCode.MyItem1.GetHashCode();
 
         result.ShouldBe(1);
     }
