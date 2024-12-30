@@ -5,6 +5,7 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net9.0;</TargetFrameworks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <IsTestProject>false</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
