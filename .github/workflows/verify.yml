@@ -23,23 +23,55 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - uses: dotnet/nbgv@master
-      id: nbgv
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: |
-          8.0.x
-          9.0.x
-    - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
-      run: dotnet test -c Release
-    - name: Pack JOS.Enumeration.sln ${{ steps.nbgv.outputs.nugetpackageversion }}
-      run: dotnet pack JOS.Enumeration.sln -c Release -o ./nuget-packages --no-build
-    - name: Store nuget packages as artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: nuget-packages
-        path: "nuget-packages/"
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch main
+        run: |
+          git fetch origin main &&
+          git checkout -b main origin/main
+          git checkout -
+      - name: Print branches
+        run: git branch
+      - uses: dotnet/nbgv@master
+        id: nbgv
+      - name: Skip if bot
+        run: |
+          AUTHOR=$(git log -1 --pretty=%an)
+          if [ "$AUTHOR" == "jos-yoda" ]; then
+            echo "Commit made by bot, skipping further steps in the pipeline."
+            exit 0
+          fi
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+      - name: Build Version ${{ steps.nbgv.outputs.nugetpackageversion }}
+        run: dotnet build -c Release
+      - name: Check formatting
+        continue-on-error: true
+        id: checkFormatting
+        run: dotnet format --no-restore --verify-no-changes --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
+      - name: Fix formatting
+        if: steps.checkFormatting.outcome == 'failure'
+        run: |
+          dotnet format --no-restore --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
+        env:
+          GITHUB_TOKEN: ${{ secrets.JOS_YODA_PAT }}
+      - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
+        run: dotnet test -c Release --no-build --no-restore
+      - name: Push formatting fixes
+        run: |
+          git config user.name "jos-yoda" &&
+          git config user.email "144553819+jos-yoda@users.noreply.github.com" &&
+          git commit -am "Fixes formatting - ${{steps.nbgv.outputs.nugetpackageversion}}" &&
+          git push origin HEAD:${{github.event.pull_request.head.ref}}
+      - name: Pack JOS.Enumeration.sln ${{ steps.nbgv.outputs.nugetpackageversion }}
+        run: dotnet pack JOS.Enumeration.sln -c Release -o ./nuget-packages --no-build
+      - name: Store nuget packages as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: "nuget-packages/"

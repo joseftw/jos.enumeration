@@ -1,4 +1,6 @@
 using Shouldly;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace JOS.Enumeration.Tests;
@@ -48,27 +50,27 @@ public class ClassGenerationTests
     }
 }
 
- internal partial class CustomGetHashCode : IEnumeration<CustomGetHashCode>
- {
-     internal static readonly CustomGetHashCode MyItem1 = new(1, "Item 1");
-     internal static readonly CustomGetHashCode MyItem2 = new (2, "Item 2");
+internal partial class CustomGetHashCode : IEnumeration<CustomGetHashCode>
+{
+    internal static readonly CustomGetHashCode MyItem1 = new(1, "Item 1");
+    internal static readonly CustomGetHashCode MyItem2 = new(2, "Item 2");
 
-     public override int GetHashCode()
-     {
-         return 1;
-     }
- }
+    public override int GetHashCode()
+    {
+        return 1;
+    }
+}
 
 internal partial class GeneratedGetHashCode : IEnumeration<GeneratedGetHashCode>
 {
     internal static readonly GeneratedGetHashCode MyItem1 = new(1, "Item 1");
-    internal static readonly GeneratedGetHashCode MyItem2 = new (2, "Item 2");
+    internal static readonly GeneratedGetHashCode MyItem2 = new(2, "Item 2");
 }
 
 internal partial class CustomEquals : IEnumeration<CustomEquals>
 {
     internal static readonly CustomEquals MyItem1 = new(1, "Item 1");
-    internal static readonly CustomEquals MyItem2 = new (2, "Item 2");
+    internal static readonly CustomEquals MyItem2 = new(2, "Item 2");
 
     public override bool Equals(object? obj)
     {
@@ -84,5 +86,5 @@ internal partial class CustomEquals : IEnumeration<CustomEquals>
 internal partial class GeneratedEquals : IEnumeration<GeneratedEquals>
 {
     internal static readonly GeneratedEquals MyItem1 = new(1, "Item 1");
-    internal static readonly GeneratedEquals MyItem2 = new (2, "Item 2");
+    internal static readonly GeneratedEquals MyItem2 = new(2, "Item 2");
 }

@@ -1,9 +1,9 @@
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace JOS.Enumeration.SourceGenerator;
 
@@ -28,10 +28,10 @@ internal static class EnumerationHelpers
 
     private static EnumerationImplementation? Transform(GeneratorSyntaxContext context)
     {
-        var typeDeclarationSyntax = (TypeDeclarationSyntax) context.Node;
+        var typeDeclarationSyntax = (TypeDeclarationSyntax)context.Node;
         var symbol = context.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
 
-        if (symbol?.BaseType == null)
+        if(symbol?.BaseType == null)
         {
             return null;
         }

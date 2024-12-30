@@ -9,7 +9,7 @@ public class EnumerationConverter<TEnumeration> : EnumerationConverter<int, TEnu
 public class EnumerationConverter<TValue, TEnumeration> :
     ValueConverter<TEnumeration, TValue> where TEnumeration : IEnumeration<TValue, TEnumeration> where TValue : IConvertible
 {
-    public EnumerationConverter() : base(x => x.Value,  x => FromValue(x))
+    public EnumerationConverter() : base(x => x.Value, x => FromValue(x))
     {
     }
 

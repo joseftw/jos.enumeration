@@ -9,6 +9,7 @@ public partial class Dog : IEnumeration<string, Dog>
 
     public int Age { get; }
 
+
     private Dog(string value, string description) : this(value, description, 0)
     {
     }
