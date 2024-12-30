@@ -31,8 +31,6 @@ jobs:
           git fetch origin main &&
           git checkout -b main origin/main
           git checkout -
-      - name: Print branches
-        run: git branch
       - uses: dotnet/nbgv@master
         id: nbgv
       - name: Skip if bot
@@ -65,6 +63,7 @@ jobs:
       - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
         run: dotnet test -c Release --no-build --no-restore
       - name: Push formatting fixes
+        if: steps.checkFormatting.outcome == 'failure'
         run: |
           git config user.name "jos-yoda" &&
           git config user.email "144553819+jos-yoda@users.noreply.github.com" &&
