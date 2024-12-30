@@ -54,7 +54,8 @@ jobs:
         git config user.email "144553819+jos-yoda@users.noreply.github.com" &&
         dotnet format --no-restore  --exclude *.generated.cs && 
         git commit -am "Fixes formatting - ${{steps.nbgv.outputs.nugetpackageversion}}" &&
-        git push
+        BRANCH_NAME=${GITHUB_REF#refs/heads/} &&
+        git push origin HEAD:$BRANCH_NAME
       env:
         GITHUB_TOKEN: ${{ secrets.JOS_YODA_PAT }}
     - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
