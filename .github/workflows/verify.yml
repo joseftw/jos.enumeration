@@ -46,15 +46,15 @@ jobs:
     - name: Check formatting
       continue-on-error: true
       id: checkFormatting
-      run: dotnet format --no-restore --verify-no-changes
+      run: dotnet format --no-restore --verify-no-changes --exclude *.generated.cs
     - name: Fix formatting
       if: steps.checkFormatting.outcome == 'failure'
       run: |
         git config user.name "jos-yoda" &&
         git config user.email "144553819+jos-yoda@users.noreply.github.com" &&
-        dotnet format --no-restore &&
+        dotnet format --no-restore  --exclude *.generated.cs && 
         git commit -am "Fixes formatting - ${{steps.nbgv.outputs.nugetpackageversion}}" &&
-        git push origin develop
+        git push
       env:
         GITHUB_TOKEN: ${{ secrets.JOS_YODA_PAT }}
     - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
