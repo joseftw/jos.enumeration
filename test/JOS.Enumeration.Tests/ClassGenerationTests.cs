@@ -1,5 +1,5 @@
-using Shouldly;
 using Xunit;
+using Shouldly;
 
 namespace JOS.Enumeration.Tests;
 
