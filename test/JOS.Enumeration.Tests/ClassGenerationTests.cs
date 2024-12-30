@@ -80,10 +80,6 @@ internal partial class CustomEquals : IEnumeration<CustomEquals>
         return true;
     }
 
-    public override int GetHashCode()
-    {
-        throw new System.NotImplementedException();
-    }
 }
 
 internal partial class GeneratedEquals : IEnumeration<GeneratedEquals>
