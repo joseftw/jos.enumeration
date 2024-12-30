@@ -25,9 +25,9 @@ public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
         AllItemsByName = new Lazy<Dictionary<string, T>>(() =>
         {
             var items = new Dictionary<string, T>(AllItems.Value.Count);
-            foreach (var item in AllItems.Value)
+            foreach(var item in AllItems.Value)
             {
-                if (!items.TryAdd(item.Value.DisplayName, item.Value))
+                if(!items.TryAdd(item.Value.DisplayName, item.Value))
                 {
                     throw new Exception(
                         $"DisplayName needs to be unique. '{item.Value.DisplayName}' already exists");
@@ -61,7 +61,7 @@ public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
 
     public static T FromValue(int value)
     {
-        if (AllItems.Value.TryGetValue(value, out var matchingItem))
+        if(AllItems.Value.TryGetValue(value, out var matchingItem))
         {
             return matchingItem;
         }
@@ -70,7 +70,7 @@ public abstract record Enumeration<T> : IComparable<T> where T : Enumeration<T>
 
     public static T FromDisplayName(string displayName)
     {
-        if (AllItemsByName.Value.TryGetValue(displayName, out var matchingItem))
+        if(AllItemsByName.Value.TryGetValue(displayName, out var matchingItem))
         {
             return matchingItem;
         }

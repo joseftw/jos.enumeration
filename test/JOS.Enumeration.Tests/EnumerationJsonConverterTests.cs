@@ -10,7 +10,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesBoolKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<bool, BoolEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -30,7 +30,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesBoolKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<bool, BoolEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -48,7 +48,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesDecimalKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<decimal, DecimalEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -68,7 +68,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesDecimalKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<decimal, DecimalEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -86,7 +86,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesIntegerKeyCorrectly_Default()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<IntEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -106,7 +106,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesIntKeyCorrectly_Default()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<IntEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -124,7 +124,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesIntegerKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<int, IntEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -144,7 +144,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesIntKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<int, IntEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -162,7 +162,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesLongKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<long, LongEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -182,7 +182,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesLongKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<long, LongEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -200,7 +200,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesStringKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<string, StringEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -220,7 +220,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesStringKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<string, StringEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -238,7 +238,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesUnsignedIntKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<uint, UnsignedIntEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -258,7 +258,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesUnsignedIntKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<uint, UnsignedIntEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -276,7 +276,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void SerializesUnsignedLongKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<ulong, UnsignedLongEnumeration>() },
             PropertyNameCaseInsensitive = true,
@@ -296,7 +296,7 @@ public class EnumerationJsonConverterTests
     [Fact]
     public void DeserializesUnsignedLongKeyCorrectly()
     {
-        var jsonSerializerOptions  = new JsonSerializerOptions
+        var jsonSerializerOptions = new JsonSerializerOptions
         {
             Converters = { new EnumerationJsonConverter<ulong, UnsignedLongEnumeration>() },
             PropertyNameCaseInsensitive = true,
