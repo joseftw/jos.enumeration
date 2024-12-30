@@ -53,13 +53,15 @@ jobs:
       - name: Check formatting
         continue-on-error: true
         id: checkFormatting
-        run: dotnet format --no-restore --verify-no-changes --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
+        run: | 
+          dotnet format whitespace --no-restore --verify-no-changes --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
+          dotnet format style --no-restore --verify-no-changes --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
       - name: Fix formatting
+        continue-on-error: true
         if: steps.checkFormatting.outcome == 'failure'
         run: |
-          dotnet format --no-restore --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
-        env:
-          GITHUB_TOKEN: ${{ secrets.JOS_YODA_PAT }}
+          dotnet format whitespace --no-restore --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
+          dotnet format style --no-restore --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
       - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
         run: dotnet test -c Release --no-build --no-restore
       - name: Push formatting fixes
@@ -68,6 +70,8 @@ jobs:
           git config user.email "144553819+jos-yoda@users.noreply.github.com" &&
           git commit -am "Fixes formatting - ${{steps.nbgv.outputs.nugetpackageversion}}" &&
           git push origin HEAD:${{github.event.pull_request.head.ref}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.JOS_YODA_PAT }}
       - name: Pack JOS.Enumeration.sln ${{ steps.nbgv.outputs.nugetpackageversion }}
         run: dotnet pack JOS.Enumeration.sln -c Release -o ./nuget-packages --no-build
       - name: Store nuget packages as artifacts
