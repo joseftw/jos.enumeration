@@ -1,4 +1,6 @@
 using Shouldly;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace JOS.Enumeration.Tests;
@@ -53,6 +55,37 @@ internal partial class CustomGetHashCode : IEnumeration<CustomGetHashCode>
     internal static readonly CustomGetHashCode MyItem1 = new(1, "Item 1");
     internal static readonly CustomGetHashCode MyItem2 = new(2, "Item 2");
 
+    public static Type ValueType => throw new NotImplementedException();
+
+    public int Value => throw new NotImplementedException();
+
+    public string Description => throw new NotImplementedException();
+
+    public static CustomGetHashCode FromDescription(string description)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static CustomGetHashCode FromDescription(ReadOnlySpan<char> description)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static CustomGetHashCode FromValue(int value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static IReadOnlySet<CustomGetHashCode> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public static IEnumerable<CustomGetHashCode> GetEnumerable()
+    {
+        throw new NotImplementedException();
+    }
+
     public override int GetHashCode()
     {
         return 1;
@@ -80,6 +113,10 @@ internal partial class CustomEquals : IEnumeration<CustomEquals>
         return true;
     }
 
+    public override int GetHashCode()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 internal partial class GeneratedEquals : IEnumeration<GeneratedEquals>
