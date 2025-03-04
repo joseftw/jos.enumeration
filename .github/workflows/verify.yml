@@ -61,8 +61,12 @@ jobs:
         run: |
           dotnet format whitespace --no-restore --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
           dotnet format style --no-restore --include $(git diff --name-only HEAD origin/main | tr '\n' ' ')
-      - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }}
-        run: dotnet test -c Release --no-build --no-restore
+      - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }} - .NET 8
+        run: dotnet test -c Release --no-build --no-restore --framework net8.0
+      - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }} - .NET 9
+        run: dotnet test -c Release --no-build --no-restore --framework net9.0
+      - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }} - .NET 10
+        run: dotnet test -c Release --no-build --no-restore --framework net10.0
       - name: Push formatting fixes
         if: steps.checkFormatting.outcome == 'failure'
         run: |
