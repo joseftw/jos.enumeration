@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JOS.Enumeration.Database.Tests.JOS.Test;
+namespace JOS.Enumeration.Database.Tests;
 
 public abstract class DatabaseFixture : IAsyncLifetime
 {

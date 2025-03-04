@@ -1,6 +1,4 @@
-using JOS.Enumeration.Database.Tests.JOS.Database;
-
-namespace JOS.Enumeration.Database.Tests.JOS.Test;
+namespace JOS.Enumeration.Database.Tests;
 
 public abstract class PostgresDatabaseFixture : DatabaseFixture
 {
