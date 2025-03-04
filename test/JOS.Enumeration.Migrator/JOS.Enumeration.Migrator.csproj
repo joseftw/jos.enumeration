@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JOS.Enumeration.Database.Tests\JOS.Enumeration.Database.Tests.csproj"/>
+    <ProjectReference Include="..\JOS.Enumeration.Database.Tests\JOS.Enumeration.Database.Tests.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
