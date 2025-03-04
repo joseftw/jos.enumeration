@@ -4,7 +4,6 @@
     <IsPackable>false</IsPackable>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net9.0;</TargetFrameworks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
