@@ -6,15 +6,16 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.CommandLine;
 
-var builder = Host.CreateDefaultBuilder(args)
-                  .ConfigureAppConfiguration((_, configurationBuilder) =>
-                  {
-                      configurationBuilder.AddJsonFile("appsettings.json");
-                      configurationBuilder.AddJsonFile("appsettings.Development.json", optional: true);
-                      configurationBuilder.AddEnvironmentVariables();
-                      configurationBuilder.AddEnvironmentVariables("JOS_Enumeration_");
-                      configurationBuilder.AddCommandLine(args);
-                  });
+var builder =
+    Host.CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration((_, configurationBuilder) =>
+        {
+            configurationBuilder.AddJsonFile("appsettings.json");
+            configurationBuilder.AddJsonFile("appsettings.Development.json", optional: true);
+            configurationBuilder.AddEnvironmentVariables();
+            configurationBuilder.AddEnvironmentVariables("JOS_Enumeration_");
+            configurationBuilder.AddCommandLine(args);
+        });
 builder.UseDefaultServiceProvider(options =>
 {
     options.ValidateScopes = true;
@@ -27,8 +28,8 @@ builder.ConfigureServices(services =>
 });
 
 var app = builder.Build();
-var migrateCommand = new Command("migrate", "Migrates the database");
-migrateCommand.SetHandler(async _ =>
+var rootCommand = new RootCommand("JOS.Enumeration.Migrator");
+rootCommand.SetHandler(async x =>
 {
     await using var scope = app.Services.CreateAsyncScope();
     var dbContexts = scope.ServiceProvider.GetServices<DbContext>();
@@ -41,12 +42,4 @@ migrateCommand.SetHandler(async _ =>
         logger.LogInformation("Migration of {DbContextName} done", dbContextName);
     }
 });
-var rootCommand = new RootCommand("JOS.Enumeration.Migrator");
-rootCommand.SetHandler(x =>
-{
-    using var scope = app.Services.CreateAsyncScope();
-    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-    logger.LogInformation("Hello world");
-});
-rootCommand.AddCommand(migrateCommand);
 return await rootCommand.InvokeAsync(args);
