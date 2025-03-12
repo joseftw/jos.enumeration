@@ -4,16 +4,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.CommandLine;
 
-var builder = Host.CreateDefaultBuilder(args)
-    .ConfigureAppConfiguration((_, configurationBuilder) =>
-    {
-        configurationBuilder.AddJsonFile("appsettings.json");
-        configurationBuilder.AddJsonFile("appsettings.Development.json", optional: true);
-        configurationBuilder.AddEnvironmentVariables();
-        configurationBuilder.AddEnvironmentVariables("JOS_Enumeration_");
-        configurationBuilder.AddCommandLine(args);
-    });
+var builder =
+    Host.CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration((_, configurationBuilder) =>
+        {
+            configurationBuilder.AddJsonFile("appsettings.json");
+            configurationBuilder.AddJsonFile("appsettings.Development.json", optional: true);
+            configurationBuilder.AddEnvironmentVariables();
+            configurationBuilder.AddEnvironmentVariables("JOS_Enumeration_");
+            configurationBuilder.AddCommandLine(args);
+        });
 builder.UseDefaultServiceProvider(options =>
 {
     options.ValidateScopes = true;
@@ -26,16 +28,12 @@ builder.ConfigureServices(services =>
 });
 
 var app = builder.Build();
-
-var hostEnv = app.Services.GetRequiredService<IHostEnvironment>();
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
-logger.LogInformation("Running in {HostEnv} mode", hostEnv.EnvironmentName);
-var scope = app.Services.CreateAsyncScope();
-
-await using(scope)
+var rootCommand = new RootCommand("JOS.Enumeration.Migrator");
+rootCommand.SetHandler(async _ =>
 {
+    await using var scope = app.Services.CreateAsyncScope();
     var dbContexts = scope.ServiceProvider.GetServices<DbContext>();
-
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
     foreach(var dbContext in dbContexts)
     {
         var dbContextName = dbContext.GetType().Name;
@@ -43,4 +41,5 @@ await using(scope)
         await dbContext.Database.MigrateAsync();
         logger.LogInformation("Migration of {DbContextName} done", dbContextName);
     }
-}
+});
+return await rootCommand.InvokeAsync(args);

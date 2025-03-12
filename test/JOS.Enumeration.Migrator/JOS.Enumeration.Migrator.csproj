@@ -4,7 +4,6 @@
     <IsPackable>false</IsPackable>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net9.0;</TargetFrameworks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,10 +13,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting"/>
+    <PackageReference Include="System.CommandLine" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JOS.Enumeration.Database.Tests\JOS.Enumeration.Database.Tests.csproj"/>
+    <ProjectReference Include="..\JOS.Enumeration.Database.Tests\JOS.Enumeration.Database.Tests.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

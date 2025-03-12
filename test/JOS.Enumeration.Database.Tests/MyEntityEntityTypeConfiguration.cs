@@ -3,7 +3,7 @@ using JOS.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace JOS.Enumeration.Database.Tests.JOS.Database;
+namespace JOS.Enumeration.Database.Tests;
 
 public class MyEntityEntityTypeConfiguration : IEntityTypeConfiguration<MyEntity>
 {

@@ -1,4 +1,4 @@
-﻿namespace JOS.Enumeration.Database.Tests.JOS.Database;
+﻿namespace JOS.Enumeration.Database.Tests;
 
 public class JosEnumerationDatabaseOptions : PostgresDatabaseOptions
 {

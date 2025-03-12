@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
+
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-#nullable disable
-
-namespace JOS.Enumeration.Database.Tests.JOS.Database.Migrations.Postgres;
+namespace JOS.Enumeration.Database.Tests.Migrations.Postgres;
 
 /// <inheritdoc />
 public partial class Initial : Migration

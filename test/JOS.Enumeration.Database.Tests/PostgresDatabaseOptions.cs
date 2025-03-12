@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace JOS.Enumeration.Database.Tests.JOS.Database;
+namespace JOS.Enumeration.Database.Tests;
 
 public abstract class PostgresDatabaseOptions
 {

@@ -1,4 +1,4 @@
-using JOS.Enumeration.Database.Tests.JOS.Test;
+using JOS.Enumeration.Database.Tests.JOS.Database;
 using JOS.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
