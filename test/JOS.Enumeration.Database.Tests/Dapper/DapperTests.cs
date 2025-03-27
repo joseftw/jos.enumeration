@@ -1,6 +1,5 @@
 using Dapper;
 using JOS.Enumeration.Database.Dapper;
-using JOS.Enumeration.Database.Tests.JOS.Database;
 using JOS.Enumerations;
 using Npgsql;
 using Shouldly;

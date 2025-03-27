@@ -1,4 +1,3 @@
-using JOS.Enumeration.Database.Tests.JOS.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace JOS.Enumeration.Database.Tests.EntityFramework;

@@ -1,4 +1,3 @@
-using JOS.Enumeration.Database.Tests.JOS.Database;
 using JOS.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
@@ -31,7 +30,9 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
         await arrangeDbContext.SaveChangesAsync(_cancellationToken);
         await using var actDbContext = new JosEnumerationDbContext(_fixture.PostgresDatabaseOptions);
 
-        var result = await actDbContext.MyEntities.FirstAsync(x => x.Id == myEntity.Id, _cancellationToken);
+        var result = await actDbContext.MyEntities
+                                       .Include(x => x.Hamburger).Include(x => x.Car)
+                                       .FirstAsync(x => x.Id == myEntity.Id, _cancellationToken);
 
         result.ShouldNotBeNull();
         result.Id.ShouldBe(myEntity.Id);

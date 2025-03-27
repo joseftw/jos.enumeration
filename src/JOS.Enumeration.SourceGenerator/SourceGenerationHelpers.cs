@@ -66,7 +66,7 @@ internal static class SourceGenerationHelpers
         var descriptionExpression = arguments[1].Expression;
         var description = GetExpressionValue(descriptionExpression);
         var fieldName = variable.Identifier.Value!.ToString()!;
-        return new EnumerationItem(value!, (string)description, fieldName, variable.SyntaxTree, variable.FullSpan);
+        return new EnumerationItem(value, (string)description, fieldName, variable.SyntaxTree, variable.FullSpan);
     }
 
     private static object GetExpressionValue(ExpressionSyntax expression)
@@ -75,7 +75,7 @@ internal static class SourceGenerationHelpers
         {
             LiteralExpressionSyntax literal => literal.Token.Value ?? string.Empty,
             BinaryExpressionSyntax binary when binary.IsKind(SyntaxKind.AddExpression) =>
-                GetExpressionValue(binary.Left).ToString() + GetExpressionValue(binary.Right).ToString(),
+                GetExpressionValue(binary.Left) + GetExpressionValue(binary.Right).ToString(),
             InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } } invocation =>
                 ((IdentifierNameSyntax)invocation.ArgumentList.Arguments[0].Expression).Identifier.Text,
             InterpolatedStringExpressionSyntax _ => throw new InvalidOperationException("String interpolation is not supported"),

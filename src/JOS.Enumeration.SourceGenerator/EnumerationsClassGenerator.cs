@@ -59,7 +59,7 @@ internal static class EnumerationsClassGenerator
         {
             "bool" => value.ToString()!.ToLower(),
             "string" => $"\"{value}\"",
-            _ => value!.ToString()!
+            _ => value.ToString()!
         };
     }
 }

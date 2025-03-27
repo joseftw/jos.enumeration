@@ -6,6 +6,6 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        var summary1 = BenchmarkRunner.Run<EnumerationBenchmark>();
+        _ = BenchmarkRunner.Run<EnumerationBenchmark>();
     }
 }

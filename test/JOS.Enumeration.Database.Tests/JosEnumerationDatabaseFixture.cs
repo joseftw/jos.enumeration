@@ -1,5 +1,4 @@
 using JOS.Enumeration.Database.Tests.EntityFramework;
-using JOS.Enumeration.Database.Tests.JOS.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 

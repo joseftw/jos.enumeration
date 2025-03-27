@@ -1,5 +1,4 @@
 using JOS.Enumeration;
-using System;
 
 namespace JOS.Enumerations;
 
