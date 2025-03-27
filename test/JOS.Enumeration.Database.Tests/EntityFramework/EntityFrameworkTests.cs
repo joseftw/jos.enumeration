@@ -31,7 +31,6 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
         await using var actDbContext = new JosEnumerationDbContext(_fixture.PostgresDatabaseOptions);
 
         var result = await actDbContext.MyEntities
-                                       .Include(x => x.Hamburger).Include(x => x.Car)
                                        .FirstAsync(x => x.Id == myEntity.Id, _cancellationToken);
 
         result.ShouldNotBeNull();
