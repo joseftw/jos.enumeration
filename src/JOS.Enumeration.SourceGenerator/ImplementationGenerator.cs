@@ -72,7 +72,13 @@ internal static class ImplementationGenerator
                 {
                     {{FromDescriptionBody(enumeration.Items, enumeration.Symbol.Name)}}
                 }
-
+                
+                public static bool FromValue(
+                    {{enumeration.Value.ValueType}} value, out {{enumeration.Symbol.Name}} result)
+                {
+                    {{FromValueOutMethodBody(enumeration.Value, enumeration.Items)}}
+                }
+                
                 public static Type ValueType => typeof({{enumeration.Value.ValueType}});
 
                 public int CompareTo({{enumeration.Symbol.Name}}? other) => Value.CompareTo(other!.Value);
@@ -217,6 +223,48 @@ internal static class ImplementationGenerator
         return stringBuilder.ToString();
 
         static bool ShouldAppendDefaultThrowCase(EnumerationValue value)
+        {
+            return value.OriginalDefinition switch
+            {
+                "bool" => false,
+                _ => true
+            };
+        }
+    }
+
+    private static string FromValueOutMethodBody(
+        EnumerationValue value, IEnumerable<EnumerationItem> items)
+    {
+        var wrapInQuotes = ShouldWrapInQuotes(value);
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine("result = value switch");
+        stringBuilder.AppendLine("{");
+        foreach(var field in items)
+        {
+            var fieldValue = field.Value;
+            if(wrapInQuotes)
+            {
+                fieldValue = WrapValueInQuotes(field.Value);
+            }
+
+            if(fieldValue is bool)
+            {
+                fieldValue = field.Value.ToString().ToLower();
+            }
+
+            stringBuilder.AppendLine($"{fieldValue} => {field.FieldName},");
+        }
+
+        if(ShouldAppendDefaultCase(value))
+        {
+            stringBuilder.Append("_ => default!");
+        }
+        stringBuilder.Append("};");
+        stringBuilder.Append("return result != default;");
+
+        return stringBuilder.ToString();
+
+        static bool ShouldAppendDefaultCase(EnumerationValue value)
         {
             return value.OriginalDefinition switch
             {

@@ -36,4 +36,21 @@ public class StringKeyTests
         result.ShouldContain(StringEnumeration.Item1);
         result.ShouldContain(StringEnumeration.Item2);
     }
+
+    [Fact]
+    public void FromValueReturnsFalseIfValueDoesNotExist()
+    {
+        var result = StringEnumeration.FromValue("gone", out _);
+
+        result.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void FromValueReturnsTrueIfValueExist()
+    {
+        var result = StringEnumeration.FromValue(StringEnumeration.Item1, out var item);
+
+        result.ShouldBeTrue();
+        item.ShouldBe(StringEnumeration.Item1);
+    }
 }

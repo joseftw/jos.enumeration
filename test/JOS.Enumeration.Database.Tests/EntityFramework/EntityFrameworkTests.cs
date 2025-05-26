@@ -30,12 +30,15 @@ public class EntityFrameworkTests : IClassFixture<JosEnumerationDatabaseFixture>
         await arrangeDbContext.SaveChangesAsync(_cancellationToken);
         await using var actDbContext = new JosEnumerationDbContext(_fixture.PostgresDatabaseOptions);
 
+        // ReSharper disable once EntityFramework.NPlusOne.IncompleteDataQuery
         var result = await actDbContext.MyEntities
                                        .FirstAsync(x => x.Id == myEntity.Id, _cancellationToken);
 
         result.ShouldNotBeNull();
         result.Id.ShouldBe(myEntity.Id);
+        // ReSharper disable once EntityFramework.NPlusOne.IncompleteDataUsage
         result.Hamburger.ShouldBe(myEntity.Hamburger);
+        // ReSharper disable once EntityFramework.NPlusOne.IncompleteDataUsage
         result.Car.ShouldBe(myEntity.Car);
         result.Cars.ShouldBe(cars);
     }
