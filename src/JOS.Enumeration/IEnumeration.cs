@@ -12,7 +12,10 @@ public interface IEnumeration<TValue, TType> where TValue : IConvertible
     static abstract IReadOnlySet<TType> GetAll();
     static abstract IEnumerable<TType> GetEnumerable();
     static abstract TType FromValue(TValue value);
+    static abstract bool FromValue(TValue value, out TType? result);
     static abstract TType FromDescription(string description);
     static abstract TType FromDescription(ReadOnlySpan<char> description);
+    static abstract bool TryParse(string value, out TType? result);
+    static abstract bool TryParse(string value, IFormatProvider formatProvider, out TType? result);
     static abstract Type ValueType { get; }
 }

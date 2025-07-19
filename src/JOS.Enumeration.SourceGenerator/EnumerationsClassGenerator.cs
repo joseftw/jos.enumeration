@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -59,6 +60,7 @@ internal static class EnumerationsClassGenerator
         {
             "bool" => value.ToString()!.ToLower(),
             "string" => $"\"{value}\"",
+            "decimal" => $"{value}m",
             _ => value.ToString()!
         };
     }

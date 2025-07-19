@@ -63,6 +63,12 @@ internal static class ImplementationGenerator
                     {{FromValueMethodBody(enumeration.Value, enumeration.Items, enumeration.Symbol.Name)}}
                 }
 
+                public static bool FromValue(
+                {{enumeration.Value.ValueType}} value, out {{enumeration.Symbol.Name}}? result)
+                {
+                    {{FromValueOutMethodBody(enumeration.Value, enumeration.Items)}}
+                }
+                
                 public static {{enumeration.Symbol.Name}} FromDescription(string description)
                 {
                     {{FromDescriptionBody(enumeration.Items, enumeration.Symbol.Name)}}
@@ -72,11 +78,17 @@ internal static class ImplementationGenerator
                 {
                     {{FromDescriptionBody(enumeration.Items, enumeration.Symbol.Name)}}
                 }
+            
                 
-                public static bool FromValue(
-                    {{enumeration.Value.ValueType}} value, out {{enumeration.Symbol.Name}} result)
+                public static bool TryParse(
+                    string value, IFormatProvider formatProvider, out {{enumeration.Symbol.Name}}? result)
                 {
-                    {{FromValueOutMethodBody(enumeration.Value, enumeration.Items)}}
+                    {{TryParseMethodBody(enumeration.Value, "formatProvider")}}
+                }
+            
+                public static bool TryParse(string value, out {{enumeration.Symbol.Name}}? result)
+                {
+                    {{TryParseMethodBody(enumeration.Value, "null")}}
                 }
                 
                 public static Type ValueType => typeof({{enumeration.Value.ValueType}});
@@ -210,6 +222,11 @@ internal static class ImplementationGenerator
                 fieldValue = field.Value.ToString().ToLower();
             }
 
+            if(value.ValueType.Equals("decimal", StringComparison.OrdinalIgnoreCase))
+            {
+                fieldValue = $"{field.Value}m";
+            }
+
             stringBuilder.AppendLine($"{fieldValue} => {field.FieldName},");
         }
 
@@ -219,7 +236,7 @@ internal static class ImplementationGenerator
                 $"_ => throw new InvalidOperationException($\"'{{value}}' is not a valid value in '{symbolName}'\")");
         }
 
-        stringBuilder.Append("};");
+        stringBuilder.AppendLine("};");
         return stringBuilder.ToString();
 
         static bool ShouldAppendDefaultThrowCase(EnumerationValue value)
@@ -252,15 +269,20 @@ internal static class ImplementationGenerator
                 fieldValue = field.Value.ToString().ToLower();
             }
 
+            if(value.ValueType.Equals("decimal", StringComparison.OrdinalIgnoreCase))
+            {
+                fieldValue = $"{field.Value}m";
+            }
+
             stringBuilder.AppendLine($"{fieldValue} => {field.FieldName},");
         }
 
         if(ShouldAppendDefaultCase(value))
         {
-            stringBuilder.Append("_ => default!");
+            stringBuilder.AppendLine("_ => null!");
         }
-        stringBuilder.Append("};");
-        stringBuilder.Append("return result != default;");
+        stringBuilder.AppendLine("};");
+        stringBuilder.Append("return result is not null;");
 
         return stringBuilder.ToString();
 
@@ -271,6 +293,33 @@ internal static class ImplementationGenerator
                 "bool" => false,
                 _ => true
             };
+        }
+    }
+
+    private static string TryParseMethodBody(EnumerationValue enumeration, string? formatProvider)
+    {
+        return enumeration.ValueType.ToLowerInvariant() switch
+        {
+            "string" => "return FromValue(value, out result);",
+            _ => $"{Convert()}"
+        };
+
+        string Convert()
+        {
+            return
+            $$"""
+            try
+            {
+                var convertedValue =
+                    ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
+                return FromValue(convertedValue, out result);
+            }
+            catch
+            {
+                result = null;
+                return false;
+            }
+            """;
         }
     }
 
@@ -286,7 +335,7 @@ internal static class ImplementationGenerator
 
         stringBuilder.AppendLine(
             $"_ => throw new InvalidOperationException($\"'{{description}}' is not a valid description in '{symbolName}'\")");
-        stringBuilder.Append("};");
+        stringBuilder.AppendLine("};");
         return stringBuilder.ToString();
     }
 
