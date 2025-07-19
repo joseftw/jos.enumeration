@@ -6,12 +6,19 @@ namespace JOS.Enumeration.Tests;
 
 public class FromValueTests
 {
-    [Theory]
-    [InlineData(2)]
-    [InlineData(2m)]
-    public void FromValueWorksForDecimalValue(decimal value)
+    [Fact]
+    public void FromValueWorksForDecimalValue()
     {
-        var result = DecimalEnumeration.FromValue(value, out var item);
+        var result = DecimalEnumeration.FromValue(2, out var item);
+
+        result.ShouldBeTrue();
+        item.ShouldBe(DecimalEnumeration.Item2);
+    }
+
+    [Fact]
+    public void FromValueWorksForDecimalValueWithM()
+    {
+        var result = DecimalEnumeration.FromValue(2m, out var item);
 
         result.ShouldBeTrue();
         item.ShouldBe(DecimalEnumeration.Item2);
