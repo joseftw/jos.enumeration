@@ -42,10 +42,6 @@ internal static class EnumerationsClassGenerator
             foreach(var item in enumeration.Items)
             {
                 var value = FormatValue(enumeration.Value, item.Value);
-                if(enumeration.Value.OriginalDefinition.Equals("decimal", StringComparison.OrdinalIgnoreCase))
-                {
-                    value = $"{value}m";
-                }
                 stringBuilder.AppendLine($"public static class {item.FieldName}");
                 stringBuilder.AppendLine("{");
                 stringBuilder.AppendLine($"public const {enumeration.Value.OriginalDefinition} Value = {value};");
@@ -64,6 +60,7 @@ internal static class EnumerationsClassGenerator
         {
             "bool" => value.ToString()!.ToLower(),
             "string" => $"\"{value}\"",
+            "decimal" => $"{value}m",
             _ => value.ToString()!
         };
     }
