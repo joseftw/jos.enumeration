@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -41,6 +42,10 @@ internal static class EnumerationsClassGenerator
             foreach(var item in enumeration.Items)
             {
                 var value = FormatValue(enumeration.Value, item.Value);
+                if(enumeration.Value.OriginalDefinition.Equals("decimal", StringComparison.OrdinalIgnoreCase))
+                {
+                    value = $"{value}m";
+                }
                 stringBuilder.AppendLine($"public static class {item.FieldName}");
                 stringBuilder.AppendLine("{");
                 stringBuilder.AppendLine($"public const {enumeration.Value.OriginalDefinition} Value = {value};");

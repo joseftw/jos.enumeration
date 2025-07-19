@@ -62,7 +62,7 @@ public class EnumerationJsonConverterTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"decimalItem\":2,\"decimalItems\":[1,2]}");
+        result.ShouldBe("{\"decimalItem\":2,\"decimalItems\":[1,2,3.1]}");
     }
 
     [Fact]

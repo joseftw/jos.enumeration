@@ -20,9 +20,10 @@ public class DecimalKeyTests
     {
         var result = DecimalEnumeration.GetAll();
 
-        result.Count.ShouldBe(2);
+        result.Count.ShouldBe(3);
         result.ShouldContain(DecimalEnumeration.Item1);
         result.ShouldContain(DecimalEnumeration.Item2);
+        result.ShouldContain(DecimalEnumeration.Item3);
     }
 
     [Fact]
@@ -32,8 +33,9 @@ public class DecimalKeyTests
 
         var result = enumerable.ToList();
 
-        result.Count.ShouldBe(2);
+        result.Count.ShouldBe(3);
         result.ShouldContain(DecimalEnumeration.Item1);
         result.ShouldContain(DecimalEnumeration.Item2);
+        result.ShouldContain(DecimalEnumeration.Item3);
     }
 }
