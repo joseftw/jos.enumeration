@@ -1,24 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-      <IsPackable>false</IsPackable>
-      <IsTestProject>true</IsTestProject>
-      <OutputType>exe</OutputType>
-    </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <OutputType>exe</OutputType>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Condition="'$(TargetFramework)' == 'net8.0' OR '$(TargetFramework)' == 'net9.0'"/>
-        <PackageReference Include="Shouldly" />
-        <PackageReference Include="xunit.runner.visualstudio" Condition="'$(TargetFramework)' == 'net8.0' OR '$(TargetFramework)' == 'net9.0'">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="xunit.v3" />
-    </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0' OR '$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Shouldly"/>
+    <PackageReference Include="xunit.v3"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\test\JOS.Enumerations\JOS.Enumerations.csproj" />
-        <ProjectReference Include="..\..\src\JOS.Enumeration.SourceGenerator\JOS.Enumeration.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\test\JOS.Enumerations\JOS.Enumerations.csproj"/>
+    <ProjectReference Include="..\..\src\JOS.Enumeration.SourceGenerator\JOS.Enumeration.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+  </ItemGroup>
 
 </Project>
