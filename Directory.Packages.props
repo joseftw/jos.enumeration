@@ -11,7 +11,7 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0"/>
         <PackageVersion Include="Shouldly" Version="4.3.0"/>
-        <PackageVersion Include="System.CommandLine" Version="2.0.0-beta4.22272.1"/>
+        <PackageVersion Include="System.CommandLine" Version="2.0.0-beta7.25380.108"/>
         <PackageVersion Include="xunit.v3" Version="3.0.0"/>
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
