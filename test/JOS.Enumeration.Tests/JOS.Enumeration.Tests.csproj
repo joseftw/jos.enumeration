@@ -2,15 +2,14 @@
 
     <PropertyGroup>
       <IsPackable>false</IsPackable>
-      <UseMicrosoftTestingPlatformRunner>false</UseMicrosoftTestingPlatformRunner>
-      <TestingPlatformDotnetTestSupport>false</TestingPlatformDotnetTestSupport>
       <IsTestProject>true</IsTestProject>
+      <OutputType>exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Condition="'$(TargetFramework)' == 'net8.0' OR '$(TargetFramework)' == 'net9.0'"/>
         <PackageReference Include="Shouldly" />
-        <PackageReference Include="xunit.runner.visualstudio">
+        <PackageReference Include="xunit.runner.visualstudio" Condition="'$(TargetFramework)' == 'net8.0' OR '$(TargetFramework)' == 'net9.0'">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
