@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -7,9 +8,12 @@ namespace JOS.Enumeration;
 public class EnumerationJsonConverter<TValue, TEnumeration> :
     JsonConverter<TEnumeration> where TEnumeration : IEnumeration<TValue, TEnumeration> where TValue : IConvertible
 {
+    private static readonly ConcurrentDictionary<Type, bool> CanConvertCache = new();
+
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert.IsAssignableTo(typeof(IEnumeration<TValue, TEnumeration>));
+        return CanConvertCache.GetOrAdd(typeToConvert,
+            type => type.IsAssignableTo(typeof(IEnumeration<TValue, TEnumeration>)));
     }
 
     public override TEnumeration Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

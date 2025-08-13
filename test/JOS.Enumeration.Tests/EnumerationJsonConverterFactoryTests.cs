@@ -5,22 +5,18 @@ using Xunit;
 
 namespace JOS.Enumeration.Tests;
 
-public class EnumerationJsonConverterTests
+public class EnumerationJsonConverterFactoryTests
 {
     [Fact]
     public void SerializesBoolKeyCorrectly()
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<bool, BoolEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            BoolItem = BoolEnumeration.Item2,
-            BoolItems = BoolEnumeration.GetAll()
-        };
+        var dto = new { BoolItem = BoolEnumeration.Item2, BoolItems = BoolEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -32,13 +28,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<bool, BoolEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "bool": true }
-        """;
+                            { "bool": true }
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 
@@ -50,15 +46,11 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<decimal, DecimalEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            DecimalItem = DecimalEnumeration.Item2,
-            DecimalItems = DecimalEnumeration.GetAll()
-        };
+        var dto = new { DecimalItem = DecimalEnumeration.Item2, DecimalItems = DecimalEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -70,13 +62,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<decimal, DecimalEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "decimal": 2.0 }
-        """;
+                            { "decimal": 2.0 }
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 
@@ -88,15 +80,11 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<IntEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            IntItem = IntEnumeration.Item2,
-            IntItems = IntEnumeration.GetAll()
-        };
+        var dto = new { IntItem = IntEnumeration.Item2, IntItems = IntEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -108,13 +96,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<IntEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "int": 2 }
-        """;
+                            { "int": 2 }
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 
@@ -126,15 +114,11 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<int, IntEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            IntItem = IntEnumeration.Item2,
-            IntItems = IntEnumeration.GetAll()
-        };
+        var dto = new { IntItem = IntEnumeration.Item2, IntItems = IntEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -146,13 +130,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<int, IntEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "int": 2 }
-        """;
+                            { "int": 2 }
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 
@@ -164,15 +148,11 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<long, LongEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            LongItem = LongEnumeration.Item2,
-            LongItems = LongEnumeration.GetAll()
-        };
+        var dto = new { LongItem = LongEnumeration.Item2, LongItems = LongEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -184,13 +164,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<long, LongEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "long": 2}
-        """;
+                            { "long": 2}
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 
@@ -202,15 +182,11 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<string, StringEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            StringItem = StringEnumeration.Item2,
-            StringItems = StringEnumeration.GetAll()
-        };
+        var dto = new { StringItem = StringEnumeration.Item2, StringItems = StringEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -222,13 +198,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<string, StringEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "string": "Second"}
-        """;
+                            { "string": "Second"}
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 
@@ -240,15 +216,11 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<uint, UnsignedIntEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            UintItem = UnsignedIntEnumeration.Item2,
-            UintItems = UnsignedIntEnumeration.GetAll()
-        };
+        var dto = new { UintItem = UnsignedIntEnumeration.Item2, UintItems = UnsignedIntEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -260,13 +232,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<uint, UnsignedIntEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "uint": 2}
-        """;
+                            { "uint": 2}
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 
@@ -278,15 +250,11 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<ulong, UnsignedLongEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var dto = new
-        {
-            UlongItem = UnsignedLongEnumeration.Item2,
-            UlongItems = UnsignedLongEnumeration.GetAll()
-        };
+        var dto = new { UlongItem = UnsignedLongEnumeration.Item2, UlongItems = UnsignedLongEnumeration.GetAll() };
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
@@ -298,13 +266,13 @@ public class EnumerationJsonConverterTests
     {
         var jsonSerializerOptions = new JsonSerializerOptions
         {
-            Converters = { new EnumerationJsonConverter<ulong, UnsignedLongEnumeration>() },
+            Converters = { new EnumerationJsonConverterFactory() },
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         const string json = """
-        { "ulong": 2}
-        """;
+                            { "ulong": 2}
+                            """;
 
         var result = JsonSerializer.Deserialize<MyDto>(json, jsonSerializerOptions)!;
 

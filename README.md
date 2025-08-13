@@ -161,21 +161,15 @@ The following types has been tested and are guaranteed to work:
 * ulong
 
 ### JSON
-The package comes with a generic `JsonConverter`. You'll need to register a custom converter for each enumeration.
+The package comes with a `JsonConverterFactory`.
 Example:
 ```csharp
 var jsonSerializerOptions = new JsonSerializerOptions
 {
-    Converters = { new EnumerationJsonConverter<Hamburger>() }
+    Converters = { new EnumerationJsonConverterFactory() }
 };
 ```
-If you're using a custom value, you need to register the converter like this:
-```csharp
-var jsonSerializerOptions = new JsonSerializerOptions
-{
-    Converters = { new EnumerationJsonConverter<string, Car>() }
-};
-```
+
 It supports the following scenarios:
 * Serializing to `TValue`
 * Deserializing from `TValue`
