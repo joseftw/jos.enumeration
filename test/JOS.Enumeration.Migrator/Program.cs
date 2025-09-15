@@ -29,7 +29,7 @@ builder.ConfigureServices(services =>
 
 var app = builder.Build();
 var rootCommand = new RootCommand("JOS.Enumeration.Migrator");
-rootCommand.SetAction(async (parseResult, token)=>
+rootCommand.SetAction(async (parseResult, token) =>
 {
     await using var scope = app.Services.CreateAsyncScope();
     var dbContexts = scope.ServiceProvider.GetServices<DbContext>();
