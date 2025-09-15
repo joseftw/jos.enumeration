@@ -4,6 +4,7 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <OutputType>exe</OutputType>
+    <TestingPlatformCommandLineArguments>--minimum-expected-tests 100</TestingPlatformCommandLineArguments>
   </PropertyGroup>
 
   <ItemGroup>
