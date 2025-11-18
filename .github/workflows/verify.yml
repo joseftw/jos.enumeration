@@ -78,7 +78,7 @@ jobs:
       - name: Pack JOS.Enumeration.sln ${{ steps.nbgv.outputs.nugetpackageversion }}
         run: dotnet pack JOS.Enumeration.sln -c Release -o ./nuget-packages --no-build
       - name: Store nuget packages as artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: nuget-packages
           path: "nuget-packages/"
