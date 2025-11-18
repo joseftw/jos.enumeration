@@ -330,13 +330,38 @@ internal static class ImplementationGenerator
         stringBuilder.AppendLine("{");
         foreach(var field in items)
         {
-            stringBuilder.AppendLine($"\"{field.Description}\" => {field.FieldName},");
+            var descriptionLiteral = FormatStringLiteral(field.Description);
+            stringBuilder.AppendLine($"{descriptionLiteral} => {field.FieldName},");
         }
 
         stringBuilder.AppendLine(
             $"_ => throw new InvalidOperationException($\"'{{description}}' is not a valid description in '{symbolName}'\")");
         stringBuilder.AppendLine("};");
         return stringBuilder.ToString();
+    }
+    
+    private static string FormatStringLiteral(string value)
+    {
+        // For strings with special characters, escape them properly
+        if (value.Contains('\n') || value.Contains('\r') || value.Contains('"') || value.Contains('\\'))
+        {
+            return FormatAsEscapedStringLiteral(value);
+        }
+        
+        return $"\"{value}\"";
+    }
+    
+    private static string FormatAsEscapedStringLiteral(string value)
+    {
+        // Escape special characters for use in a regular string literal
+        var escaped = value
+            .Replace("\\", "\\\\")  // Backslash must be escaped first
+            .Replace("\"", "\\\"")   // Escape quotes
+            .Replace("\n", "\\n")    // Escape newlines
+            .Replace("\r", "\\r")    // Escape carriage returns
+            .Replace("\t", "\\t");   // Escape tabs
+        
+        return $"\"{escaped}\"";
     }
 
     private static bool ShouldWrapInQuotes(EnumerationValue value)
@@ -350,6 +375,6 @@ internal static class ImplementationGenerator
 
     private static string WrapValueInQuotes(object value)
     {
-        return $"\"{value}\"";
+        return FormatStringLiteral(value.ToString());
     }
 }
