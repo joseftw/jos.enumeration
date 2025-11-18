@@ -12,9 +12,6 @@ internal static class EnumerationHelpers
     internal static IncrementalValueProvider<ImmutableArray<EnumerationImplementation>> GetImplementations(
         IncrementalGeneratorInitializationContext context)
     {
-#if DEBUG
-        System.Diagnostics.Debugger.Launch();
-#endif
         var declarations = context.SyntaxProvider
                                   .CreateSyntaxProvider(
                                       predicate: static (node, _) => Predicate(node),
