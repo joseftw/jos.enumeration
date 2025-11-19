@@ -1,5 +1,6 @@
 using JOS.Enumerations.CustomKey;
 using Shouldly;
+using System.Linq;
 using System.Text.Json;
 using Xunit;
 
@@ -54,13 +55,17 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldContain("\"decimalItem\":2");
-        result.ShouldContain("\"decimalItems\":");
-        result.ShouldContain("1");
-        result.ShouldContain("2");
-        result.ShouldContain("4.2");
-        result.ShouldContain("3.1");
-        result.ShouldContain("5.3");
+        // Deserialize and verify contents
+        var deserialized = JsonSerializer.Deserialize<JsonElement>(result);
+        deserialized.GetProperty("decimalItem").GetDecimal().ShouldBe(2);
+        
+        var items = deserialized.GetProperty("decimalItems").EnumerateArray().Select(x => x.GetDecimal()).ToArray();
+        items.ShouldContain(1m);
+        items.ShouldContain(2m);
+        items.ShouldContain(3.1m);
+        items.ShouldContain(4.2m);
+        items.ShouldContain(5.3m);
+        items.Length.ShouldBe(5);
     }
 
     [Fact]
