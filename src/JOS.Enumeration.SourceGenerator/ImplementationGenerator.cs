@@ -38,7 +38,7 @@ internal static class ImplementationGenerator
 
                 static {{enumeration.Symbol.MetadataName}}()
                 {
-                    AllItems = new HashSet<{{enumeration.Symbol.Name}}>({{enumeration.Items.Count}})
+                    AllItems = new List<{{enumeration.Symbol.Name}}>({{enumeration.Items.Count}})
                     {
                         {{AllItemsSet(enumeration.Items)}}
                     }.ToFrozenSet();
