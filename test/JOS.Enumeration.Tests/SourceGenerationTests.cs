@@ -40,6 +40,26 @@ public class SourceGenerationTests
     }
 
     [Fact]
+    public void ShouldBeSmallFrozenSet_WhenItemCountIsSmall()
+    {
+        // BoolEnumeration has 2 items, should use SmallFrozenSet
+        var result = JOS.Enumerations.CustomKey.BoolEnumeration.GetAll();
+
+        result.GetType().Name.ShouldBe("SmallFrozenSet`1");
+        result.Count.ShouldBe(2);
+    }
+
+    [Fact]
+    public void ShouldBeDefaultFrozenSet_WhenItemCountIsLarge()
+    {
+        // Hamburger has 5 items, should use DefaultFrozenSet
+        var result = Hamburger.GetAll();
+
+        result.GetType().Name.ShouldBe("DefaultFrozenSet`1");
+        result.Count.ShouldBe(5);
+    }
+
+    [Fact]
     public void ShouldAddGeneratedCodeAttributeToClass()
     {
         var josEnumerationAssemblyName = typeof(Hamburger).Assembly.GetReferencedAssemblies()
