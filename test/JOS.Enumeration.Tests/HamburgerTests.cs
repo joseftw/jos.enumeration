@@ -33,10 +33,12 @@ public class HamburgerTests
     {
         var hamburgers = Hamburger.GetAll().ToHashSet();
 
-        hamburgers.Count.ShouldBe(3);
+        hamburgers.Count.ShouldBe(5);
         hamburgers.ShouldContain(Hamburger.BigMac);
         hamburgers.ShouldContain(Hamburger.BigTasty);
         hamburgers.ShouldContain(Hamburger.Cheeseburger);
+        hamburgers.ShouldContain(Hamburger.QuarterPounder);
+        hamburgers.ShouldContain(Hamburger.SpecialBurger);
     }
 
     [Fact]
@@ -46,10 +48,12 @@ public class HamburgerTests
 
         var items = enumerable.ToList();
 
-        items.Count.ShouldBe(3);
+        items.Count.ShouldBe(5);
         items.ShouldContain(Hamburger.BigMac);
         items.ShouldContain(Hamburger.BigTasty);
         items.ShouldContain(Hamburger.Cheeseburger);
+        items.ShouldContain(Hamburger.QuarterPounder);
+        items.ShouldContain(Hamburger.SpecialBurger);
     }
 
     [Fact]
@@ -110,8 +114,40 @@ public class HamburgerTests
         var hamburgers = Hamburger.GetAll().ToList();
         var sausages = Sausage.GetAll().ToList();
 
-        hamburgers.Count.ShouldBe(3);
-        sausages.Count.ShouldBe(2);
+        hamburgers.Count.ShouldBe(5);
+        sausages.Count.ShouldBe(4);
+    }
+
+    [Fact]
+    public void FromDescription_WithRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Hamburger.FromDescription("Quarter Pounder");
+
+        result.ShouldBe(Hamburger.QuarterPounder);
+    }
+
+    [Fact]
+    public void FromDescription_WithMultiLineRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Hamburger.FromDescription("Special\nBurger");
+
+        result.ShouldBe(Hamburger.SpecialBurger);
+    }
+
+    [Fact]
+    public void Span_FromDescription_WithRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Hamburger.FromDescription("Quarter Pounder".AsSpan());
+
+        result.ShouldBe(Hamburger.QuarterPounder);
+    }
+
+    [Fact]
+    public void Span_FromDescription_WithMultiLineRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Hamburger.FromDescription("Special\nBurger".AsSpan());
+
+        result.ShouldBe(Hamburger.SpecialBurger);
     }
 
     [Fact]

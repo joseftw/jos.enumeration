@@ -6,6 +6,11 @@ public partial class Dog : IEnumeration<string, Dog>
 {
     public static readonly Dog Pug = new("pug", "Lovely dog");
     public static readonly Dog Bulldog = new("bulldog", "Adorable", 10);
+    public static readonly Dog GoldenRetriever = new("golden", """Golden Retriever""");
+    public static readonly Dog GermanShepherd = new("german", """
+        German
+        Shepherd
+        """, 5);
 
     public int Age { get; }
 

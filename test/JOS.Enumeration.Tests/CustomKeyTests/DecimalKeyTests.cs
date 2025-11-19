@@ -20,10 +20,12 @@ public class DecimalKeyTests
     {
         var result = DecimalEnumeration.GetAll();
 
-        result.Count.ShouldBe(3);
+        result.Count.ShouldBe(5);
         result.ShouldContain(DecimalEnumeration.Item1);
         result.ShouldContain(DecimalEnumeration.Item2);
         result.ShouldContain(DecimalEnumeration.Item3);
+        result.ShouldContain(DecimalEnumeration.Item4);
+        result.ShouldContain(DecimalEnumeration.Item5);
     }
 
     [Fact]
@@ -33,9 +35,27 @@ public class DecimalKeyTests
 
         var result = enumerable.ToList();
 
-        result.Count.ShouldBe(3);
+        result.Count.ShouldBe(5);
         result.ShouldContain(DecimalEnumeration.Item1);
         result.ShouldContain(DecimalEnumeration.Item2);
         result.ShouldContain(DecimalEnumeration.Item3);
+        result.ShouldContain(DecimalEnumeration.Item4);
+        result.ShouldContain(DecimalEnumeration.Item5);
+    }
+
+    [Fact]
+    public void FromDescription_WithRawStringLiteral_ReturnsCorrectItem()
+    {
+        var result = DecimalEnumeration.FromDescription("Raw String Description");
+
+        result.ShouldBe(DecimalEnumeration.Item4);
+    }
+
+    [Fact]
+    public void FromDescription_WithMultiLineRawStringLiteral_ReturnsCorrectItem()
+    {
+        var result = DecimalEnumeration.FromDescription("Multi-line\nDescription");
+
+        result.ShouldBe(DecimalEnumeration.Item5);
     }
 }
