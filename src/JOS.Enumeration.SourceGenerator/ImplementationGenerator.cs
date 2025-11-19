@@ -331,8 +331,7 @@ internal static class ImplementationGenerator
         stringBuilder.AppendLine("{");
         foreach(var field in items)
         {
-            var descriptionLiteral = SyntaxFactory.Literal(field.Description).ToString();
-            stringBuilder.AppendLine($"{descriptionLiteral} => {field.FieldName},");
+            stringBuilder.AppendLine($"{SyntaxFactory.Literal(field.Description)} => {field.FieldName},");
         }
 
         stringBuilder.AppendLine(
