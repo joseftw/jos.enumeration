@@ -20,9 +20,11 @@ public class UnsignedLongKeyTests
     {
         var result = UnsignedLongEnumeration.GetAll();
 
-        result.Count.ShouldBe(2);
+        result.Count.ShouldBe(4);
         result.ShouldContain(UnsignedLongEnumeration.Item1);
         result.ShouldContain(UnsignedLongEnumeration.Item2);
+        result.ShouldContain(UnsignedLongEnumeration.Item3);
+        result.ShouldContain(UnsignedLongEnumeration.Item4);
     }
 
     [Fact]
@@ -32,8 +34,26 @@ public class UnsignedLongKeyTests
 
         var result = enumerable.ToList();
 
-        result.Count.ShouldBe(2);
+        result.Count.ShouldBe(4);
         result.ShouldContain(UnsignedLongEnumeration.Item1);
         result.ShouldContain(UnsignedLongEnumeration.Item2);
+        result.ShouldContain(UnsignedLongEnumeration.Item3);
+        result.ShouldContain(UnsignedLongEnumeration.Item4);
+    }
+
+    [Fact]
+    public void FromDescription_WithRawStringLiteral_ReturnsCorrectItem()
+    {
+        var result = UnsignedLongEnumeration.FromDescription("Raw String Description");
+
+        result.ShouldBe(UnsignedLongEnumeration.Item3);
+    }
+
+    [Fact]
+    public void FromDescription_WithMultiLineRawStringLiteral_ReturnsCorrectItem()
+    {
+        var result = UnsignedLongEnumeration.FromDescription("Multi-line\nDescription");
+
+        result.ShouldBe(UnsignedLongEnumeration.Item4);
     }
 }

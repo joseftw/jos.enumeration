@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -48,6 +49,10 @@ internal static class ImplementationGenerator
                 public {{enumeration.Value.ValueType}} Value { get; }
                 public string Description { get; }
 
+                /// <summary>
+                /// Returns all enumeration items as a FrozenSet.
+                /// Note: Iteration order is not guaranteed. Use GetEnumerable() if you need items in declaration order.
+                /// </summary>
                 public static IReadOnlySet<{{enumeration.Symbol.Name}}> GetAll()
                 {
                     return AllItems;
@@ -330,7 +335,7 @@ internal static class ImplementationGenerator
         stringBuilder.AppendLine("{");
         foreach(var field in items)
         {
-            stringBuilder.AppendLine($"\"{field.Description}\" => {field.FieldName},");
+            stringBuilder.AppendLine($"{SyntaxFactory.Literal(field.Description)} => {field.FieldName},");
         }
 
         stringBuilder.AppendLine(
@@ -350,6 +355,6 @@ internal static class ImplementationGenerator
 
     private static string WrapValueInQuotes(object value)
     {
-        return $"\"{value}\"";
+        return SyntaxFactory.Literal(value.ToString()).ToString();
     }
 }

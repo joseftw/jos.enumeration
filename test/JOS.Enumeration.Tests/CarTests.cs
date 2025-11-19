@@ -33,9 +33,11 @@ public class CarTests
     {
         var cars = Car.GetAll().ToHashSet();
 
-        cars.Count.ShouldBe(2);
+        cars.Count.ShouldBe(4);
         cars.ShouldContain(Car.FerrariSpider);
         cars.ShouldContain(Car.TeslaModelY);
+        cars.ShouldContain(Car.Porsche911);
+        cars.ShouldContain(Car.LamborghiniAventador);
     }
 
     [Fact]
@@ -45,9 +47,11 @@ public class CarTests
 
         var items = enumerable.ToList();
 
-        items.Count.ShouldBe(2);
+        items.Count.ShouldBe(4);
         items.ShouldContain(Car.FerrariSpider);
         items.ShouldContain(Car.TeslaModelY);
+        items.ShouldContain(Car.Porsche911);
+        items.ShouldContain(Car.LamborghiniAventador);
     }
 
     [Fact]
@@ -108,8 +112,40 @@ public class CarTests
         var cars = Car.GetAll().ToList();
         var hamburgers = Hamburger.GetAll().ToList();
 
-        cars.Count.ShouldBe(2);
-        hamburgers.Count.ShouldBe(3);
+        cars.Count.ShouldBe(4);
+        hamburgers.Count.ShouldBe(5);
+    }
+
+    [Fact]
+    public void FromDescription_WithRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Car.FromDescription("Porsche");
+
+        result.ShouldBe(Car.Porsche911);
+    }
+
+    [Fact]
+    public void FromDescription_WithMultiLineRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Car.FromDescription("Lamborghini\nAventador");
+
+        result.ShouldBe(Car.LamborghiniAventador);
+    }
+
+    [Fact]
+    public void Span_FromDescription_WithRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Car.FromDescription("Porsche".AsSpan());
+
+        result.ShouldBe(Car.Porsche911);
+    }
+
+    [Fact]
+    public void Span_FromDescription_WithMultiLineRawStringLiteral_ShouldReturnCorrectInstance()
+    {
+        var result = Car.FromDescription("Lamborghini\nAventador".AsSpan());
+
+        result.ShouldBe(Car.LamborghiniAventador);
     }
 
     [Fact]
