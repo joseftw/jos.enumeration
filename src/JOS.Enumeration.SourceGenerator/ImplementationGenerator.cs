@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -330,7 +331,7 @@ internal static class ImplementationGenerator
         stringBuilder.AppendLine("{");
         foreach(var field in items)
         {
-            stringBuilder.AppendLine($"\"{field.Description}\" => {field.FieldName},");
+            stringBuilder.AppendLine($"{SyntaxFactory.Literal(field.Description)} => {field.FieldName},");
         }
 
         stringBuilder.AppendLine(
@@ -338,7 +339,7 @@ internal static class ImplementationGenerator
         stringBuilder.AppendLine("};");
         return stringBuilder.ToString();
     }
-
+    
     private static bool ShouldWrapInQuotes(EnumerationValue value)
     {
         return value.ValueType.ToLowerInvariant() switch
@@ -350,6 +351,6 @@ internal static class ImplementationGenerator
 
     private static string WrapValueInQuotes(object value)
     {
-        return $"\"{value}\"";
+        return SyntaxFactory.Literal(value.ToString()).ToString();
     }
 }

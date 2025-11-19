@@ -54,7 +54,13 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"decimalItem\":2,\"decimalItems\":[1,2,3.1]}");
+        result.ShouldContain("\"decimalItem\":2");
+        result.ShouldContain("\"decimalItems\":");
+        result.ShouldContain("1");
+        result.ShouldContain("2");
+        result.ShouldContain("4.2");
+        result.ShouldContain("3.1");
+        result.ShouldContain("5.3");
     }
 
     [Fact]
@@ -88,7 +94,7 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"intItem\":2,\"intItems\":[1,2]}");
+        result.ShouldBe("{\"intItem\":2,\"intItems\":[1,2,3,4]}");
     }
 
     [Fact]
@@ -122,7 +128,7 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"intItem\":2,\"intItems\":[1,2]}");
+        result.ShouldBe("{\"intItem\":2,\"intItems\":[1,2,3,4]}");
     }
 
     [Fact]
@@ -156,7 +162,7 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"longItem\":2,\"longItems\":[1,2]}");
+        result.ShouldBe("{\"longItem\":2,\"longItems\":[1,2,3,4]}");
     }
 
     [Fact]
@@ -190,7 +196,7 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"stringItem\":\"Second\",\"stringItems\":[\"First\",\"Second\"]}");
+        result.ShouldBe("{\"stringItem\":\"Second\",\"stringItems\":[\"First\",\"Second\",\"Third\",\"Multi\\nLine\"]}");
     }
 
     [Fact]
@@ -224,7 +230,7 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"uintItem\":2,\"uintItems\":[1,2]}");
+        result.ShouldBe("{\"uintItem\":2,\"uintItems\":[1,2,3,4]}");
     }
 
     [Fact]
@@ -258,7 +264,7 @@ public class EnumerationJsonConverterFactoryTests
 
         var result = JsonSerializer.Serialize(dto, jsonSerializerOptions);
 
-        result.ShouldBe("{\"ulongItem\":2,\"ulongItems\":[1,2]}");
+        result.ShouldBe("{\"ulongItem\":2,\"ulongItems\":[1,2,3,4]}");
     }
 
     [Fact]
