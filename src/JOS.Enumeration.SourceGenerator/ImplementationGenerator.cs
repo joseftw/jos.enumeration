@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -330,7 +331,7 @@ internal static class ImplementationGenerator
         stringBuilder.AppendLine("{");
         foreach(var field in items)
         {
-            var descriptionLiteral = FormatStringLiteral(field.Description);
+            var descriptionLiteral = SyntaxFactory.Literal(field.Description).ToString();
             stringBuilder.AppendLine($"{descriptionLiteral} => {field.FieldName},");
         }
 
@@ -340,30 +341,6 @@ internal static class ImplementationGenerator
         return stringBuilder.ToString();
     }
     
-    private static string FormatStringLiteral(string value)
-    {
-        // For strings with special characters, escape them properly
-        if (value.Contains('\n') || value.Contains('\r') || value.Contains('"') || value.Contains('\\'))
-        {
-            return FormatAsEscapedStringLiteral(value);
-        }
-        
-        return $"\"{value}\"";
-    }
-    
-    private static string FormatAsEscapedStringLiteral(string value)
-    {
-        // Escape special characters for use in a regular string literal
-        var escaped = value
-            .Replace("\\", "\\\\")  // Backslash must be escaped first
-            .Replace("\"", "\\\"")   // Escape quotes
-            .Replace("\n", "\\n")    // Escape newlines
-            .Replace("\r", "\\r")    // Escape carriage returns
-            .Replace("\t", "\\t");   // Escape tabs
-        
-        return $"\"{escaped}\"";
-    }
-
     private static bool ShouldWrapInQuotes(EnumerationValue value)
     {
         return value.ValueType.ToLowerInvariant() switch
@@ -375,6 +352,6 @@ internal static class ImplementationGenerator
 
     private static string WrapValueInQuotes(object value)
     {
-        return FormatStringLiteral(value.ToString());
+        return SyntaxFactory.Literal(value.ToString()).ToString();
     }
 }
