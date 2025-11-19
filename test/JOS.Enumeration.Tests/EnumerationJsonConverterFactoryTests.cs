@@ -58,7 +58,7 @@ public class EnumerationJsonConverterFactoryTests
         // Deserialize and verify contents
         var deserialized = JsonSerializer.Deserialize<JsonElement>(result);
         deserialized.GetProperty("decimalItem").GetDecimal().ShouldBe(2);
-        
+
         var items = deserialized.GetProperty("decimalItems").EnumerateArray().Select(x => x.GetDecimal()).ToArray();
         items.ShouldContain(1m);
         items.ShouldContain(2m);
