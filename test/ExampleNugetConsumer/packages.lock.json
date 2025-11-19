@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net9.0": {
+      "JOS.Enumeration": {
+        "type": "Direct",
+        "requested": "[4.1.6-beta-gef2489413a, )",
+        "resolved": "4.1.6-beta-gef2489413a",
+        "contentHash": "QOfBlv2UXaflb0PhFsm+dVE2dujYpqL0PyRrEA9YS/l4K0g4dDZTOQrHkQBybIYlPcrb3g2GGW911tQmGATQBA=="
+      },
+      "JOS.Enumeration.SourceGenerator": {
+        "type": "Direct",
+        "requested": "[4.1.6-beta-gef2489413a, )",
+        "resolved": "4.1.6-beta-gef2489413a",
+        "contentHash": "i1s9ulmU8moSds/EkwY8kRlpyvaWm8jzHI4gwURVaYx4PTCjn8zqscxUtIHltP3UA1iCVPNIR0f9frvJrjFQuw=="
+      }
+    }
+  }
+}
