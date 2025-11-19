@@ -34,7 +34,7 @@ public class SourceGenerationTests
     [Fact]
     public void ShouldBeFrozenSet()
     {
-        var result = Hamburger.GetAll();
+        var result = JOS.Enumerations.CustomKey.BoolEnumeration.GetAll();
 
         result.GetType().Name.ShouldBe("SmallFrozenSet`1");
     }
