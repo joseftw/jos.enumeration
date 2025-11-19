@@ -46,6 +46,8 @@ jobs:
             8.0.x
             9.0.x
             10.0.x
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
       - name: Build Version ${{ steps.nbgv.outputs.nugetpackageversion }}
         run: dotnet build -c Release
       - name: Check formatting
