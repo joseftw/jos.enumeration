@@ -38,7 +38,7 @@ internal static class ImplementationGenerator
 
                 static {{enumeration.Symbol.MetadataName}}()
                 {
-                    AllItems = new List<{{enumeration.Symbol.Name}}>({{enumeration.Items.Count}})
+                    AllItems = new HashSet<{{enumeration.Symbol.Name}}>({{enumeration.Items.Count}})
                     {
                         {{AllItemsSet(enumeration.Items)}}
                     }.ToFrozenSet();
@@ -49,6 +49,10 @@ internal static class ImplementationGenerator
                 public {{enumeration.Value.ValueType}} Value { get; }
                 public string Description { get; }
 
+                /// <summary>
+                /// Returns all enumeration items as a FrozenSet.
+                /// Note: Iteration order is not guaranteed. Use GetEnumerable() if you need items in declaration order.
+                /// </summary>
                 public static IReadOnlySet<{{enumeration.Symbol.Name}}> GetAll()
                 {
                     return AllItems;
