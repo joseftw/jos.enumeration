@@ -339,7 +339,7 @@ internal static class ImplementationGenerator
         stringBuilder.AppendLine("};");
         return stringBuilder.ToString();
     }
-    
+
     private static bool ShouldWrapInQuotes(EnumerationValue value)
     {
         return value.ValueType.ToLowerInvariant() switch
