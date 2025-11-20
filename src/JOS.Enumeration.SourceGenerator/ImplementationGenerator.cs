@@ -210,122 +210,21 @@ internal static class ImplementationGenerator
     private static string FromValueMethodBody(
         EnumerationValue value, IEnumerable<EnumerationItem> items, string symbolName)
     {
-        var wrapInQuotes = ShouldWrapInQuotes(value);
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("return value switch");
-        stringBuilder.AppendLine("{");
-        foreach(var field in items)
-        {
-            var fieldValue = field.Value;
-            if(wrapInQuotes)
-            {
-                fieldValue = WrapValueInQuotes(field.Value);
-            }
-
-            if(fieldValue is bool)
-            {
-                fieldValue = field.Value.ToString().ToLower();
-            }
-
-            if(value.ValueType.Equals("decimal", StringComparison.OrdinalIgnoreCase))
-            {
-                fieldValue = $"{field.Value}m";
-            }
-
-            stringBuilder.AppendLine($"{fieldValue} => {field.FieldName},");
-        }
-
-        if(ShouldAppendDefaultThrowCase(value))
-        {
-            stringBuilder.AppendLine(
-                $"_ => throw new InvalidOperationException($\"'{{value}}' is not a valid value in '{symbolName}'\")");
-        }
-
-        stringBuilder.AppendLine("};");
-        return stringBuilder.ToString();
-
-        static bool ShouldAppendDefaultThrowCase(EnumerationValue value)
-        {
-            return value.OriginalDefinition switch
-            {
-                "bool" => false,
-                _ => true
-            };
-        }
+        var generator = ValueTypeCodeGeneratorFactory.GetGenerator(value);
+        return generator.GenerateFromValueMethodBody(value, items, symbolName);
     }
 
     private static string FromValueOutMethodBody(
         EnumerationValue value, IEnumerable<EnumerationItem> items)
     {
-        var wrapInQuotes = ShouldWrapInQuotes(value);
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("result = value switch");
-        stringBuilder.AppendLine("{");
-        foreach(var field in items)
-        {
-            var fieldValue = field.Value;
-            if(wrapInQuotes)
-            {
-                fieldValue = WrapValueInQuotes(field.Value);
-            }
-
-            if(fieldValue is bool)
-            {
-                fieldValue = field.Value.ToString().ToLower();
-            }
-
-            if(value.ValueType.Equals("decimal", StringComparison.OrdinalIgnoreCase))
-            {
-                fieldValue = $"{field.Value}m";
-            }
-
-            stringBuilder.AppendLine($"{fieldValue} => {field.FieldName},");
-        }
-
-        if(ShouldAppendDefaultCase(value))
-        {
-            stringBuilder.AppendLine("_ => null!");
-        }
-        stringBuilder.AppendLine("};");
-        stringBuilder.Append("return result is not null;");
-
-        return stringBuilder.ToString();
-
-        static bool ShouldAppendDefaultCase(EnumerationValue value)
-        {
-            return value.OriginalDefinition switch
-            {
-                "bool" => false,
-                _ => true
-            };
-        }
+        var generator = ValueTypeCodeGeneratorFactory.GetGenerator(value);
+        return generator.GenerateFromValueOutMethodBody(value, items);
     }
 
     private static string TryParseMethodBody(EnumerationValue enumeration, string? formatProvider)
     {
-        return enumeration.ValueType.ToLowerInvariant() switch
-        {
-            "string" => "return FromValue(value, out result);",
-            _ => $"{Convert()}"
-        };
-
-        string Convert()
-        {
-            return
-            $$"""
-            try
-            {
-                var convertedValue =
-                    ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
-                return FromValue(convertedValue, out result);
-            }
-            catch
-            {
-                result = null;
-                return false;
-            }
-            """;
-        }
+        var generator = ValueTypeCodeGeneratorFactory.GetGenerator(enumeration);
+        return generator.GenerateTryParseMethodBody(enumeration, formatProvider);
     }
 
     private static string FromDescriptionBody(IEnumerable<EnumerationItem> items, string symbolName)
@@ -342,19 +241,5 @@ internal static class ImplementationGenerator
             $"_ => throw new InvalidOperationException($\"'{{description}}' is not a valid description in '{symbolName}'\")");
         stringBuilder.AppendLine("};");
         return stringBuilder.ToString();
-    }
-
-    private static bool ShouldWrapInQuotes(EnumerationValue value)
-    {
-        return value.ValueType.ToLowerInvariant() switch
-        {
-            "string" => true,
-            _ => false
-        };
-    }
-
-    private static string WrapValueInQuotes(object value)
-    {
-        return SyntaxFactory.Literal(value.ToString()).ToString();
     }
 }
