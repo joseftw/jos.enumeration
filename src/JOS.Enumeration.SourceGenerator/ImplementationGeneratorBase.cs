@@ -40,15 +40,6 @@ internal abstract class ImplementationGeneratorBase
         """;
     }
 
-    protected static string FormatFieldValue(object fieldValue)
-    {
-        if(fieldValue is bool)
-        {
-            return fieldValue.ToString()!.ToLower();
-        }
-        return fieldValue.ToString()!;
-    }
-
     protected static StringBuilder CreateSwitchStart(string variableName)
     {
         var stringBuilder = new StringBuilder();

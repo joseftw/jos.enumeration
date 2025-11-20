@@ -16,7 +16,7 @@ internal class BoolImplementationGenerator : ImplementationGeneratorBase
 
         foreach(var field in items)
         {
-            var fieldValue = FormatFieldValue(field.Value);
+            var fieldValue = FormatBoolValue(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
@@ -33,7 +33,7 @@ internal class BoolImplementationGenerator : ImplementationGeneratorBase
 
         foreach(var field in items)
         {
-            var fieldValue = FormatFieldValue(field.Value);
+            var fieldValue = FormatBoolValue(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
@@ -43,23 +43,8 @@ internal class BoolImplementationGenerator : ImplementationGeneratorBase
         return stringBuilder.ToString();
     }
 
-    public override string GenerateTryParseMethodBody(
-        EnumerationValue enumeration,
-        string? formatProvider)
+    private static string FormatBoolValue(object fieldValue)
     {
-        return
-        $$"""
-        try
-        {
-            var convertedValue =
-                ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
-            return FromValue(convertedValue, out result);
-        }
-        catch
-        {
-            result = null;
-            return false;
-        }
-        """;
+        return fieldValue.ToString()!.ToLower();
     }
 }

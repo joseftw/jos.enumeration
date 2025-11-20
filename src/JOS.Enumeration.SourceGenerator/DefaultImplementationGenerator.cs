@@ -16,7 +16,7 @@ internal class DefaultImplementationGenerator : ImplementationGeneratorBase
 
         foreach(var field in items)
         {
-            var fieldValue = FormatFieldValue(field.Value);
+            var fieldValue = field.Value.ToString()!;
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
@@ -31,30 +31,10 @@ internal class DefaultImplementationGenerator : ImplementationGeneratorBase
 
         foreach(var field in items)
         {
-            var fieldValue = FormatFieldValue(field.Value);
+            var fieldValue = field.Value.ToString()!;
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
         return CloseSwitchWithNull(stringBuilder);
-    }
-
-    public override string GenerateTryParseMethodBody(
-        EnumerationValue enumeration,
-        string? formatProvider)
-    {
-        return
-        $$"""
-        try
-        {
-            var convertedValue =
-                ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
-            return FromValue(convertedValue, out result);
-        }
-        catch
-        {
-            result = null;
-            return false;
-        }
-        """;
     }
 }
