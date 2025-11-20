@@ -23,7 +23,7 @@ internal abstract class ImplementationGeneratorBase
 
     protected static string FormatFieldValue(object fieldValue)
     {
-        if (fieldValue is bool)
+        if(fieldValue is bool)
         {
             return fieldValue.ToString()!.ToLower();
         }

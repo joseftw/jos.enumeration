@@ -16,7 +16,7 @@ internal class StringImplementationGenerator : ImplementationGeneratorBase
     {
         var stringBuilder = CreateSwitchStart("value");
 
-        foreach (var field in items)
+        foreach(var field in items)
         {
             var fieldValue = WrapValueInQuotes(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
@@ -31,7 +31,7 @@ internal class StringImplementationGenerator : ImplementationGeneratorBase
     {
         var stringBuilder = CreateOutSwitchStart();
 
-        foreach (var field in items)
+        foreach(var field in items)
         {
             var fieldValue = WrapValueInQuotes(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);

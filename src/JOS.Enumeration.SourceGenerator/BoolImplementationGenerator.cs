@@ -14,7 +14,7 @@ internal class BoolImplementationGenerator : ImplementationGeneratorBase
     {
         var stringBuilder = CreateSwitchStart("value");
 
-        foreach (var field in items)
+        foreach(var field in items)
         {
             var fieldValue = FormatFieldValue(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
@@ -31,7 +31,7 @@ internal class BoolImplementationGenerator : ImplementationGeneratorBase
     {
         var stringBuilder = CreateOutSwitchStart();
 
-        foreach (var field in items)
+        foreach(var field in items)
         {
             var fieldValue = FormatFieldValue(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
