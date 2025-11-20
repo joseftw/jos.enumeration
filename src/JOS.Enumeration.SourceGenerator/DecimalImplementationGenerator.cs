@@ -38,23 +38,5 @@ internal class DecimalImplementationGenerator : ImplementationGeneratorBase
         return CloseSwitchWithNull(stringBuilder);
     }
 
-    public override string GenerateTryParseMethodBody(
-        EnumerationValue enumeration,
-        string? formatProvider)
-    {
-        return
-        $$"""
-        try
-        {
-            var convertedValue =
-                ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
-            return FromValue(convertedValue, out result);
-        }
-        catch
-        {
-            result = null;
-            return false;
-        }
-        """;
-    }
+    // Inherit GenerateTryParseMethodBody from base class.
 }
