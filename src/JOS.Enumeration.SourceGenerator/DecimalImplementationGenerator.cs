@@ -37,6 +37,4 @@ internal class DecimalImplementationGenerator : ImplementationGeneratorBase
 
         return CloseSwitchWithNull(stringBuilder);
     }
-
-    // Inherit GenerateTryParseMethodBody from base class.
 }

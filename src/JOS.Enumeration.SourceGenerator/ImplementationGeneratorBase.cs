@@ -17,9 +17,28 @@ internal abstract class ImplementationGeneratorBase
         EnumerationValue value,
         IEnumerable<EnumerationItem> items);
 
-    public abstract string GenerateTryParseMethodBody(
+    /// <summary>
+    /// Generates the body of the TryParse method. Can be overridden for type-specific behavior.
+    /// </summary>
+    public virtual string GenerateTryParseMethodBody(
         EnumerationValue enumeration,
-        string? formatProvider);
+        string? formatProvider)
+    {
+        return
+        $$"""
+        try
+        {
+            var convertedValue =
+                ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
+            return FromValue(convertedValue, out result);
+        }
+        catch
+        {
+            result = null;
+            return false;
+        }
+        """;
+    }
 
     protected static string FormatFieldValue(object fieldValue)
     {
