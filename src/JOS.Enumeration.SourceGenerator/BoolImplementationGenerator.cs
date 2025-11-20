@@ -3,9 +3,9 @@ using System.Collections.Generic;
 namespace JOS.Enumeration.SourceGenerator;
 
 /// <summary>
-/// Code generator for decimal-based enumeration values.
+/// Implementation generator for bool-based enumeration values.
 /// </summary>
-internal class DecimalValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
+internal class BoolImplementationGenerator : ImplementationGeneratorBase
 {
     public override string GenerateFromValueMethodBody(
         EnumerationValue value,
@@ -16,11 +16,13 @@ internal class DecimalValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
 
         foreach (var field in items)
         {
-            var fieldValue = $"{field.Value}m";
+            var fieldValue = FormatFieldValue(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
-        return CloseSwitchWithThrow(stringBuilder, symbolName);
+        // Bool enumerations don't need a default throw case since bool only has two values
+        stringBuilder.AppendLine("};");
+        return stringBuilder.ToString();
     }
 
     public override string GenerateFromValueOutMethodBody(
@@ -31,11 +33,14 @@ internal class DecimalValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
 
         foreach (var field in items)
         {
-            var fieldValue = $"{field.Value}m";
+            var fieldValue = FormatFieldValue(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
-        return CloseSwitchWithNull(stringBuilder);
+        // Bool enumerations don't need a default null case since bool only has two values
+        stringBuilder.AppendLine("};");
+        stringBuilder.Append("return result is not null;");
+        return stringBuilder.ToString();
     }
 
     public override string GenerateTryParseMethodBody(

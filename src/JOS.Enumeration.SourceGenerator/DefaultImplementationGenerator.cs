@@ -3,9 +3,9 @@ using System.Collections.Generic;
 namespace JOS.Enumeration.SourceGenerator;
 
 /// <summary>
-/// Code generator for bool-based enumeration values.
+/// Default implementation generator for numeric and other enumeration value types (int, long, uint, ulong, etc.).
 /// </summary>
-internal class BoolValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
+internal class DefaultImplementationGenerator : ImplementationGeneratorBase
 {
     public override string GenerateFromValueMethodBody(
         EnumerationValue value,
@@ -20,9 +20,7 @@ internal class BoolValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
-        // Bool enumerations don't need a default throw case since bool only has two values
-        stringBuilder.AppendLine("};");
-        return stringBuilder.ToString();
+        return CloseSwitchWithThrow(stringBuilder, symbolName);
     }
 
     public override string GenerateFromValueOutMethodBody(
@@ -37,10 +35,7 @@ internal class BoolValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
-        // Bool enumerations don't need a default null case since bool only has two values
-        stringBuilder.AppendLine("};");
-        stringBuilder.Append("return result is not null;");
-        return stringBuilder.ToString();
+        return CloseSwitchWithNull(stringBuilder);
     }
 
     public override string GenerateTryParseMethodBody(

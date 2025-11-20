@@ -1,13 +1,11 @@
-using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JOS.Enumeration.SourceGenerator;
 
 /// <summary>
-/// Code generator for string-based enumeration values.
+/// Implementation generator for decimal-based enumeration values.
 /// </summary>
-internal class StringValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
+internal class DecimalImplementationGenerator : ImplementationGeneratorBase
 {
     public override string GenerateFromValueMethodBody(
         EnumerationValue value,
@@ -18,7 +16,7 @@ internal class StringValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
 
         foreach (var field in items)
         {
-            var fieldValue = WrapValueInQuotes(field.Value);
+            var fieldValue = $"{field.Value}m";
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
@@ -33,7 +31,7 @@ internal class StringValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
 
         foreach (var field in items)
         {
-            var fieldValue = WrapValueInQuotes(field.Value);
+            var fieldValue = $"{field.Value}m";
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
@@ -44,11 +42,19 @@ internal class StringValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
         EnumerationValue enumeration,
         string? formatProvider)
     {
-        return "return FromValue(value, out result);";
-    }
-
-    private static string WrapValueInQuotes(object value)
-    {
-        return SyntaxFactory.Literal(value.ToString()).ToString();
+        return
+        $$"""
+        try
+        {
+            var convertedValue =
+                ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
+            return FromValue(convertedValue, out result);
+        }
+        catch
+        {
+            result = null;
+            return false;
+        }
+        """;
     }
 }

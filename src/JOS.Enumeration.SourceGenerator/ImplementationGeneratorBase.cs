@@ -4,9 +4,9 @@ using System.Text;
 namespace JOS.Enumeration.SourceGenerator;
 
 /// <summary>
-/// Base class for value type code generators with common functionality.
+/// Base class for implementation generators with common functionality.
 /// </summary>
-internal abstract class ValueTypeCodeGeneratorBase : IValueTypeCodeGenerator
+internal abstract class ImplementationGeneratorBase
 {
     public abstract string GenerateFromValueMethodBody(
         EnumerationValue value,

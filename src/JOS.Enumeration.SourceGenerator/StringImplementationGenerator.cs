@@ -1,11 +1,13 @@
+using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
+using System.Text;
 
 namespace JOS.Enumeration.SourceGenerator;
 
 /// <summary>
-/// Default code generator for numeric and other enumeration value types (int, long, uint, ulong, etc.).
+/// Implementation generator for string-based enumeration values.
 /// </summary>
-internal class DefaultValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
+internal class StringImplementationGenerator : ImplementationGeneratorBase
 {
     public override string GenerateFromValueMethodBody(
         EnumerationValue value,
@@ -16,7 +18,7 @@ internal class DefaultValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
 
         foreach (var field in items)
         {
-            var fieldValue = FormatFieldValue(field.Value);
+            var fieldValue = WrapValueInQuotes(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
@@ -31,7 +33,7 @@ internal class DefaultValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
 
         foreach (var field in items)
         {
-            var fieldValue = FormatFieldValue(field.Value);
+            var fieldValue = WrapValueInQuotes(field.Value);
             AppendSwitchCase(stringBuilder, fieldValue, field.FieldName);
         }
 
@@ -42,19 +44,11 @@ internal class DefaultValueTypeCodeGenerator : ValueTypeCodeGeneratorBase
         EnumerationValue enumeration,
         string? formatProvider)
     {
-        return
-        $$"""
-        try
-        {
-            var convertedValue =
-                ({{enumeration.ValueType}})Convert.ChangeType(value, typeof({{enumeration.ValueType}}), {{formatProvider}});
-            return FromValue(convertedValue, out result);
-        }
-        catch
-        {
-            result = null;
-            return false;
-        }
-        """;
+        return "return FromValue(value, out result);";
+    }
+
+    private static string WrapValueInQuotes(object value)
+    {
+        return SyntaxFactory.Literal(value.ToString()).ToString();
     }
 }

@@ -210,20 +210,20 @@ internal static class ImplementationGenerator
     private static string FromValueMethodBody(
         EnumerationValue value, IEnumerable<EnumerationItem> items, string symbolName)
     {
-        var generator = ValueTypeCodeGeneratorFactory.GetGenerator(value);
+        var generator = ImplementationGeneratorFactory.GetGenerator(value);
         return generator.GenerateFromValueMethodBody(value, items, symbolName);
     }
 
     private static string FromValueOutMethodBody(
         EnumerationValue value, IEnumerable<EnumerationItem> items)
     {
-        var generator = ValueTypeCodeGeneratorFactory.GetGenerator(value);
+        var generator = ImplementationGeneratorFactory.GetGenerator(value);
         return generator.GenerateFromValueOutMethodBody(value, items);
     }
 
     private static string TryParseMethodBody(EnumerationValue enumeration, string? formatProvider)
     {
-        var generator = ValueTypeCodeGeneratorFactory.GetGenerator(enumeration);
+        var generator = ImplementationGeneratorFactory.GetGenerator(enumeration);
         return generator.GenerateTryParseMethodBody(enumeration, formatProvider);
     }
 
