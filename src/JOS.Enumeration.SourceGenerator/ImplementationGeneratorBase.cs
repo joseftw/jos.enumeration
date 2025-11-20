@@ -46,7 +46,7 @@ internal abstract class ImplementationGeneratorBase
         return stringBuilder;
     }
 
-    protected static void AppendSwitchCase(StringBuilder stringBuilder, object fieldValue, string fieldName)
+    protected static void AppendSwitchCase(StringBuilder stringBuilder, string fieldValue, string fieldName)
     {
         stringBuilder.AppendLine($"{fieldValue} => {fieldName},");
     }
