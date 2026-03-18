@@ -48,6 +48,12 @@ jobs:
             10.0.x
           cache: true
           cache-dependency-path: '**/packages.lock.json'
+      - name: Setup .NET - .NET 11
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            11.0.x
+          dotnet-quality: 'preview'
       - name: Build Version ${{ steps.nbgv.outputs.nugetpackageversion }}
         run: dotnet build -c Release
       - name: Check formatting
@@ -68,6 +74,8 @@ jobs:
         run: dotnet test -c Release --no-build --no-restore --framework net9.0
       - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }} - .NET 10
         run: dotnet test -c Release --no-build --no-restore --framework net10.0
+      - name: Test Version ${{ steps.nbgv.outputs.nugetpackageversion }} - .NET 10
+        run: dotnet test -c Release --no-build --no-restore --framework net11.0
       - name: Push formatting fixes
         if: steps.checkFormatting.outcome == 'failure'
         run: |
