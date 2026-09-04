@@ -31,7 +31,7 @@ jobs:
     - uses: dotnet/nbgv@master
       id: nbgv
     - name: Setup .NET
-      uses: actions/setup-dotnet@v6
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
       with:
         dotnet-version: |
           8.0.x
@@ -40,7 +40,7 @@ jobs:
         cache: true
         cache-dependency-path: '**/packages.lock.json'
     - name: Setup .NET - .NET 11
-      uses: actions/setup-dotnet@v6
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
       with:
         dotnet-version: |
           11.0.x
