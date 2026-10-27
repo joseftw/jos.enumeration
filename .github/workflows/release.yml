@@ -28,7 +28,7 @@ jobs:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       with:
         fetch-depth: 0
-    - uses: dotnet/nbgv@512d02860b01661cb8f6cc22b3e837b2bd9e9865
+    - uses: dotnet/nbgv@f70c0005d0e042bc476eb83fd3f88e7842e4f0c6
       id: nbgv
     - name: Setup .NET
       uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
