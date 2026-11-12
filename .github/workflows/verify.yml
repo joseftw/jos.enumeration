@@ -30,7 +30,7 @@ jobs:
           git fetch origin main &&
           git checkout -b main origin/main
           git checkout -
-      - uses: dotnet/nbgv@bbadc895869136b4fe4f7489e72db0496ae56c48
+      - uses: dotnet/nbgv@c9afdf919a1cdb512bd5d64569ef77a3ac4c3c85
         id: nbgv
       - name: Skip if bot
         run: |
